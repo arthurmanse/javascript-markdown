@@ -418,19 +418,193 @@ var x
 ```
 Içamento é um comportamento padrão do JS de mover todas as declarações para o topo do escopo atual (para o topo do atual script ou da função atual)
 
-> Keywords let e const
+### let e const
 
-	As variávels definidas com const e let são içadas para o topo do bloco, mas não inicializadas. Ou seja: o bloco de código é avisada da variável, mas não pode ser usada até que tenha sido declarada.
-	Usando a variável let antes que é declarada vai retornar em ReferenceError. A variável está em uma "zona morta temporal" do começo do bloco até ser declarado.
+As variávels definidas com *const* e *let* são içadas para o topo do bloco, mas não inicializadas. Ou seja: *o bloco de código é avisado da variável, mas não pode ser usada até que tenha sido declarada*.
 
-	carName = "Volvo"
-	let carName	/ ReferenceError
+Usando a variável **let** antes que é declarada vai retornar em *ReferenceError*. A variável está em uma "zona morta temporal" do começo do bloco até ser declarado.
+```js
+carName = "Volvo"
+let carName	// ReferenceError
+```	
+Usando **const** antes de ser declarada, é um erro de sintaxe, e o código irá simplesmente não funcionar.
+```js	
+carName = "Volvo"
+const carName
+```
+#### Atenção: 
+JavaScript apenas iça declarações, não inicializações. Não içará se x = 5, por exemplo, mas içará que existe uma variável x.
+
+*Portanto, sempre que possível, declare todas as variáveis no começo de cada escopo.*
+
+## use strict
+
+**"use strict"** define que o código em JS deverá ser executado em "modo estrito"
+
+Não é uma declaração, mas uma expressão literal, ignorada por versões anteriores do JavaScript. 
+
+Com o modo estrito, você não pode, por exemplo, usar variáveis não-declaradas. 	
+
+Você pode usar modo estrito em todos seus programas. Isso ajuda a escrever um código mais limpo, como prevenir você de usar variáveis não dclaradas.
+
+### Declarando o Modo Estrito:
+O modo estrito é declarado ao adicionar "use strict" no começo de um script ou uma função.
+Declarada no começo de um script, ele tem escopo global (todo o código do script executará em modo estrito)
+```js
+"use strict"
+x = 3.14	// Causará um erro porque x não é declarado.
+
+"use strict"
+myFunction()
+function myFunction() {
+  y = 3.14 	// Também causará erro
+}
+
+x = 3.14	// Não causará erro
+myFunction() 
+function myFunction () {
+  "use strict"
+  y = 3.14
+}
+```
+### Sintaxe do "use strict"
+Por declarar o modo estrito, a sintaxe foi designada para ser compatível com antigas versões do JS. 
+
+Compilando um literal numérico (4 + 5) ou uma string literal ("John Doe") em um programa JS não possui efeitos colaterais. Ele simplesmente compila para uma não-existente variável e morre.
+
+Então "use strict" apenas importa para novos compiladores que "entendem" o significado disso.
+
+### Por que usar o Modo Estrito?
+O modo estrito torna mais fácil em escrever em um JS mais "seguro". Ele muda previamente "má sintaxes" aceitadas em erros reais.
+
+Como exemplo, em normal JS, um erro de digitação em um nome de variável cria uma nova variável global. Em modo estrito, um desenvolvedor não receberá qualquer feedback de erro na atribuição de valores a propriedades não graváveis.
+
+Em modo estrito, qualquer atribuição para uma propriedade não-gravável, uma propriedade apenas captadora, uma propriedade, variável ou objeto inexistente, vai lançar um erro.
 	
-Usando const antes de ser declarada, é um erro de sintaxe, e o código irá simplesmente não funcionar.
-	
-	carName = "Volvo"
-	const carName
+### Não Permitido em Modo Estrito
+Usar uma variável sem declará-la não é permitido.
+```js
+"use strict"
+x = 3.14	// causará um erro
+```
+**Atenção: Objetos são também variáveis.**
 
-Atenção: JavaScript apenas iça declarações, não inicializações. Não içará se x = 5, por exemplo, mas içará que existe uma variável x.
+Usando um objeto, sem declará-lo, não é permitido
+```js	
+"use strict"
+x = {p1:10, p2:20}	// causará um erro
+```
+Deletar uma variável (ou objeto ou função) não é permitido
+```js
+"use strict"
+var x = 3.14
+delete x	// causará um erro.
+```
+Duplicando um nome de parâmetro não é permitido
+```js
+"use strict"
+function x(p1, p1) {}	// causará um erro
+```
+Literais numéricas octais não são permitidas
+```js
+"use strict"
+var x = 010	// causará um erro
+```
+Caracteres de escape octais, Gravações em uma propriedade de somente leitura, Gravação em uma propriedade apenas captadora, Deletar uma propriedade indeletável, Usar a palavra "eval" ou "arguments" como nomes de variáveis, Usar a declaração "with", Usar "eval()"  não funcionam em "strict mode".
 
-	Portanto, sempre que possível, declare todas as variáveis no começo de cada escopo.
+A keyword "*this*" em funções se comporta diferentemente em modo estrito. 
+
+**"this" refere-se para o objeto que chamou a função.** Se o objeto não foi especificado, funções em modo estrito retornarão "*undefined*" e funções em modo normal retornarão o objeto global (window).
+```js
+"use strict"
+function myFunction() {
+  alert(this)	/ alertará "undefined"
+}
+myFunction()
+```
+Há palavras que estão reservadas para versões futuras do JS e não podem serem usadas como nomes de variáveis em Modo Estrito:
+- implements
+- interface
+- let
+- package
+- private
+- protected
+- public
+- static
+- yield
+```js
+"use strict"
+var public = 1500 // causará erro
+```
+**Atenção: A diretiva do "use strict" é apenas reconhecida no começo do script ou da função.**
+
+## THIS
+```js
+var person = {
+  firstName: "John"
+  lastName: "Doe"
+  id: 5566
+  fullName: function() {
+    return this.firstName + " " + this.lastName
+  }
+}
+```
+**this** refere-se ao objeto no qual ele pertence. Portanto, ele tem diferentes valores dependendo sobre onde ele é usado:
+1. Em um método, "this" refere-se ao objeto proprietário (como exemplo acima)
+2. Sozinho, "this" refere-se ao objeto global.
+3. Em uma função, "this" refere-se ao objeto global.
+4. Em uma função, em modo estrito, "this" é "undefined".
+5. Em um evento, "this" refere-se ao elemento que recebeu o evento.
+6. Métodos como "call()", e "apply()" podem referir "this"
+
+### this Sozinho
+Quando usada sozinha, o "proprietário" é o objeto global. Em uma janela do navegador o objeto global é o [object window]. Isso também ocorre em Modo Estrito.
+```js
+var x = this
+document.getElementById("demo") = x
+```
+### this em uma Função:
+Em uma função em JS, o proprietário da função é a ligação padrão para "this". Então, em uma função, "this" refere-se ao objeto global [object window].
+
+Em modo estrito, não se permite ligação. Portanto, quando usado em uma função dentro do modo estrito, "this" é "undefined".
+
+### this em Manejamento de Eventos.
+Em HTML, this refere-se ao elemento HTML que recebeu o evento.
+```js
+<button onclick="this.style.background='red' ">
+  Click to Remove Me!
+</button>	// transforma o botão vermelho ao clicar.
+```
+
+### Vinculação de Método de Objeto
+Nesses exemplos, "this" é um objeto "person" (o objeto "person" é o "proprietário" da função)
+```js
+var person = {
+  firstName: "John"
+  lastName: "Doe"
+  id: 5566
+  myFunction: function() {
+    return this
+  }
+}
+document.getElementById("demo").innerHTML = person.myFunction()	
+// retorna [object Object]
+```
+Em outras palavaras: this.firstName significa a propriedade firstName do objeto (person).
+
+### Ligação de Função Explícita:
+Os métodos "*call()*" e "*apply()*" são métodos de JS predefinidos. Ambos podem ser usados para chamar um método de objeto com um outro objeto como argumento.
+
+No exemplo abaixo, quando chamamos person1.fullName com person2 como argumento, "this" vai referir para person2, mesmo se ele é método de person1:
+```js
+var person1 = {
+    fullName: function() {
+    return this.firstName + " " + this.lastName
+  }
+}
+var person2 = {
+  firstName: "John",
+  lastName: "Doe",
+}
+person1.fullName.call(person2)	// retorna "John Doe"
+```

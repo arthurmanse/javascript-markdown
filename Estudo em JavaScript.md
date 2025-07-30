@@ -1266,11 +1266,20 @@ JS pode ser usada como linguagem de programação em muitas aplicações. Você 
 ```js
 alert 	|	all	| 	anchor	|	anchors
 area 	|	assign 	|	blur 	|	button
-checkbox |	clearInterval	| 	clearTimeout	| clientInformation	|	close 	|	closed 	|	confirm 	constructor	|	crypto 	|	decodeURI 	decodeURIComponent	|	defaultStatus	|	document 	element 		|	elements 		|	embed
-embeds 		|	encodeURI 	|	encodeURIComponent escape	|	event 	|	fileUpload	| 	focus 	form	|	forms 	|	frame 	|	innerHeight 	innerWidth	|	layer 	|	layers 	|	link 	location	|	mimeTypes 	|	navigate 	|	navigator 	frames	|	frameRate 	|	hidden 	|	history 	image	|	images 	|	offscreenBuffering 	|	open 	opener	|	option 	|	outerHeight 	|	outerWidth 	packages		|	pageXOffset 	|	pageYOffset 	parent	|	parseFloat	|	parseInt 	|	password 	pkcs11 	|	plugin	|	prompt 	|	propertyIsEnum 	radio 	|	reset	|	screenX 	|	screenY 	|	scroll 	|	secure	|	select 	|	self 	
-setInterval		 |	setTimeout	|	status 	|
-submit 		|	taint 	|	text	|	textarea 	
-top 	|	unescape 	|	untaint	|	window 	
+checkbox |	clearInterval	| 	
+clearTimeout	| clientInformation	|	close 	|	closed 	|	confirm |	constructor	|	
+crypto 	|	decodeURI | decodeURIComponent	|	defaultStatus	|	document |	element 	|	
+elements 		|	embed |
+embeds 		|	encodeURI 	|	encodeURIComponent | escape	|	event 	|	fileUpload	| 	
+focus 	form	|	forms 	|	frame 	|	innerHeight |	innerWidth	|	layer 	|	layers 	|	
+link |	location	|	mimeTypes 	|	navigate 	|	navigator |	frames	|	frameRate 
+|	hidden 	|	history |	image	|	images 	|	offscreenBuffering 	|	open 	opener	|	
+option 	|	outerHeight 	|	outerWidth |	packages		|	pageXOffset 	|	pageYOffset |	
+parent	|	parseFloat	|	parseInt 	|	password |	pkcs11 	|	plugin	|	prompt 	|	
+propertyIsEnum |	radio 	|	reset	|	screenX 	|	screenY 	|	scroll 	|	secure	|	
+select 	|	self | setInterval		 |	setTimeout	|	status 	|
+submit 	|	
+taint 	|	text	|	textarea 	| top 	|	unescape 	|	untaint	|	window 	
 ```
 #### Manejadores de Eventos HTML:
 Além disso, você deveria evitar usar nomes de todos os manejadores de evento do HTML.
@@ -1282,3 +1291,606 @@ onkeydown	|	onkeypress	|	onkeyup
 onmouseover	|	onload	|	onmouseup
 onmousedown	|	onsubmit
 ```
+
+## LET
+
+As variáveis declaradas com let não podem acessadas fora de um escopo de bloco, ou seja: fora de um bloco de código:
+```js
+{ 
+  let x = 2
+}
+// x não pode ser usado aqui
+```
+Com isso, você pode solucionar problemas de redeclaração.
+```js
+var x = 10
+{
+  let x = 2
+// aqui x é 2
+}
+// aqui x é 10
+```
+Ainda sobre a redeclaração, há o Escopo do Loop. Variáveis declaradas com let dentro de loops apenas são visíveis dentro do loop.
+```js
+let i = 5
+for (let i = 0; i < 10; i++) {
+  // argumentos
+}
+// Aqui "i" é 5
+```
+Porém, dentro do Escopo de Função, **var** e **let** são similares, não sendo visíveis fora das funções caso sejam declaradas dentro.
+
+Além disso, var e let são também semelhantes quando declaradas fora de um bloco, ou seja: quando tem escopo global.
+
+#### Variáveis Globais em HTML:
+Em HTML, o objeto global é o *window object*. 
+Variáveis globais definidas com a keyword "var" pertencem ao window object:
+```js
+var carName = "Volvo"
+// o código aqui pode usar window.carName
+```
+Varáveis globais definidas com a keyword "let" não pertencem ao window object:
+```js
+let carName = "Volvo"
+// o código aqui Não pode usar o window.carName
+```
+### Redeclaração:
+Redeclarando uma variável JS com var é permitido em qualquer parte do programa.
+
+Redeclarando uma variável var com let, no mesmo escopo, ou no mesmo bloco, não é permitido.
+```js
+var x = 2
+let x = 3	// não permitido
+{
+  var x = 4
+  var x = 5	// não é permitido por causa de let e porque var é global
+}
+```
+
+O mesmo funciona o contrário: não é possível redeclarar uma variável let com var, no mesmo escopo, ou no mesmo bloco.
+
+Redeclarar uma variável com let, em outro escopo, ou em outro escorpo, é permitido:
+```js
+let x = 2
+{
+  let x = 3
+}
+{
+  let x = 4
+}
+```
+#### Içamento:
+Variáveis definidas com let são içadas para o topo do bloco, mas não são inicializadas. Ou seja: o bloco de código é avisado da variável, mas não pode ser usada até ser declarada.
+
+Usando let antes que seja declarada vai resultar em um ReferenceError.
+
+## CONST
+
+Variáveis definidas com "const" se comportam parecidas com variáveis "let", exceto que elas não podem ser reatribuidas.
+```js
+const PI = 3.141592653589793
+PI = 3.14		// error
+PI = PI + 10	// error
+```
+**Atenção: Variáveis com const devem ser atribuídas com um valor quando elas são declaradas.**
+
+Não faça:
+```js
+const PI
+PI = 3.14159265359
+```
+E sim:
+```js
+const PI = 3.14159265359
+```
+#### Não-Constantes Reais:
+const Não define um valor constante, mas sim uma referência constante a um valor. Por isso, ela não pode alterar valores primitivos constantes, mas pode modificar as propriedades de objetos constantes.
+```js
+const car = {type:"Fiat", model:"500", color:"white"}
+car.color = "red"	// você pode modificar uma propriedade
+car.owner = "John"	// você pode adicionar uma propriedade
+```
+Não pode:
+```js
+const car = {type:"Fiat", model:"500", color:"white"}
+car = {type:"Volvo", model:"EX60", color:"red"}	// Error
+```
+O mesmo acontece com Vetores: você pode modificar elementos de um vetor de uma constante, mas não reatribuir um vetor de uma constante.
+```js
+const cars = ["Saab", "Volvo", "BMW"]
+cars[0] = "Toyota"
+cars.push("Audi")
+```
+Não pode:
+```js
+const cars = ["Saab", "Volvo", "BMW"]
+cars = ["Toyota", "Volvo", "Audi"]	// Error
+```
+#### Redeclaração:
+Redeclarar ou reatribuir uma já existente variável var ou let para const, no mesmo escopo, ou no mesmo bloco, não é permitido
+```js
+var x = 2
+const x = 2		// não permitido
+{
+  let x = 2
+  const x = 2	// não permitido
+}
+```
+A mesma incapacidade acontece se você tentar reatribuir ou redeclarar de uma variável const já existente no mesmo escopo, ou no mesmo bloco.
+
+Apenas é possível redeclarar com const em outro escopo, ou em outro bloco:
+```js
+const x = 2
+{
+  const x = 3	// permitido
+}
+{	
+  const x = 4	// permitido
+}
+```
+#### Içamento:
+Semelhante a let, variáveis const são içadas ao topo do bloco, mas não inicializadas.
+
+## VERSÕES DO JAVASCRIPT
+
+### ES5 - JAVASCRIPT 2009
+
+#### JSON.parse()
+Um uso comum do JSON é de receber dados de um web server. Imagine que você recebeu essa string de texto de um servidor web.
+```js
+'{"name":"John", "age":30, "city":"New York"}'
+```
+A função JS "JSON.parse()" é usada para converter o texto em um objeto JS:
+```js
+var obj = JSON.parse('{"name":"John", "age":30, "city":"New York"}')
+```
+Para mais formas, acesse o [Tutorial sobre JSON](https://www.w3schools.com/js/js_json_intro.asp)
+
+#### JSON.stringify()
+Um uso comum de JSON é também de enviar dados para um servidor web. Quando enviamos dados para um servidor, os dados devem que ser uma string.
+
+Imagine que nós tempos esse objeto:
+```js
+var obj = {name:"John", age:30, city:"New York"}
+```
+Use a função JSON.stringify() para convertê-lo em um string.
+```js
+var myJSON = JSON.stringify(obj)
+```
+O resultado será uma string seguida de uma notação JSON.
+myJSON é agora uma string, pronta para ser enviada ao servidor.
+
+#### Date.now()
+Retorna o número de milissegundos desde a data zero (1 de janeiro de 1970.
+```js
+var timInMss = Date.now()
+```
+Date.now() retorna o mesmo que getTime() executado em um objeto de Data.
+
+#### Propriedades Getters e Setters:
+ES5 deixa você definir métodos de objeto com uma sintaxe que parece pegar ou definir uma propriedade.
+
+Esse exemplo cria um getter para uma propriedade chamada fullName:
+```js
+// crie um objeto:
+var person = {
+  firstName: "John",
+  lastName: "Doe",
+  get fullName() {
+    return this.firstName + " " + this.lastName
+  }
+}
+```
+Esse exemplo cria um setter e um getter para a propriedade "language":
+```js
+var person = {
+  firstName: "John",
+  lastName: "Doe",
+  language: "NO",
+  get lang() {
+    return this.language
+  },
+  set lang(value) {
+    this.language = value
+  }
+}
+// Define uma propriedade usando um setter:
+person.lang = "en"
+// Disponibiliza dados do objeto usando um getter:
+document.getElementById("demo").innerHTML = person.lang
+```
+**Atenção: sem o set, o valor final é "NO". Com o set, o person.lang = "en" torna-se "en".**
+
+Esse exemplo abaixo usa um setter para assegurar atualizações uppercase de linguagem:
+  
+var person = {
+  firstName: "John",
+  lastName: "Doe",
+  language: "NO",
+  set lang(value) {
+    this.language = value.toUpperCase()
+  }
+}
+/ Define uma propriedade usando um setter.
+person.lang = "en"
+/ Disponibiliza dado do objeto:
+document.getElementById("demo").innerHTML = person.language
+/ Resultado: "EN"
+
+https://www.w3schools.com/js/js_object_accessors.asp JavaScript Object Accessors
+
+> Novos Métodos de Propriedade de Objetos:
+"Object.defineProperty()" é um novo método de Objeto em ES5. Ele permite definir uma propriedade de objeto e/ou mudar um valor da propriedade e/ou metadados:
+
+var person = {
+  firstName:"John",
+  lastName: "Doe",
+  language: "NO" ,
+}
+/ Mude uma propriedade:
+Object.defineProperty(person, "language", {
+  value: "EN"
+  writable: true
+  enumerable: true 	/ se for false, ele não retorna "EN"
+  configurable: true
+})
+/ Enumere propriedades:
+var txt = ""
+for (var x in person) {
+  txt += person[x] + "<br>"
+}
+document.getElementById("demo").innerHTML = txt
+
+Esse exemplo abaixo cria um setter e um getter para assegurar atualizações em Uppercases de language:
+
+var person = {
+  firstName: "John",
+  lastName: "Doe",
+  language: "No"
+}
+/ Mude uma propriedade
+Object.defineProperty(person, "language", {
+  get : function() { return language }
+  set : function(value) { language = value.toUpperCase()}
+})
+/ Muda a linguagem:	
+person.language = "en"
+document.getElementById("demo").innerHTML = person.language
+/ Retorna "EN"
+
+ES5 adicionou vários novos Métodos de Objeto no JS:
+
+/ Adiciona ou muda uma propriedade de objeto
+Object.defineProperty(object, property, descriptor)
+
+/ Adiciona ou muda várias propriedades de objetos
+Object.defineProperties(object, descriptors)
+
+/ Acessa propriedades
+Object.getOwnPropertyDescriptor(object, property)
+
+/ Retorna todas as propriedades como um vetor:
+Object.getOwnPropertyNames(object)
+
+/ Retorna propriedades enumeráveis como um vetor:
+Object.keys(object)
+
+/ Acessa o prototype:
+Object.getPrototypeOf(object)
+
+/ Previne de adicionar propriedades a um objeto:
+Object.preventExtensions(object)
+
+/ Retorna true se propriedades podem ser adicionadas a um objeto:
+Object.isExtensible(object)
+
+/ Previne mudanças de propriedades de objeto (não valores):
+Object.seal(object)
+
+/ Retorna true se objeto está selado:
+Object.isSealed(object)
+
+/ Previne qualquer mudanças em um objeto:
+Object.freeze(object)
+
+/ Retorna true se o objeto está congelado
+Object.isFrozen(object)
+
+https://www.w3schools.com/js/js_object_es5.asp Object ECMAScript5
+
+> Vírgulas no Final:
+
+person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 46,
+}
+
+Atenção: IE8 vai ter problemas. JSON não permite vírgulas no final:
+
+/ Permitido
+var person = '{"firstName":"John", "lastName":"Doe", "age":46}'
+JSON.parse(person)	
+
+/ Não permitido:
+var person = '{"firstName":"John", "lastName":"Doe", "age":46,}'
+JSON.parse(person)
+
+> Palavras Reservadas como Nomes de Propriedades:
+ES5 permite palavras reservadas como nomes de propriedades:
+
+var obj = {name: "John", new: "yes"}
+
+
+JS 2015 (ES6):
+
+> Loop For/Of:
+A declaração JS for/of promove iterações entre os valores de um objeto. Ele permite que você realize repetições sobre estruturas de dados que são iteráveis, tais como Vetores, Strings, Maps, NodeLists, e mais.
+O loop for/of tem a seguinte sintaxe:
+
+for (variável of iterável) {
+  / bloco de código a ser executado
+}
+
+variável: por cada iteração, o valor da próxima propriedade é atribuída para a variável. A variável pode ser declarada com const, let, ou var.
+iterável: um objeto que tem propriedades iteráveis.
+
+Exemplo com um vetor:
+
+var cars = ["BMW", "Volvo", "Mini"]
+var text = ""
+
+for (let x of cars) {
+  text += x + "<br>"
+}
+document.getElementById("demo").innerHTML = text
+
+
+Atenção: Há diferenças entre o for/in e o for/of:
+
+var arr = [3, 5, 7];
+arr.foo = "hello";
+for (var x in arr) {
+      console.log(x)
+}
+for (var j of arr) {
+    console.log(j)
+} 
+/ Retorna 0, 1, 2, foo
+/ 	3, 5, 7
+
+> Promises em JavaScript:
+Um Promise é um objeto JS que conecta "Produzir Código" e "Consumir Código". 
+"Produzir Código" pode tomar algum tempo e "Consumir Código" deve esperar pelo resultado.
+
+Sintaxe da Promise:
+  
+let myPromise = new Promise(function(myResolve, myReject) {
+  /  "Produzir Código" (pode tomar algum tempo)
+  
+  myResolve() / quando der certo
+  myReject()   / quando falhar
+})
+
+/ "Consumir código" (Deve esperar pela final da Promise)
+myPromise.then(
+  function(value) { / código se der certo / }
+  function(error) { / código se algo falhar / }
+)
+
+---------------
+
+  let myPromise = new Promise(function(myResolve, myReject) {
+  setTimeout(function(){ myResolve("Hello World") }, 3000)
+})
+
+myPromise.then(function(value) {
+  document.getElementById("demo").innerHTML = value
+})
+/ Resulta "Hello Word" após 3seg, ou 3000 miliseg
+
+> O Tipo Symbol
+Um Símbolo JS é um tipo de dado primitivo assim como Números, Strings, ou Booleanos. Ele representa um único identificador "escondido" que nenhum outro código pode acidentalmente acessar.
+Por exemplo, se diferentes codificadores desejam adicionar uma propriedade person.id para o objeto person pertencente a um código terceiro, eles poderão misturar cada um dos seus valores.
+Usando Symbol() para criar um identificador único, ajuda a resolver esse problema:
+
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  eyeColor: "blue"
+}
+let id = Symbol('id')
+person.id = 140353
+
+Simbolos têm um outro uso importante. Eles podem ser usados como chaves (propriedades) em objetos. Exemplo de uso de um símbolo como chave:
+
+const obj = {}
+const sym = Symbol()
+obj[sym] = 'foo'
+obj.bar = 'bar'
+
+console.log(obj)		/ { bar: 'bar' }
+console.log(sym in obj)	/ true
+console.log(obj[sym])	/ foo
+console.log(Object.keys(obj)	/ ['bar']
+
+Note como o Símbolo não foi retornado em Object.keys(). Isso é, novamente, pelo propósito de compatibilidade com versões anteriores. Códigos antigos não avisam dos Símbolos e então eles não são retornados nesse método.
+Ao primeiro olhar, parece que Símbolos podem ser usados para criar propriedades privadas sobre objetos. Muitas outras linguagens de programação tem propriedades escondidas em suas classes e essa omissão tem sido visto como uma deficiência do JS.
+Infelizmente, é ainda possível para códigos que interajam com esses objetos acessar propriedades nos quais as chaves são símbolos. É até mesmo possível em situações onde o código invocado não já tenha acesso ao símbolo por si mesmo. Como exemplo, o método "Reflect.ownKeys()" é capaz de gerar uma lista de todas as chaves de um obejto, seja strings ou simbolos:
+
+function tryToAddPrivate(o) {
+  o[Symbol ('Pseudo Private')] = 42
+}
+const obj = { prop: 'hello' }
+trytoAddPrivate(obj)
+console.log(Reflect.ownKeys(obj)) 	/ [ 'prop', Symbol(Pseudo Private) ]
+console.log(obj[Reflect.ownKeys(obj)[1]])	/ 42
+
+Prevenindo Colisões de Nomes de Propriedades:
+Símbolos não podem beneficiar diretamente o JS de providenciar propriedades privadas aos objetos. No entanto, eles podem beneficiar de uma outra forma. Eles podem serem úteis em situações onde diferentes bibliotecas querem adicionar propriedades aos objetos sem o risco de haver colisões de nomes.
+Considere a situação onde duas diferentes bibliotecas querem anexar algum tipo de metadado a um objeto. Talvez elas ambas querem definir algum tipo de identificador no objeto. Simplesmente usando dois caracteres de string "id" como chave, há um grande risco que múltiplas bibliotecas usarão a mesma chave.
+Fazendo uso de símbolos, cada biblioteca pode gerar seus símbolos requeridos na instaciação. Portanto, os símbolos podem ser checados nos objetos, e definidos aos objetos, não importando quando um objeto é encontrado.
+Por essa razão, aparenta-se que símbolos beneficiam JS. No entanto, você pode se perguntar por que não podemos apenas gerar para cada biblioteca uma string aleatória, ou usar uma string com um nome especifamente, sobre a instanciação?
+Essa abordagem é realmente muito similar a abordagem com símbolos. A menos que duas bibliotecas pudessem escolher usar o mesmo nome de propriedade, então não haveria um risco de sobreposição.
+Nossos nomes de propriedades com nomes únicos ainda tem uma deficiência: suas chaves são muito fáceis de encontrar, especialmente quando o código executa ou para iterar as chaves ou serializar os objetos de outra forma. Considere o exemplo a seguir:
+
+const library2property = 'LIB2-NAMESPACE-id'
+function lib2tag(obj) {
+  obj[library2property] = 369
+}
+const user = {
+  name: 'Thomas Hunter II',
+  age: 32	
+}
+lib2tag(user)
+JSON.stringify(user)
+/ '{"name":"Thomas Hunter II", "age":32, "LIB2-NAMESPACE-id":369}'
+
+Se nós tivemos usado um símbolo para um nome de propriedade do objeto, então o resultado do JSON não iria conter seu valor. Por que isso? Bem, apenas porque JS ganhou suporte para símbolos não quer dizer que a especificação JSON tem mudado. JSON apenas permite strings como chaves e JS não faz qualquer tentativa de representar propriedades de símbolos no código final do JSON.
+Nós podemos corrigir facilmente o problema em que as strings de objeto de nossa biblioteca estão poluindo a saída JSON, usando "Object.defineProperty()":
+
+const library2property = uuid()
+function lib2tag(obj) {
+  Object.defineProperty(obj, library2property, {
+    enumarable: false,
+    value: 369
+  })
+}
+const user = {
+  name: 'Thomas Hunter II',
+  age: 32
+}
+lib2tag(user)
+/ '{"name":"Thomas Hunter II",
+  "age":32,"f468c902-26ed-4b2e-81d6-5775ae7eec5d":369}'
+console.log(JSON.stringify(user))
+console.log(user[library2property])	/ 369
+
+Chaves de string nas quais tem sido "escondidas" através das definições de seus "enumerable" colocados para "false" se comportarem muito similarmente com chaves de símbolos. Ambos são escondidas pelo "Object.keys()" e ambos são revelados com "Reflect.ownKeys()", como visto no exemplo seguinte:
+
+const obj = {}
+obj[Symbol()] = 1
+Object.defineProperty(obj, 'foo', {
+  enumerable: false,	
+  value: 2
+})
+console.log(Object.keys(obj))		/ []
+console.log(Reflect.ownKeys(obj))	/ ['foo', Symbol()]
+console.log(JSON.stringify(obj))	/ {}
+
+Nesse ponto, nós temos aproximadamente recriado símbolos. Ambos nossas strings de propriedade escondidas e símbolos são escondidos dos serializadores. Ambas propriedades podem ser extraídas usando o método "Reflect.ownKeys()" e são então não realmente privadas. Assumindo que nós usamos algum tipo de namespace / valor randômico para versões de strings nos nomes de propriedades então nós temos removido o risco de múltiplas bibliotecas acidentalmente terem um colisão de nome.
+
+Symbols são acessíveis de três formas:
+1. Symbols são acessúveis entre realms, e, por realm queremos dizer contexto. Por exemplo, sua página é um contexto de "document" enquanto, dentro dela, podemos ter um <iframe> com um contexto/realm diferente.
+2. Você pode registrar Symbols globais e acessa-los por entre esses contextos também.
+3. Uma das classes de Symbols é chamada de "Well-Known", eles existem entre realms, mas não são acessíveis no registro global de Symbols. 
+
+Podemos encontrar a chave que foi associada um Symbol através do método "symbol.keyFor(symbol)" que, dado um Sumbol criado previamente, vai nos retornar a chave associada a ele.
+
+Por fim, isso quer dizer que nada impede que outro programados, dentro de outro script da aplicação, também tenha a ideia de criar uma propriedade chamada, por exemplo, de "contador" em "painel" atribuindo um valor completamente diferente do que estamos esperando.
+Portanto, evidente que isso nos causrá problemas. A cada clique agora tentaremos incrementar uma string, o que não faz muito sentido. É aí que usamos o symbol.
+Podemos listar todos os símbolos que um objeto possui através da função "Object.getOwnPropertySymbols()". Vejamos um exemplo criando um novo script:
+
+Object.getOwnPropertySymbols(painel)		
+  .forEach(symbol => console.log(painel[symbol])
+
+> Valores de Parâmetro Padrão:
+
+ES6 permite que parâmetros de funções tenham valores padrões.
+
+function myFunction(x, y = 10) {
+  / y é 10 se não passado ou undefined
+  return x + y
+}
+myFunction(5)	/ retorna 15
+
+> Rest Parameter da Função:
+
+O rest parameter (...) permite a uma função lidar com um número indefinido de argumentos como um vetor:
+
+function sum(...args) {
+  let sum = 0
+  for (let arg of args) sum += arg 	/ cria uma variável para lidar com cada argumento do rest parameter
+  return sum
+}
+let x = sum(4, 9, 16, 25, 29, 100, 66, 77)
+
+ECMAScript 2016:
+
+> Operador de Exponenciação:
+O operador de exponenciação (**) calcula o primeiro operando para a potência do segundo operando:
+
+let x = 5
+let z = x ** 2	/ resultado é 25
+
+"x ** y" produz o mesmo resultado que "Math.pow(x, y)".
+
+> Atribuição de Exponenciação:
+O operador de atribuição de exponenciação (**=) calcula o valor de uma variável à potência do operando à direita:
+03:10 18/02/2021
+let x = 5
+x **= 2	/ resultado é 25
+
+> Array.prototype.includes:
+ECMAScript 2016 introduziu "Array.prototype.includes" aos vetores. Isso permite-nos checar se um elemento está presente em um vetor:
+
+const fruits = ["Banana", "Orange", "Apple", "Mango"]
+fruits.include("Mango")	/ true
+
+ECMAScript 2017
+
+> Entradas de Objetos no JavaScript
+ECMAScript 2017 adicionou um novo método "Object.entries" para objetos:
+
+const person = {
+  firstName: "John",
+  lastName: "Doe',
+  age: 50,
+  eyeColor: "blue"
+}
+document.getElementById("demo").innerHTML = Object.entries(person)	/ firstName,John,lastName,Doe,age,50,eyeColor,blue
+
+> Valores de Objeto em JavaScript:
+"Object.values" é similar a "Object.entries", mas retorna um único vetor de dimensão dos valores do objeto:
+
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  eyeColor: "blue"
+}
+document.getElementById("demo").innerHTML = Object.values(person)	/ John,Doe,50,blue
+
+
+ECMAScript 2018:
+
+> Iteração Assíncronas em JS:
+ECMAScript 2018 adicionou iteráveis e iterações assíncronas. 
+Com iteráveis assíncronos, podemos usar a keyword "await" em loops "for/of".
+
+for await () {}
+
+> Promise.finally:
+Finalizou a implementação completa do objeto Promise com "Promise.finally":
+
+let myPromise = new Promise()
+
+myPromise.then()
+myPromise.catch()
+myPromise.finally()
+
+> Rest Properties de Objetos:
+Adicionou rest properties. Isso permite-nos desestruturar um objeto e coletar as sobras em um novo objeto:
+
+let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 }
+x	/ 1
+y	/ 2
+z	/ {a: 3, b: 4}
+
+> Novas Características do RegExp em JS:
+
+- Sinalizador s (dotAll)
+- Unicode Property Escapes (\p{...})
+- Lookbehind Assertions (?<= ) and (?<! )
+- Named Capture Groups.

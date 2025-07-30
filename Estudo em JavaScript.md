@@ -608,3 +608,677 @@ var person2 = {
 }
 person1.fullName.call(person2)	// retorna "John Doe"
 ```
+
+## ARROW Function
+
+Funções Arrow nos permite escrever sintaxes mais curtas de funções:
+```js
+hello = function() {
+  return "Hello World"
+}
+```
+Com Arrow Function:
+```js
+hello = () => {
+  return "Hello World"
+}
+```
+E fica ainda mais curto. Se a função tem apenas uma declaração, e a declaração retorna um valor, você pode remover as chaves e a keyword "return"
+```js
+hello = () => "Hello World!"
+```
+**Atenção: Isso trabalha apenas se a função tem apenas uma declaração.**
+
+Se você tem dois parâmetros, você passa-os dentro dos parênteses:
+```js
+hello = (val) => "Hello " + val
+document.getElementById("demo").innerHTML = hello("you")
+```
+Na verdade, se você tem apenas um parâmetro, você pode retirar os parâmetros:
+```js  
+hello = val => "Hello " + val
+```
+### E Sobre "this"?
+O manejo de "this" é também diferente em arrow functions comparado com funções regulares. Em resumo, com funções arrow não há ligação de "this".
+
+Em funções regulares, a keyword "this" representava o objeto que chamava a função, no qual poderia ser o "window", o documento, um botão, ou qualquer coisa.
+
+Com arrow functions, o "this" sempre representa o objeto que definiu a arrow function.
+
+Os exemplos abaixo chamam um método duas vezes: o primeiro quando a página carrega, e uma vez novamente quando o usuário clica um botão.
+
+O primeiro exemplo usa uma função regular, e o segundo usa arrow functions. O resultado mostra que o primeiro exemplo retorna dois objetos diferentes (window e button), e o segundo exemplo retorna o objeto window duas vezes, porque o objeto window é o "proprietário" da função.
+```js
+// Função Regular:
+hello = function() {
+  document.getElementById("demo").innerHTML += this
+}
+// O objeto window chama a função
+window.addEventListener("load", hello)
+// Um objeto de botão chama a função:
+document.getElementById("btn").addEventListener("click", hello)
+// Retorna [object Window] [object HTMLButtonElement]
+-----------------------------------
+// Arrow Function
+hello = () => {
+  document.getElementById("demo").innerHTML += this
+}
+// o objeto window chama a função:
+window.addEventListener("load", hello)
+// o objeto button chama a função:
+document.getElementById("btn").addEventListener("click", hello)
+// Retorna [object Window] [object Window]
+```
+Lembre-se dessas diferenças quando você estiver trabalhando com funções. Às vezes o comportamento de funções regulares é o que você deseja, se não, use arrow functions.
+
+## CLASSES
+
+Foi introduzido pelo ES6. As Classes em JavaScript são modelos para Objetos em JavaScript.
+
+### Sintaxe
+Use  a keyword "**class**" para criar uma classe. Sempre adicione um método chamado "constructor()"
+```js
+class ClassName {
+  constructor() { ... }
+}
+
+class Car {
+  constructor(name, year) {
+    this.name = name
+    this.year = year
+  }
+}
+```
+O exemplo acima cria uma classe chamada "Car". A classe tem duas propriedades iniciais: "name" e "year".
+
+**Atenção: Uma classe Não é um objeto. É um Modelo para objetos de JavaScript.**
+
+### Usando uma Classe:
+Quando você tem uma classe, você pode usar a classe para criar objetos:
+```js
+let myCar1 = new Car("Ford", 2014)
+let myCar2 = new Car("Audi", 2019)
+```
+O exemplo acima usa a classe Car para criar dois objetos Car.
+
+**Atenção: O método constructor é chamado automaticamente quando um novo objeto é criado.**
+
+### O Método Constructor:
+O método constructor é um método especial:
+  - Tem que ter o exato nome "*constructor*"
+  - É executado automaticamente quando um novo objeto é criado.
+  - É usado para inicializar propriedades de objeto.
+
+Se você não definir um método constructor, JS adicionará um método *constructor* vazio.
+
+### Métodos de Classe
+Os métodos de classe são criados com a mesma sintaxe como métodos de objetos.
+Use a keyword "class" para criar uma class.
+
+Sempre adicione um método "constructor()". Então adicione qualquer número de métodos.
+
+#### Sintaxe:
+```js
+class ClassName {
+  constructor() { ... }
+  method_1() { ... }
+  method_ 2() { ... }
+  method_3() { ... }
+}
+```
+Cria um método de Classe nomeado "age", que retorna a idade do carro:
+```js
+class Car {
+  constructor(name, year) {
+    this.name = name
+    this.year = year
+  }
+  age()
+    let date = new Date()
+    return date.getFullYear() - this.year
+  }
+}
+let myCar = new Car("Ford", 2014)
+document.getrElementById("demo").innerHTML = "My car is " + myCar.age() + " years old."
+```
+Você pode enviar parâmetros para os métodos de Classe:
+```js
+class Car {
+  constructor(name, year) {
+    this.name = name
+    this.year = year
+  }
+  age(x) {
+    return x - this.year
+  }
+}
+
+let date = new Date()
+let year = date.getFullYear()
+
+let myCar = new Car("Ford", 2014)
+document.getElementById("demo").innerHTML = "My car is " + myCar.age(year) + " years old."
+```
+
+## JSON
+
+JSON é um formato de armazenamento e transporte de dados. JSON é frequentemente usado quando dados são enviados de um servidor para a webpage.
+
+### O Que É JSON?
+- JSON significa JavaScript Object Notation
+- JSON é um formato leve de intercâmbio de dados.
+- JSON é uma linguagem independente *
+- JSON é "auto-descritiva" e de fácil entendimento.
+
+A sintaxe JSON é derivada da sintaxe de notação de objeto em JavaScript, mas o formato JSON é apenas textual. Os códigos para leitura e geração de dados JSON podem ser escritos em qualquer linguagem de programação.
+
+##### Exemplo:
+Essa sintaxe JSON define um objeto employees: um vetor de 3 gravações de empregados (objetos):
+```js
+{
+  "employees":[
+    {"firstName":"John", "lastName":"Doe"},
+    {"firstName":"Anna", "lastName":"Smith"},
+    {"firstName":"Peter", "lastName":"Jones"}
+  ]
+}
+```
+##### Formato JSON Avalia Objetos JavaScript:
+O formato JSON é sintaticamente idêntico ao código de criação de objetos em JavaScript. Por isso, um programa JS pode ser facilmente converter dados JSON em objetos nativos do JS.
+
+#### Regras de Sintaxe em JSON:
+- Dados estão em pares nome/valores.
+- Dados são separados por vírgulas
+- Chaves abrigam objetos
+- Colchetes abrigam vetores.
+
+#### Dado JSON - Um Nome e um Valor:
+Dado JSON é escrito como pares nome/valor, assim como propriedades em objetos JS.
+
+Um par nome/valor consiste de um campo de nome (em aspas duplas), seguido por dois pontos, seguido por um valor:
+```js
+"firstName": "John"
+```
+**Atenção: Nomes JSON requerem aspas duplas. Nomes em JS não.**
+
+#### Objetos em JSON:
+Objetos JSON são escritos em chaves. Assim como em JS, objetos podem conter múltiplos pares nome/valor.
+```js
+{"firstName: "John", "lastName": "Doe"}
+```
+#### Vetores em JSON:
+São escritos em colchetes:
+```js
+"employees":[
+  {"firstName": "John", "lastName": "Doe"},
+  {"firstName": "Anna", "lastName": "Smith"},
+  {"firstName": "Peter", "lastName": "Jones"}
+}
+```
+
+No exemplo acima, o objeto "employees" é um vetor que contém três objetos. Cada objeto é uma gravação de uma pessoa (com o primeiro e último nomes).
+
+#### Covertendo um Texto JSON para um Objeto JavaScript:
+Um uso comum de JSON é para ler dados de um servidor web, e disponibilizar os dados em uma webpage. 
+
+Por simplicidade, isso pode ser demonstrado usando uma string como input. Primeiro, crie uma string JS contendo sintaxe JSON:
+```js
+var text = '{ "employees" : [' +
+'{ "firstName": "John"  , "lastName": "Doe" },' +
+'{ "firstName": "Anna" , "lastName": "Smith"}' +
+'{ "firstName": "Peter" , "lastName": "Jones" } ]}'
+```
+Então, use uma função embutida do JavaScript "JSON.parse()" para converter a string em um objeto JS:
+```js
+var obj = JSON.parse(text)
+```
+Finalmente, use o novo objeto JS em sua página:
+```js
+<p id="demo"></p>
+
+<script>
+document.getElementById("demo").innerHTML = 
+  obj.employees[1].firstName + " " + obj.employees[1].lastName
+</script>
+```
+
+## Debugging com JavaScript
+
+Erros podem (e vão) acontecer, todas as vezes que você escreve algum novo código no computador.
+
+Códigos de programação podem conter sintaxes errôneas, ou erros lógicos. Muitos desses erros são de difícil diagnóstico. 
+
+Frequentemente, quando códigos de programação contém erros, nada acontecerá. Não há messagens de erro, e você não terá indicações onde encontrar por tais erros. Buscando (e ajeitando) erros em códigos é chamado de "debugging" de código.
+
+### Debuggers em JavaScript
+Debugar não é fácil. Porém, felizmente, todos os navegadores modernos tem um debugger embutido para JavaScript.	
+
+Deguggers embutidos podem ser ligados e desligados, forçando erros a serem reportados pelo usuário. Com o debugger, você pode definir pontos de interrupção (lugares onde a execução do código pode ser parada), e examinar variáveis enquanto o código está executando.
+
+Normalmente, caso contrário, siga as etapas no final dessa página, você ativa o debugging em seu navegador com o botão F12, e seleciona "Console" no menu Debugger.
+
+#### O Método console.log()
+Se seu navegador suporta debugging, você pode usar o "console.log()" para disponibilizar os valores em JS em uma janela de debugger.
+
+Para mais formas, acesse a [Listagem das Referências de JavaScript Console](https://www.w3schools.com/jsref/api_console.asp) 
+
+#### Definindo Pontos de Interrupção:
+Em cada breakpoint, JS vai parar a execução e permitir que você examine os valores de JS.
+
+Após a examinação dos valores, você pode retomar a execução do código (tipicamente com um botão de play)
+
+#### A Keyword debugger
+A keyword "debugger" para a execução do JavaScript e invoca (se disponível) a função debugging.
+
+Isso tem a mesma função de definir um breakpoint no debugger. Se nenhum debugger está disponível, a declaração debugger não terá efeito. Com o debugger ligado (F12), esse código vai parar de executar antes de executar a terceira linha.
+```js
+var x = 15 * 5
+debugger
+document.getElementById("demo").innerHTML = x
+```
+
+## Guia de Estilo em JavaScript
+
+Atenção: Sempre use as mesmas convenções de código para todos os seus projetos em JavaScript.
+
+Convenções código são guias de estilo para programação. Eles tipicamente cobrem:
+  - Regras de nomeação e declaração para variáveis e funções.
+  - Regras para o uso de espaços em branco, indentações e comentários
+  - Práticas e princípios de programação.
+
+Convenções de código: 
+  - Asseguram a qualidade;
+  - Desenvolve a legibilidade do código;
+  - Torna o código com manutenção mais fácil.
+
+Convenções de código podem ser regras documentadas para times que você segue, ou apenas para práticas individuais de código.
+
+### Espaços Em Torno dos Operadores:
+Sempre deixe espaços ao redor de operadores ( = + - * / ), e após vírgulas:
+```js
+var x = y + z
+var values = ["Volvo", "Saab", "Fiat"]
+```
+### Indentação de Código:
+Sempre use 2 espaços para indentações de blocos de código:
+```js 
+functon toCelsius(fahrenheit) {
+  return (5 / 9) * (fahrenheit - 32)
+}
+```
+**Atenção: Não use tabs (tabuladores) para indentação. Diferentes editores interpretam tabs diferentemente.**
+
+### Regras de Declaração:
+
+**Regras gerais para simples declarações:**
+  - Sempre termine uma declaração simples com um ponto e vírgula.
+
+**Regras gerais para declarações complexas (compostas):**
+- Coloque uma chaves aberta no fim da primeira linha.
+- Use um espaço antes das chaves abertas.
+- Coloque chaves de fechamento em uma nova linha, sem espaços anteriores.
+- Não termine uma declaração complexa com um ponto e vírgula.
+
+### Regras de Objetos:
+**Regras gerais para definições de objetos:**
+- Coloque as chaves de abertura na mesma linha do nome do objeto.
+- Use dois pontos mais um espaço entre cada propriedade e seu valor
+- Use aspas em torno de valores de string, não em valores numéricos.
+- Não adicione vírgula após o último par de valores de propriedade.
+- Coloque a chave de fechamento em uma nova linha, sem espaço antes.
+- Sempre termine uma definição de objeto com um ponto e vírgula.
+```js
+var person = { 
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  eyeColor: "blue"
+};
+```
+Objetos encurtados podem ser compressados em uma linha, usando espaços apenas entre propriedades, dessa forma:
+```js
+var person = {firstName: "John", lastName: "Doe", age: 50, eyecolor: "blue"};
+```
+#### Comprimento de Linha < 80
+Para melhor legibilidade, evite linhas mais longas que 80 caracteres. Se declarações em JS não cabem em uma linha, o melhor local para quebrar a linha é após o operador ou uma vírgula.
+
+#### Convenções de Nomeação
+Sempre usa a mesma convenção de nomeação para todo o seu código.
+- Nomes de variáveis e funções escritas em camelCase
+- Variáveis globais escritas em UPPERCASE (é comum, embora há quem não faça)
+- Constantes (como PI) escritas em UPPERCASE
+
+#### Hífens em HTML e CSS: 
+Atributos em HTML5 podem começar com data- (data-quantify, data-price)
+
+CSS usa hífens em property-names (font-size).
+
+**Atenção: Hífens podem ser mal-interpretados como tentativas de subtração. Hífens não são permitidos em nomes em JS.**
+
+Sublinhados: muitos programadores preferem usar sublinhados (date_of_birth) especialmente em databases SQL. São também usados na documentação PHP.
+
+- PascalCase: frequentemente preferido pelos programadores em C.
+- camelCase: usado pelo próprio JS, pelo jQuery, e outras bibliotecas JS.
+
+**Atenção: Não inicie nomes com um sinal de $. Você colocará em conflito com muitos nomes de bibliotecas JS.**
+
+#### Carregando JS em HTML:
+Use sintaxe simples para scripts simples de carregamento (o atributo type não é necessário):
+```js
+<script src="myscript.js"></script>
+```
+#### Acessando Elementos em HTML
+Uma consequência de usar estilos HTML desarrumados podem resultar em erros em JS. Se possível, use a mesma convenção de nomeação (como usado em JS) em HTML.
+
+Para mais formas, acesse a [Listagem das Referências de HTML Style Guide](https://www.w3schools.com/jsref/api_console.asp) 
+
+#### Extensões de Arquivo:
+Arquivos em HTML tem uma extensão .html (.html é permitido). CSS tem .css e JS tem .js.
+
+##### Use LowerCase Para Nomear Arquivos:
+Maioria dos servidores web (Apache, Unix) são caso sensitivos sobre nomes de arquivos:
+
+- london.jpg não pode ser acessado como London.jpg.
+
+Outros servidores web (Microsoft, IIS) não são caso sensitivo:
+
+- london.jpg pode ser acessado como London.jpg ou london.jpg.
+
+Se você usar uma mistura de upper e lowercase, você tem que ser extremamente consistente. Se você mudar de um servidor web caso insensitivo, para um caso sensitivo, mesmo pequenos erros podem quebrar seu website.
+
+Para evitar esses problemas, sempre use nomes de arquivos em lowercase (se possível).
+
+## Boas Práticas em JavaScript
+
+Evite variáveis globais, keyword "new", operador "==", e "eval()".
+
+Minimize o uso de variáveis globais. Isso inclui todos tipos de dados, objetos e funções. Variáveis globais e funções podem ser sobrescritas por outros scripts. Use variáveis locais.
+
+Sempre declare Variáveis Locais. Todas as variáveis locais usadas em uma função devem ser declaradas como variáveis locais. Variáveis locais devem ser declaradas com "var" ou "let", senão elas vão tornar-se variáveis globais.
+
+**Atenção: Modo Estrito não permite variáveis não declaradas.**
+
+Sempre declare no começo de cada script ou função. 
+
+É bom também inicializar variáveis quando declara-las. 
+```js
+var firstName = "",
+lastName = "",
+price = 0,
+discount = 0,
+fullPrice = 0,
+myArray = [],
+myObject = {}
+```
+Nunca declare Número, String, ou Objetos Booleanos. Sempre trate esses dados como valores primitivos, e não objetos.
+
+Não use "new Object()":
+  - Use {} ao invés de "new Object()"
+  - Use "" ao invés de "new String()"
+  - Use 0 ao invés de new Number()
+  - Use *false* ao invés de new Boolean()
+  - Use [] ao invés de new Array()
+  - Use /()/ ao invés de "new RegExp()"	/ new regexp object
+  - Use function (){} ao invés de "new Function()"
+
+Atenção às Conversões Automáticas de Tipo, como de strings para números, e operadores. String menos string gera NaN, por exemplo, mas somando cria-se uma concatenação.
+
+#### Use Comparação ===
+O operador de comparação == sempre converte (para tipos correspondentes) antes da comparação. O operador === força comparação de valores e tipo.
+
+#### Use Padrões de Parâmetros:
+Se uma função é chamada com um argumento errado ou faltante, o valor desse argumento é definido como *"undefined"*.
+
+Valores indefinidos podem quebrar seu código. É um bom hábito atribuir valores padrões para argumentos.
+```js
+function myFunction(x, y) {
+  if (y === undefined) {
+    y = 0
+  }
+}
+```
+ECMAScript 2015 permite parâmetros padrões na definição de função:
+```js
+function (a=1, b=1) { /*código da função/* }
+```
+#### Sempre Termine Seus Switches com Defaults
+```js
+switch (new Date().getDay()) {
+  case 0:
+    day = "Sunday"
+    break
+  case 1:
+    day = "Monday"
+    break
+  default:
+    day = "Outro dia"
+}
+```
+#### Evite Usar eval()
+A função eval() é usada para executar texto como código. Em quase todos os casos, ele não deve ser necessário.
+
+Por causa disso, ele permite código arbitrário para ser executado, o que representa um problema de segurança.
+
+## Erros Comuns em JavaScript:
+
+Programas JS podem gerar resultados inesperados se um programador acidentalmente usar um operador de atribuição (=), ao invés de um operador de comparação (==) em uma declaração if.
+
+A declaração if retorna "false" (como esperado) porque x não é igual a 10.
+```js
+var x = 0
+if (x == 10)
+```
+**Atenção: uma atribuição sempre retorna o valor da atribuição.**
+
+#### Esperando Comparações Frouxas.
+Em comparações regulares, tipos de dados não importam:
+```js
+var x = 10
+var y = "10"
+if (x == y) // retorna true
+```
+Em comparações estritas, tipos de dados importam:
+```js
+var x = 10
+var y = "10"
+if (x === y) // retorna false
+```
+É um erro comum esquecer que declarações "switch" usam comparações estritas.
+Esse switch não irá mostrar um alerta:
+```js
+var x = 10
+switch(x) {
+  case "10": alert("Hello")
+}
+```
+#### Confundindo Adição e Concatenação
+**Adição** é sobre adicionar números.
+
+**Concatenação** é sobre adicionar strings.
+
+#### Mal-Entendido com Números de Ponto Flutuante.
+Todos os números em JS são armazenados como números de ponto flutuante (floats) a 64-bits. Todas as linguagens de programação, incluindo JS, tem dificuldades com valores precisos de ponto flutuante.
+
+```js
+var x = 0.1
+var y = 0.2
+var z = x + z	// resultado não será 0.3, mas sim 0.30000000000004
+```
+Para resolver isso, multiplique e divida:
+```js
+var z = (x * 10 + y * 10) / 10	// resultado será 0.3
+```
+#### Mal Posicionamento do Ponto e Vírgula
+Por causa de um ponto e vírgula mal colocado, esse código executará sem importar o valor de x.
+```js
+if (x == 19);
+{
+// bloco de código
+}
+```
+**Atenção: Nunca quebre uma declaração return. Escreva a declaração na mesma linha. Declarar variáveis pode ser feito em diferentes linhas, mas o return não.**
+
+#### Acessando Vetores com Indexação Nomeadas.
+Vetores com indexações nomeadas são chamados vetores associativos (ou hashes). JS não suporta vetores com indexações nomeadas. Em JS, vetores são indexações numeradas:
+```js
+var person = []
+person[0] = "John"
+person[1] = "Doe"
+person[2] = 46
+var x = person.length
+var y = person[0]
+```
+Em JS, objetos são indexações numeradas. Se você usa uma indexação nomeada, quando acessar um vetor, JS vai redefinir o vetor para um objeto padrão.
+
+Após a redefinição automática, métodos e propriedades de vetores produzirão resultados undefined e incorretos.
+```js
+var person = []
+person["firstName"] = "John"
+person["lastName"] = "Doe"
+person["age"] = 46
+var x = person.length	// retorna 0
+var y = person[0]	// retorna undefined
+```
+#### Terminando Definições com uma Vírgula:
+Vírgulas finais em objetos e definições de vetores são permitidos em ECMAScript 5.
+```js
+points = [40, 100, 1, 5, 25, 10, ]
+```
+**Atenção: Internet Explorer 8 irá quebrar. E JSON não permite vírgulas finais.**
+
+#### Undefined Não É Null
+Objetos, variáveis, propriedades e métodos em JS podem ser "undefined". Além disso, objetos vazios em JS podem ter o valor "null". Isso pode criar pequenas dificuldades para testar se um objeto é vazio. 
+
+Você pode testar se um objeto existe testando se o tipo é undefined:
+```js
+if (typeof myObj === "undefined")
+```
+Porém você não consegue testar se um objeto é null e, por isso, lançará um erro se o objeto é undefined:
+```js
+if (myObj === null)
+```
+Para resolver esse problema, você deve testar se um objeto não é null, e não é undefined. Mas ainda lançará um erro.
+```js
+if (myObj !== null && typeof myObj !== "undefined")
+```
+Por isso, você deve testar se não é "undefined" antes de testar se não é null.
+```js
+if (typeof myObj !== "undefined" && myObj !== null) 
+// Retorna false se não existir myObj. Mas de for declarado com {} então retorna true.
+```
+
+## Performance em JavaScript:
+
+#### Reduza a Atividade em Loops:
+Cada declaração em um loop, incluindo a declaração "for", é executada por cada iteração do loop. Declarações ou atribuições que podem ser colocadas fora do loop irão fazer o loop executar mais rápido.
+
+Faça:
+```js
+var i
+var e = arr.length
+for (i = 0; i < e; i++)
+```
+#### Reduza o Acesso ao DOM:
+Acessar o HTML DOM é bastante lento, comparado a outras declarações JS. Se você precisa acessar um elemento do DOM muitas vezes, acesse-o uma vez apenas, e use-o como uma variável local:
+```js
+var obj
+obj = document.getElementById("demo")
+obj.innerHTML = "Hello"
+```
+#### Reduza o Tamanho do DOM:
+Mantenha um número pequeno de elementos no HTML DOM. Isso irá sempre melhorar o carregamento de páginas, e acelerar a renderização (disponibilização da página), especificamente sobre pequenos dispositivos.
+
+Cada tentativa de buscar o DOM irá ser beneficiada de um DOM menor. 
+
+#### Evite Variáveis Desnecessárias:
+Não crie novas variáveis se você não planeja salvar valores. 
+Você poderá transformar códigos assim:
+```js
+var fullName = firstName + " " + lastName
+document.getElementById("demo").innerHTML = fullName
+```
+Para assim:
+```js
+document.getElementById("demo").innerHTML = firstName + " " + lastName;
+```
+#### Atrase o Carregamento do JavaScript:
+Colocar seus scripts no final do corpo da página deixa o navegador carregar a página primeiro.
+
+Enquanto o script está sendo baixado, o navegador não irá começar qualquer outro download. Além disso, todas as atividades de análise e renderização podem ser bloqueadas.
+
+**Atenção: A especificação HTTP define que os navegadores não devem baixar mais que dois componentes em paralelo.**
+
+Uma alternativa é usar o **defer="true"** na tag "script". O atributo "defer" especifica que o script deve ser executado depois que a página tem finalizado a análise, mas apenas funciona para scripts externos.
+
+Se possível, você adicionar seu script para a página pelo código, após a página ser carregada.
+```js
+<script>
+window.onload = function() {
+  var element = document.createElement("script")
+  element.src = "myScript.js"
+  document.body.appendChild(element)
+}
+</script> 
+```
+#### Evite Usar "with"
+Tem um efeito negativo sobre a velocidade. Ele também confunde os escopos do JavaScript.
+
+A keyword "with" não é permitida em Modo Estrito.
+
+### Palavras Reservadas em JS:
+```js
+abstract	|	arguments	|	await*	|	boolean
+break	|	byte	|	case	|	catch
+char 	|	class* 	|	const 	|	continue
+debugger |	default 	|	delete 	|	do
+double 	|	else 	|	enum* 	|	eval
+export* 	|	extends* 	|	false 	|	final
+finally 	|	float 	|	for 	|	function
+goto 	|	if 	|	implements 	|	import*
+in 	|	instanceof	| 	int 	|	interface
+let* 	|	long 	|	native 	|	new
+null 	|	package 	|	private 	|	protected
+public 	|	return 	|	short 	|	static
+super* 	|	switch 	|	synchronized 	|	this
+throw 	|	throws 	|	transient 	|	true
+try 	|	typeof 	|	var 	|	void
+volatile 	|	while 	|	with 	|	yield
+```
+* \* Palavras que são novas no ECMAS 5 e 6
+
+#### Palavras Reservadas Removidas:
+```js
+abstract 	|	boolean 	|	byte 	|	char
+double 	|	final 	|	float 	|	goto
+int 	|	long 	|	native 	|	short
+synchronized	| 	throws	|	transient	|	volatile
+```
+**Atenção: Não use essas palavras como variáveis. ECMAS 5/6 não tem suporte em todos navegadores.**
+
+#### Palavras Reservadas em Java:
+JS é frequentemente usado juntamente com Java. Você deve evitar de usar alguns objetos e propriedades Java como identificadores JS:
+```js
+get Class		|	java	|	JavaArray		
+javaClass		|	JavaObject	|	JavaPackage
+```
+#### Outras Palavras Reservadas:
+JS pode ser usada como linguagem de programação em muitas aplicações. Você deve também evitar de usar o nome de objetos e propriedades HTML e do Window.
+```js
+alert 	|	all	| 	anchor	|	anchors
+area 	|	assign 	|	blur 	|	button
+checkbox |	clearInterval	| 	clearTimeout	| clientInformation	|	close 	|	closed 	|	confirm 	constructor	|	crypto 	|	decodeURI 	decodeURIComponent	|	defaultStatus	|	document 	element 		|	elements 		|	embed
+embeds 		|	encodeURI 	|	encodeURIComponent escape	|	event 	|	fileUpload	| 	focus 	form	|	forms 	|	frame 	|	innerHeight 	innerWidth	|	layer 	|	layers 	|	link 	location	|	mimeTypes 	|	navigate 	|	navigator 	frames	|	frameRate 	|	hidden 	|	history 	image	|	images 	|	offscreenBuffering 	|	open 	opener	|	option 	|	outerHeight 	|	outerWidth 	packages		|	pageXOffset 	|	pageYOffset 	parent	|	parseFloat	|	parseInt 	|	password 	pkcs11 	|	plugin	|	prompt 	|	propertyIsEnum 	radio 	|	reset	|	screenX 	|	screenY 	|	scroll 	|	secure	|	select 	|	self 	
+setInterval		 |	setTimeout	|	status 	|
+submit 		|	taint 	|	text	|	textarea 	
+top 	|	unescape 	|	untaint	|	window 	
+```
+#### Manejadores de Eventos HTML:
+Além disso, você deveria evitar usar nomes de todos os manejadores de evento do HTML.
+
+Exemplos:
+```js
+onblur	|	onclick	|	onerror	|	onfocus
+onkeydown	|	onkeypress	|	onkeyup
+onmouseover	|	onload	|	onmouseup
+onmousedown	|	onsubmit
+```

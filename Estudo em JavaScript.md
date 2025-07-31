@@ -1663,27 +1663,25 @@ for (var j of arr) {
 // Retorna 0, 1, 2, foo
 // 	3, 5, 7
 ```
-> Promises em JavaScript:
+#### Promises em JavaScript:
 Um Promise é um objeto JS que conecta "Produzir Código" e "Consumir Código". 
 "Produzir Código" pode tomar algum tempo e "Consumir Código" deve esperar pelo resultado.
 
-Sintaxe da Promise:
-  
+##### Sintaxe da Promise:
+```js
 let myPromise = new Promise(function(myResolve, myReject) {
-  /  "Produzir Código" (pode tomar algum tempo)
+// "Produzir Código" (pode tomar algum tempo)
   
-  myResolve() / quando der certo
-  myReject()   / quando falhar
+  myResolve() // quando der certo
+  myReject()  // quando falhar
 })
 
-/ "Consumir código" (Deve esperar pela final da Promise)
+// "Consumir código" (Deve esperar pela final da Promise)
 myPromise.then(
-  function(value) { / código se der certo / }
-  function(error) { / código se algo falhar / }
+  function(value) { /* código se der certo */ }
+  function(error) { /* código se algo falhar */ }
 )
-
 ---------------
-
   let myPromise = new Promise(function(myResolve, myReject) {
   setTimeout(function(){ myResolve("Hello World") }, 3000)
 })
@@ -1691,13 +1689,15 @@ myPromise.then(
 myPromise.then(function(value) {
   document.getElementById("demo").innerHTML = value
 })
-/ Resulta "Hello Word" após 3seg, ou 3000 miliseg
-
-> O Tipo Symbol
+// Resulta "Hello Word" após 3seg, ou 3000 miliseg
+```
+#### O Tipo Symbol
 Um Símbolo JS é um tipo de dado primitivo assim como Números, Strings, ou Booleanos. Ele representa um único identificador "escondido" que nenhum outro código pode acidentalmente acessar.
-Por exemplo, se diferentes codificadores desejam adicionar uma propriedade person.id para o objeto person pertencente a um código terceiro, eles poderão misturar cada um dos seus valores.
-Usando Symbol() para criar um identificador único, ajuda a resolver esse problema:
 
+Por exemplo, se diferentes codificadores desejam adicionar uma propriedade person.id para o objeto person pertencente a um código terceiro, eles poderão misturar cada um dos seus valores.
+
+Usando Symbol() para criar um identificador único, ajuda a resolver esse problema:
+```js
 const person = {
   firstName: "John",
   lastName: "Doe",
@@ -1706,39 +1706,48 @@ const person = {
 }
 let id = Symbol('id')
 person.id = 140353
-
+```
 Simbolos têm um outro uso importante. Eles podem ser usados como chaves (propriedades) em objetos. Exemplo de uso de um símbolo como chave:
-
+```js
 const obj = {}
 const sym = Symbol()
 obj[sym] = 'foo'
 obj.bar = 'bar'
 
-console.log(obj)		/ { bar: 'bar' }
-console.log(sym in obj)	/ true
-console.log(obj[sym])	/ foo
-console.log(Object.keys(obj)	/ ['bar']
-
+console.log(obj) // { bar: 'bar' }
+console.log(sym in obj)	// true
+console.log(obj[sym])	// foo
+console.log(Object.keys(obj) // ['bar']
+```
 Note como o Símbolo não foi retornado em Object.keys(). Isso é, novamente, pelo propósito de compatibilidade com versões anteriores. Códigos antigos não avisam dos Símbolos e então eles não são retornados nesse método.
-Ao primeiro olhar, parece que Símbolos podem ser usados para criar propriedades privadas sobre objetos. Muitas outras linguagens de programação tem propriedades escondidas em suas classes e essa omissão tem sido visto como uma deficiência do JS.
-Infelizmente, é ainda possível para códigos que interajam com esses objetos acessar propriedades nos quais as chaves são símbolos. É até mesmo possível em situações onde o código invocado não já tenha acesso ao símbolo por si mesmo. Como exemplo, o método "Reflect.ownKeys()" é capaz de gerar uma lista de todas as chaves de um obejto, seja strings ou simbolos:
 
+Ao primeiro olhar, parece que Símbolos podem ser usados para criar propriedades privadas sobre objetos. Muitas outras linguagens de programação tem propriedades escondidas em suas classes e essa omissão tem sido visto como uma deficiência do JS.
+
+Infelizmente, é ainda possível para códigos que interajam com esses objetos acessar propriedades nos quais as chaves são símbolos. É até mesmo possível em situações onde o código invocado não já tenha acesso ao símbolo por si mesmo. Como exemplo, o método "Reflect.ownKeys()" é capaz de gerar uma lista de todas as chaves de um obejto, seja strings ou simbolos:
+```js
 function tryToAddPrivate(o) {
   o[Symbol ('Pseudo Private')] = 42
 }
 const obj = { prop: 'hello' }
 trytoAddPrivate(obj)
-console.log(Reflect.ownKeys(obj)) 	/ [ 'prop', Symbol(Pseudo Private) ]
-console.log(obj[Reflect.ownKeys(obj)[1]])	/ 42
-
-Prevenindo Colisões de Nomes de Propriedades:
+console.log(Reflect.ownKeys(obj)) 	// [ 'prop', Symbol(Pseudo Private) ]
+console.log(obj[Reflect.ownKeys(obj)[1]])	// 42
+```
+##### Prevenindo Colisões de Nomes de Propriedades:
 Símbolos não podem beneficiar diretamente o JS de providenciar propriedades privadas aos objetos. No entanto, eles podem beneficiar de uma outra forma. Eles podem serem úteis em situações onde diferentes bibliotecas querem adicionar propriedades aos objetos sem o risco de haver colisões de nomes.
-Considere a situação onde duas diferentes bibliotecas querem anexar algum tipo de metadado a um objeto. Talvez elas ambas querem definir algum tipo de identificador no objeto. Simplesmente usando dois caracteres de string "id" como chave, há um grande risco que múltiplas bibliotecas usarão a mesma chave.
-Fazendo uso de símbolos, cada biblioteca pode gerar seus símbolos requeridos na instaciação. Portanto, os símbolos podem ser checados nos objetos, e definidos aos objetos, não importando quando um objeto é encontrado.
-Por essa razão, aparenta-se que símbolos beneficiam JS. No entanto, você pode se perguntar por que não podemos apenas gerar para cada biblioteca uma string aleatória, ou usar uma string com um nome especifamente, sobre a instanciação?
-Essa abordagem é realmente muito similar a abordagem com símbolos. A menos que duas bibliotecas pudessem escolher usar o mesmo nome de propriedade, então não haveria um risco de sobreposição.
-Nossos nomes de propriedades com nomes únicos ainda tem uma deficiência: suas chaves são muito fáceis de encontrar, especialmente quando o código executa ou para iterar as chaves ou serializar os objetos de outra forma. Considere o exemplo a seguir:
 
+Considere a situação onde duas diferentes bibliotecas querem anexar algum tipo de metadado a um objeto. Talvez elas ambas querem definir algum tipo de identificador no objeto. Simplesmente usando dois caracteres de string "id" como chave, há um grande risco que múltiplas bibliotecas usarão a mesma chave.
+
+Fazendo uso de símbolos, cada biblioteca pode gerar seus símbolos requeridos na instaciação. Portanto, os símbolos podem ser checados nos objetos, e definidos aos objetos, não importando quando um objeto é encontrado.
+
+Por essa razão, aparenta-se que símbolos beneficiam JS. No entanto, você pode se perguntar por que não podemos apenas gerar para cada biblioteca uma string aleatória, ou usar uma string com um nome especifamente, sobre a instanciação?
+
+Essa abordagem é realmente muito similar a abordagem com símbolos. A menos que duas bibliotecas pudessem escolher usar o mesmo nome de propriedade, então não haveria um risco de sobreposição.
+
+Nossos nomes de propriedades com nomes únicos ainda tem uma deficiência: suas chaves são muito fáceis de encontrar, especialmente quando o código executa ou para iterar as chaves ou serializar os objetos de outra forma. 
+
+**Considere o exemplo a seguir:**
+```js
 const library2property = 'LIB2-NAMESPACE-id'
 function lib2tag(obj) {
   obj[library2property] = 369
@@ -1749,11 +1758,12 @@ const user = {
 }
 lib2tag(user)
 JSON.stringify(user)
-/ '{"name":"Thomas Hunter II", "age":32, "LIB2-NAMESPACE-id":369}'
-
+// '{"name":"Thomas Hunter II", "age":32, "LIB2-NAMESPACE-id":369}'
+```
 Se nós tivemos usado um símbolo para um nome de propriedade do objeto, então o resultado do JSON não iria conter seu valor. Por que isso? Bem, apenas porque JS ganhou suporte para símbolos não quer dizer que a especificação JSON tem mudado. JSON apenas permite strings como chaves e JS não faz qualquer tentativa de representar propriedades de símbolos no código final do JSON.
-Nós podemos corrigir facilmente o problema em que as strings de objeto de nossa biblioteca estão poluindo a saída JSON, usando "Object.defineProperty()":
 
+Nós podemos corrigir facilmente o problema em que as strings de objeto de nossa biblioteca estão poluindo a saída JSON, usando "Object.defineProperty()":
+```js
 const library2property = uuid()
 function lib2tag(obj) {
   Object.defineProperty(obj, library2property, {
@@ -1769,10 +1779,10 @@ lib2tag(user)
 / '{"name":"Thomas Hunter II",
   "age":32,"f468c902-26ed-4b2e-81d6-5775ae7eec5d":369}'
 console.log(JSON.stringify(user))
-console.log(user[library2property])	/ 369
-
+console.log(user[library2property])	// 369
+```
 Chaves de string nas quais tem sido "escondidas" através das definições de seus "enumerable" colocados para "false" se comportarem muito similarmente com chaves de símbolos. Ambos são escondidas pelo "Object.keys()" e ambos são revelados com "Reflect.ownKeys()", como visto no exemplo seguinte:
-
+```js
 const obj = {}
 obj[Symbol()] = 1
 Object.defineProperty(obj, 'foo', {
@@ -1782,119 +1792,211 @@ Object.defineProperty(obj, 'foo', {
 console.log(Object.keys(obj))		/ []
 console.log(Reflect.ownKeys(obj))	/ ['foo', Symbol()]
 console.log(JSON.stringify(obj))	/ {}
-
+```
 Nesse ponto, nós temos aproximadamente recriado símbolos. Ambos nossas strings de propriedade escondidas e símbolos são escondidos dos serializadores. Ambas propriedades podem ser extraídas usando o método "Reflect.ownKeys()" e são então não realmente privadas. Assumindo que nós usamos algum tipo de namespace / valor randômico para versões de strings nos nomes de propriedades então nós temos removido o risco de múltiplas bibliotecas acidentalmente terem um colisão de nome.
 
 Symbols são acessíveis de três formas:
-1. Symbols são acessúveis entre realms, e, por realm queremos dizer contexto. Por exemplo, sua página é um contexto de "document" enquanto, dentro dela, podemos ter um <iframe> com um contexto/realm diferente.
+1. Symbols são acessíveis entre realms, e, por realm queremos dizer contexto. Por exemplo, sua página é um contexto de "document" enquanto, dentro dela, podemos ter um *iframe* com um contexto/realm diferente.
 2. Você pode registrar Symbols globais e acessa-los por entre esses contextos também.
 3. Uma das classes de Symbols é chamada de "Well-Known", eles existem entre realms, mas não são acessíveis no registro global de Symbols. 
 
 Podemos encontrar a chave que foi associada um Symbol através do método "symbol.keyFor(symbol)" que, dado um Sumbol criado previamente, vai nos retornar a chave associada a ele.
 
 Por fim, isso quer dizer que nada impede que outro programados, dentro de outro script da aplicação, também tenha a ideia de criar uma propriedade chamada, por exemplo, de "contador" em "painel" atribuindo um valor completamente diferente do que estamos esperando.
+
 Portanto, evidente que isso nos causrá problemas. A cada clique agora tentaremos incrementar uma string, o que não faz muito sentido. É aí que usamos o symbol.
 Podemos listar todos os símbolos que um objeto possui através da função "Object.getOwnPropertySymbols()". Vejamos um exemplo criando um novo script:
-
+```js
 Object.getOwnPropertySymbols(painel)		
   .forEach(symbol => console.log(painel[symbol])
-
-> Valores de Parâmetro Padrão:
+```
+#### Valores de Parâmetro Padrão:
 
 ES6 permite que parâmetros de funções tenham valores padrões.
-
+```js
 function myFunction(x, y = 10) {
-  / y é 10 se não passado ou undefined
+  // y é 10 se não passado ou undefined
   return x + y
 }
-myFunction(5)	/ retorna 15
-
-> Rest Parameter da Função:
+myFunction(5)	// retorna 15
+```
+#### Rest Parameter da Função:
 
 O rest parameter (...) permite a uma função lidar com um número indefinido de argumentos como um vetor:
-
+```js
 function sum(...args) {
   let sum = 0
-  for (let arg of args) sum += arg 	/ cria uma variável para lidar com cada argumento do rest parameter
+  for (let arg of args) sum += arg 
+  // cria uma variável para lidar com cada argumento do rest parameter
   return sum
 }
 let x = sum(4, 9, 16, 25, 29, 100, 66, 77)
+```
+### ECMAScript 2016:
 
-ECMAScript 2016:
-
-> Operador de Exponenciação:
+#### Operador de Exponenciação:
 O operador de exponenciação (**) calcula o primeiro operando para a potência do segundo operando:
-
+```js
 let x = 5
-let z = x ** 2	/ resultado é 25
-
+let z = x ** 2	// resultado é 25
+```
 "x ** y" produz o mesmo resultado que "Math.pow(x, y)".
 
-> Atribuição de Exponenciação:
+#### Atribuição de Exponenciação:
 O operador de atribuição de exponenciação (**=) calcula o valor de uma variável à potência do operando à direita:
-03:10 18/02/2021
+```js
 let x = 5
-x **= 2	/ resultado é 25
-
-> Array.prototype.includes:
+x **= 2	// resultado é 25
+```
+#### Array.prototype.includes:
 ECMAScript 2016 introduziu "Array.prototype.includes" aos vetores. Isso permite-nos checar se um elemento está presente em um vetor:
-
+```js
 const fruits = ["Banana", "Orange", "Apple", "Mango"]
 fruits.include("Mango")	/ true
+```
+### ECMAScript 2017
 
-ECMAScript 2017
-
-> Entradas de Objetos no JavaScript
+#### Entradas de Objetos no JavaScript
 ECMAScript 2017 adicionou um novo método "Object.entries" para objetos:
-
-const person = {
-  firstName: "John",
-  lastName: "Doe',
-  age: 50,
-  eyeColor: "blue"
-}
-document.getElementById("demo").innerHTML = Object.entries(person)	/ firstName,John,lastName,Doe,age,50,eyeColor,blue
-
-> Valores de Objeto em JavaScript:
-"Object.values" é similar a "Object.entries", mas retorna um único vetor de dimensão dos valores do objeto:
-
+```js
 const person = {
   firstName: "John",
   lastName: "Doe",
   age: 50,
   eyeColor: "blue"
 }
-document.getElementById("demo").innerHTML = Object.values(person)	/ John,Doe,50,blue
+document.getElementById("demo").innerHTML = Object.entries(person)	
+// firstName,John,lastName,Doe,age,50,eyeColor,blue
+```
+#### Valores de Objeto em JavaScript:
+"Object.values" é similar a "Object.entries", mas retorna um único vetor de dimensão dos valores do objeto:
+```js
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 50,
+  eyeColor: "blue"
+}
+document.getElementById("demo").innerHTML = Object.values(person)	
+// John,Doe,50,blue
+```
 
+### ECMAScript 2018:
 
-ECMAScript 2018:
-
-> Iteração Assíncronas em JS:
+#### Iteração Assíncronas em JS:
 ECMAScript 2018 adicionou iteráveis e iterações assíncronas. 
 Com iteráveis assíncronos, podemos usar a keyword "await" em loops "for/of".
-
+```js
 for await () {}
-
-> Promise.finally:
+```
+#### Promise.finally:
 Finalizou a implementação completa do objeto Promise com "Promise.finally":
-
+```js
 let myPromise = new Promise()
 
 myPromise.then()
 myPromise.catch()
 myPromise.finally()
-
-> Rest Properties de Objetos:
+```
+#### Rest Properties de Objetos:
 Adicionou rest properties. Isso permite-nos desestruturar um objeto e coletar as sobras em um novo objeto:
-
+```js
 let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 }
-x	/ 1
-y	/ 2
-z	/ {a: 3, b: 4}
-
-> Novas Características do RegExp em JS:
+x	// 1
+y	// 2
+z	// {a: 3, b: 4}
+```
+#### Novas Características do RegExp em JS:
 
 - Sinalizador s (dotAll)
 - Unicode Property Escapes (\p{...})
 - Lookbehind Assertions (?<= ) and (?<! )
 - Named Capture Groups.
+
+## Formulários:
+
+> Validação de Formulário em JavaScript:
+Validação de formulário pode ser feita peoo JS. Se um campo de formulário (fname) está vazio, essa função alerta uma mensagem e retorna falso, para previnir que o formulário seja submetido.
+
+function validateForm() {
+  var x = document.forms["myForm"]["fname"].value
+  if(x == "") {
+    alert("Name must be filled out")
+    return false
+  }
+}
+
+A função pode ser chamada quando o formulário é submetido:
+
+<form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+Name: <input type="text" name="fname">
+<input type="submit" value="submit">
+</form>
+
+> Validação de Input Numérico
+
+<input id="numb">
+<button type="button" onclick="myFunction()">Submit</button>
+<p id="demo"></p>
+
+<script>	
+function myFunction() {
+  var x, text
+  x = document.getElementById("numb").value
+  
+  if (isNaN(x) || x < 1 || x > 10)
+    text = "Input not valid"
+  } else {
+    text = "Input OK"
+  }
+  document.getElementbyId("demo").innerHTML = text
+}
+</script>
+
+> Validação de Formulário HTML Automática:
+Pode ser executada automaticamente pelo navegador. Se um campo de formulário (fname) está vazio, o atributo "required" previne esse formulário seja submetido:
+
+<form action="/action_page.php" method="post"
+.		<input type="text" name="fname" required>
+  <input type="submit" value="submit">
+</form>
+
+> Validação de Dados:
+É um proecesso de assegurar que o input do usuário está claro, correto e útil.
+Tarefas típicas de validação:
+1. O usuário tem preenchido todos os campos requeridos?
+2. O usuário colocou uma data válida?
+3. O usuário colocou texto em um campo numérico?
+
+Muito frequentemente, o próposito da validação de dados é assegurar o correto input do usuário.
+Validação pode ser definida por muitos diferentes métodos, e implantado em muitas diferentes maneiras.
+
+- Validação Server Side: é executado pelo web server, depois que o input tem sido enviado ao servidor.
+- Validação Client Side: é executado pelo navegador, antes que o input seja enviado ao servidor web.
+
+> Validação de Restrição do HTML:
+HTML5 introduziu um novo conceito de validação HTML chamado "validação de restrição". Esse novo conceito é baseado em:
+1. Validação de restrição de Atributos de Input HTML.
+2. Validação de restrição de Pseudo Seletores CSS.
+3. Validação de restrição de Métodos e Propriedades do DOM.
+
+> Validação de Restrição de Atributos de Input HTML:
+
+disabled		|	Especifica que o elemento input 			deveria estar desabilitado.
+max		|	Valor máximo de um elemento input
+min		|	Valor mínimo de um elemento input.
+pattern		|	Padrão de valor de um input.
+required		|	Campo de input é requerido.
+type		|	Especifica o tipo de input.
+
+https://www.w3schools.com/html/html_form_attributes.asp HTML Input Attributes.
+
+> Validação de Restrição de Pseudo-Seletores CSS:
+
+:disabled		|	Seleciona elementos input com o 			atributo "disabled" especificado.
+:invalid		|	Elementos com valores inválidos.
+:optional		|	Elementos sem atributo "required".
+:required		|	Elementos com atributo "required".
+:valid		|	Elementos com valores válidos.
+
+https://www.w3schools.com/css/css_pseudo_classes.asp CSS Pseudo Classes.

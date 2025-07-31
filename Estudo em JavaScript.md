@@ -1502,7 +1502,7 @@ document.getElementById("demo").innerHTML = person.lang
 **Atenção: sem o set, o valor final é "NO". Com o set, o person.lang = "en" torna-se "en".**
 
 Esse exemplo abaixo usa um setter para assegurar atualizações uppercase de linguagem:
-  
+```js  
 var person = {
   firstName: "John",
   lastName: "Doe",
@@ -1511,132 +1511,136 @@ var person = {
     this.language = value.toUpperCase()
   }
 }
-/ Define uma propriedade usando um setter.
+// Define uma propriedade usando um setter.
 person.lang = "en"
-/ Disponibiliza dado do objeto:
+// Disponibiliza dado do objeto:
 document.getElementById("demo").innerHTML = person.language
-/ Resultado: "EN"
+// Resultado: "EN"
+```
+Para mais formas, acesse o [JavaScript Object Accessors](https://www.w3schools.com/js/js_object_accessors.asp)
 
-https://www.w3schools.com/js/js_object_accessors.asp JavaScript Object Accessors
-
-> Novos Métodos de Propriedade de Objetos:
+#### Novos Métodos de Propriedade de Objetos:
 "Object.defineProperty()" é um novo método de Objeto em ES5. Ele permite definir uma propriedade de objeto e/ou mudar um valor da propriedade e/ou metadados:
-
+```js
 var person = {
   firstName:"John",
   lastName: "Doe",
   language: "NO" ,
 }
-/ Mude uma propriedade:
+// Mude uma propriedade:
 Object.defineProperty(person, "language", {
   value: "EN"
   writable: true
-  enumerable: true 	/ se for false, ele não retorna "EN"
+  enumerable: true 	// se for false, ele não retorna "EN"
   configurable: true
 })
-/ Enumere propriedades:
+// Enumere propriedades:
 var txt = ""
 for (var x in person) {
   txt += person[x] + "<br>"
 }
 document.getElementById("demo").innerHTML = txt
-
+```
 Esse exemplo abaixo cria um setter e um getter para assegurar atualizações em Uppercases de language:
-
+```js
 var person = {
   firstName: "John",
   lastName: "Doe",
   language: "No"
 }
-/ Mude uma propriedade
+// Muda uma propriedade
 Object.defineProperty(person, "language", {
   get : function() { return language }
   set : function(value) { language = value.toUpperCase()}
 })
-/ Muda a linguagem:	
+// Muda a linguagem:	
 person.language = "en"
 document.getElementById("demo").innerHTML = person.language
-/ Retorna "EN"
-
+// Retorna "EN"
+```
 ES5 adicionou vários novos Métodos de Objeto no JS:
-
-/ Adiciona ou muda uma propriedade de objeto
+```js
+// Adiciona ou muda uma propriedade de objeto
 Object.defineProperty(object, property, descriptor)
 
-/ Adiciona ou muda várias propriedades de objetos
+// Adiciona ou muda várias propriedades de objetos
 Object.defineProperties(object, descriptors)
 
-/ Acessa propriedades
+// Acessa propriedades
 Object.getOwnPropertyDescriptor(object, property)
 
-/ Retorna todas as propriedades como um vetor:
+// Retorna todas as propriedades como um vetor:
 Object.getOwnPropertyNames(object)
 
-/ Retorna propriedades enumeráveis como um vetor:
+// Retorna propriedades enumeráveis como um vetor:
 Object.keys(object)
 
-/ Acessa o prototype:
+// Acessa o prototype:
 Object.getPrototypeOf(object)
 
-/ Previne de adicionar propriedades a um objeto:
+// Previne de adicionar propriedades a um objeto:
 Object.preventExtensions(object)
 
-/ Retorna true se propriedades podem ser adicionadas a um objeto:
+// Retorna true se propriedades podem ser adicionadas a um objeto:
 Object.isExtensible(object)
 
-/ Previne mudanças de propriedades de objeto (não valores):
+// Previne mudanças de propriedades de objeto (não valores):
 Object.seal(object)
 
-/ Retorna true se objeto está selado:
+// Retorna true se objeto está selado:
 Object.isSealed(object)
 
-/ Previne qualquer mudanças em um objeto:
+// Previne qualquer mudanças em um objeto:
 Object.freeze(object)
 
-/ Retorna true se o objeto está congelado
+// Retorna true se o objeto está congelado
 Object.isFrozen(object)
+```
 
-https://www.w3schools.com/js/js_object_es5.asp Object ECMAScript5
+Para mais formas, acesse o [JavaScript Object ECMAScript5](https://www.w3schools.com/js/js_object_es5.asp)
 
-> Vírgulas no Final:
-
+#### Vírgulas no Final:
+```js 
 person = {
   firstName: "John",
   lastName: "Doe",
   age: 46,
 }
-
+```
 Atenção: IE8 vai ter problemas. JSON não permite vírgulas no final:
-
-/ Permitido
+```js
+// Permitido
 var person = '{"firstName":"John", "lastName":"Doe", "age":46}'
 JSON.parse(person)	
 
-/ Não permitido:
+// Não permitido:
 var person = '{"firstName":"John", "lastName":"Doe", "age":46,}'
 JSON.parse(person)
-
-> Palavras Reservadas como Nomes de Propriedades:
+```
+#### Palavras Reservadas como Nomes de Propriedades:
 ES5 permite palavras reservadas como nomes de propriedades:
-
+```js
 var obj = {name: "John", new: "yes"}
+```
 
+### JS 2015 (ES6):
 
-JS 2015 (ES6):
-
-> Loop For/Of:
+#### Loop For/Of:
 A declaração JS for/of promove iterações entre os valores de um objeto. Ele permite que você realize repetições sobre estruturas de dados que são iteráveis, tais como Vetores, Strings, Maps, NodeLists, e mais.
+
 O loop for/of tem a seguinte sintaxe:
-
+```js
 for (variável of iterável) {
-  / bloco de código a ser executado
+  // bloco de código a ser executado
 }
+```
 
-variável: por cada iteração, o valor da próxima propriedade é atribuída para a variável. A variável pode ser declarada com const, let, ou var.
-iterável: um objeto que tem propriedades iteráveis.
+Variável: por cada iteração, o valor da próxima propriedade é atribuída para a variável. A variável pode ser declarada com const, let, ou var.
+
+Iterável: um objeto que tem propriedades iteráveis.
 
 Exemplo com um vetor:
-
+```js
 var cars = ["BMW", "Volvo", "Mini"]
 var text = ""
 
@@ -1644,10 +1648,10 @@ for (let x of cars) {
   text += x + "<br>"
 }
 document.getElementById("demo").innerHTML = text
-
+```
 
 Atenção: Há diferenças entre o for/in e o for/of:
-
+```js
 var arr = [3, 5, 7];
 arr.foo = "hello";
 for (var x in arr) {
@@ -1656,9 +1660,9 @@ for (var x in arr) {
 for (var j of arr) {
     console.log(j)
 } 
-/ Retorna 0, 1, 2, foo
-/ 	3, 5, 7
-
+// Retorna 0, 1, 2, foo
+// 	3, 5, 7
+```
 > Promises em JavaScript:
 Um Promise é um objeto JS que conecta "Produzir Código" e "Consumir Código". 
 "Produzir Código" pode tomar algum tempo e "Consumir Código" deve esperar pelo resultado.

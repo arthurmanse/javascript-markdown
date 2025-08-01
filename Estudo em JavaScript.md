@@ -2471,16 +2471,16 @@ Objetos do mesmo tipo são criados por invocação da função construtora com a
 var myFather = new Person("John", "Doe", 50, "blue")
 var myMother = new Person("Sally", "Rally", 48, "green")
 ```
-> Keyword "this" em Construtores:
+### Keyword "this" em Construtores:
 Em uma função construtora, this não tem um valor. Ele é um substituto para o novo objeto. O valor de this tornará-se o novo objeto quando um novo objeto é criado.
 
-Atenção: Note que "this" não é uma variável, mas sim um keyword. Não se pode mudar o valor de "this".
+**Atenção: Note que "this" não é uma variável, mas sim um keyword. Não se pode mudar o valor de "this".**
 
-> Adicionando uma Propriedade ao Constructor:
+### Adicionando uma Propriedade ao Constructor:
 Você não é capaz de adicionar uma nova propriedade a um construtor de objeto da mesma forma que você adiciona uma nova propriedade a um objeto existente.
 
 Para adicionar uma nova propriedade a um construtor, você deve adicionar à função construtora:
-
+```js
 function Person(first, last, age, eyecolor) {
   this.firstName = first
   this.lastName = last
@@ -2488,12 +2488,12 @@ function Person(first, last, age, eyecolor) {
   this.eyeColor = eyecolor
   this.nationality = "English"
 }
-
+```
 Dessa forma, propriedades de objetos podem ter valores padrão.
 
-> Adicionando um Método a um Construtor:
+### Adicionando um Método a um Construtor:
 Sua função construtora pode também definir métodos:
-
+```js
 function Person(first, last, age, eyecolor) {
   this.firstName = first
   this.lastName = last
@@ -2501,10 +2501,11 @@ function Person(first, last, age, eyecolor) {
   this.eyeColor = eyecolor
   this.name = function() {return this.firstName + " " + this.lastName}
 }
-
+```
 Você não pode adicionar um novo método a um objeto construtor da mesma forma que você adiciona um novo método a um objeto existente.
-Adicionar métodos a um construtor de objeto deve ser feito dentro da função construtora:
 
+Adicionar métodos a um construtor de objeto deve ser feito dentro da função construtora:
+```js
 function Person(firstName, lastName, age, eyeColor) {
   this.firstName = firstName
   this.lastName = lastName
@@ -2514,16 +2515,16 @@ function Person(firstName, lastName, age, eyeColor) {
     this.lastName = name
   }
 }
-
+```
 A função changeName() atribui o valor de name (parâmetro) para a propriedade lastName de person.
-
+```js
 var myMother = new Person("Sally", "Rally", 48, "green")
 myMother.changeName("Doe")
 
 document.getElementById("demo").innerHTML = "My mother's last name is " + myMlther.lastName
-/ "My mother's last name is Doe"
-
-JavaScript save qual pessoa você falando sobre ao "substituir" this com myMother.
+// "My mother's last name is Doe"
+```
+JavaScript sabe qual pessoa você falando sobre ao "substituir" this com myMother.
 
 Atenção: "Math" é um tipo JS, sendo um objeto global. A keyword "new" não pode ser usada em "Math".
 
@@ -2534,8 +2535,7 @@ Use literais de objetos { } ao invés de "new Object()".
 
 O mesmo vale para outros valores primitivos, funções, RegExp, vetores, etc.
 
-
-PROTÓTIPOS DE OBJETOS EM JAVASCRIPT
+## Protótipos de Objetos em JS:
 
 > Herança em Protótipos:
 Todos os objetos em JavaScript herdam propriedades e métodos de um protótipo.

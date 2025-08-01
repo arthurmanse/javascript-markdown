@@ -1915,9 +1915,9 @@ z	// {a: 3, b: 4}
 
 ## Formulários:
 
-> Validação de Formulário em JavaScript:
-Validação de formulário pode ser feita peoo JS. Se um campo de formulário (fname) está vazio, essa função alerta uma mensagem e retorna falso, para previnir que o formulário seja submetido.
-
+### Validação de Formulário em JavaScript:
+Validação de formulário pode ser feita pelo JS. Se um campo de formulário (fname) está vazio, essa função alerta uma mensagem e retorna falso, para previnir que o formulário seja submetido.
+```js
 function validateForm() {
   var x = document.forms["myForm"]["fname"].value
   if(x == "") {
@@ -1925,16 +1925,16 @@ function validateForm() {
     return false
   }
 }
-
+```
 A função pode ser chamada quando o formulário é submetido:
-
+```js
 <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
 Name: <input type="text" name="fname">
 <input type="submit" value="submit">
 </form>
-
-> Validação de Input Numérico
-
+```
+### Validação de Input Numérico
+```js
 <input id="numb">
 <button type="button" onclick="myFunction()">Submit</button>
 <p id="demo"></p>
@@ -1952,16 +1952,16 @@ function myFunction() {
   document.getElementbyId("demo").innerHTML = text
 }
 </script>
-
-> Validação de Formulário HTML Automática:
+```
+### Validação de Formulário HTML Automática:
 Pode ser executada automaticamente pelo navegador. Se um campo de formulário (fname) está vazio, o atributo "required" previne esse formulário seja submetido:
-
+```js
 <form action="/action_page.php" method="post"
 .		<input type="text" name="fname" required>
   <input type="submit" value="submit">
 </form>
-
-> Validação de Dados:
+```
+### Validação de Dados:
 É um proecesso de assegurar que o input do usuário está claro, correto e útil.
 Tarefas típicas de validação:
 1. O usuário tem preenchido todos os campos requeridos?
@@ -1969,47 +1969,53 @@ Tarefas típicas de validação:
 3. O usuário colocou texto em um campo numérico?
 
 Muito frequentemente, o próposito da validação de dados é assegurar o correto input do usuário.
+
 Validação pode ser definida por muitos diferentes métodos, e implantado em muitas diferentes maneiras.
 
 - Validação Server Side: é executado pelo web server, depois que o input tem sido enviado ao servidor.
 - Validação Client Side: é executado pelo navegador, antes que o input seja enviado ao servidor web.
 
-> Validação de Restrição do HTML:
+### Validação de Restrição do HTML:
 HTML5 introduziu um novo conceito de validação HTML chamado "validação de restrição". Esse novo conceito é baseado em:
 1. Validação de restrição de Atributos de Input HTML.
 2. Validação de restrição de Pseudo Seletores CSS.
 3. Validação de restrição de Métodos e Propriedades do DOM.
 
-> Validação de Restrição de Atributos de Input HTML:
+### Validação de Restrição de Atributos de Input HTML:
 
-disabled		|	Especifica que o elemento input 			deveria estar desabilitado.
+|Atributos| Uso |
+|:---:|---|
+disabled		|	Especifica que o elemento input deveria estar desabilitado.
 max		|	Valor máximo de um elemento input
 min		|	Valor mínimo de um elemento input.
 pattern		|	Padrão de valor de um input.
 required		|	Campo de input é requerido.
 type		|	Especifica o tipo de input.
 
-https://www.w3schools.com/html/html_form_attributes.asp HTML Input Attributes.
+**Para mais formas, acesse o [HTML Input Attributes](https://www.w3schools.com/html/html_form_attributes.asp)**
 
-> Validação de Restrição de Pseudo-Seletores CSS:
+### Validação de Restrição de Pseudo-Seletores CSS:
 
-:disabled		|	Seleciona elementos input com o 			atributo "disabled" especificado.
+|Atributos| Uso |
+|:---:|---|
+:disabled		|	Seleciona elementos input com o	atributo "disabled" especificado.
 :invalid		|	Elementos com valores inválidos.
 :optional		|	Elementos sem atributo "required".
 :required		|	Elementos com atributo "required".
 :valid		|	Elementos com valores válidos.
 
-https://www.w3schools.com/css/css_pseudo_classes.asp CSS Pseudo Classes.
+**Para mais formas, acesse o [CSS Pseudo Classes](https://www.w3schools.com/css/css_pseudo_classes.asp)**
 
-API DE VALIDAÇÃO EM JAVASCRIPT:
+## API DE VALIDAÇÃO EM JAVASCRIPT:
 
-> Validação de Restrição em Métodos de DOM:
+### Validação de Restrição em Métodos de DOM:
 
-checkValidity()	|	Retorna true se um elemento input 			contém dados válidos.
-setCustomValidity()	|	Define a propriedade 			validationMessage de um elemento 			input.
+* **checkValidity()**	|	Retorna true se um elemento input contém dados válidos.
+
+* **setCustomValidity()**	|	Define a propriedade validationMessage de um elemento input.
   
 Se um campo de input contém um dado inválido, disponibilizando uma mensagem:
-
+```js
 <input id="id1" type="number" min="100" max="300" required>
 <button onclick="myFunction()">OK</button>
 <p id="demo"></p>
@@ -2024,37 +2030,35 @@ function myFunction() {
   }
 }
 </script>
-
+```
 No exemplo acima, a condição testa se o valor não é true e retorna uma messagem do navegador (validationMessage). Essa mensagem estará na lingua em que o navegador está configurado para o usuário. O "validationMessage" é uma propriedade de apenas-leitura. 
 
-> Validação de Restrição com Propriedades do DOM:
+### Validação de Restrição com Propriedades do DOM:
 
-validity		|	Contém propriedades booleanas 			relacionadas à validade de um 			elemento input.
-validationMessage	|	Contém a messagem que um 			navegador vai mostrar quando a 			validade é falsa.
-willValidate	|	Indica um valor booleano se um 			input será validado.
+|Atributos| Uso |
+|:---:|---|
+validity		|	Contém propriedades booleanas relacionadas à validade de um elemento input.
+validationMessage	|	Contém a messagem que um navegador vai mostrar quando a validade é falsa.
+willValidate	|	Indica um valor booleano se um input será validado.
 
 
-> Propriedades de Validade:
+### Propriedades de Validade:
 A propriedade de validade de um elemento input contém um número de propriedades relacionadas à validação de dados:
 
-customError	|	Define como true, se uma 			mensagem de validade 			personalizada for definida.
-patternMismatch	|	Define como true, se um valor do 			elemento não corresponde ao seu 			atributo padrão.
-rangeOverflow	|	Define como true, se um valor de 			elemento é maior do que seu 			atributo máximo.
-rangeUnderflow	|	Define como true, se um valor de 			elemento é menor do que seu 			atributo mínimo.
-stepMismatch	|	Define como true, se um valor do 				elemento é inválido por seu atributo 			step.
-tooLong		|	Define como true, se um valor do 
-    elemento excede o atributo 			maxLength.
-typeMismatch	|	Define como true, se um valor do
-    elemento é inválido por seu atributo
-    type.
-valueMissing	|	Define como true, se um elemento
-    (com atributo required) não possui
-    valor.
-valid		|	Define como true se um valor do
-    elemento é válido.
+|Atributos| Uso |
+|:---:|---|
+customError	|	Define como true, se uma mensagem de validade personalizada for definida.
+patternMismatch	|	Define como true, se um valor do elemento não corresponde ao seu 		atributo padrão.
+rangeOverflow	|	Define como true, se um valor de elemento é maior do que seu atributo máximo.
+rangeUnderflow	|	Define como true, se um valor de elemento é menor do que seu atributo mínimo.
+stepMismatch	|	Define como true, se um valor do elemento é inválido por seu atributo step.
+tooLong		|	Define como true, se um valor do elemento excede o atributo maxLength.
+typeMismatch	|	Define como true, se um valor do elemento é inválido por seu atributo type.
+valueMissing	|	Define como true, se um elemento (com atributo required) não possui valor.
+valid		|	Define como true se um valor do elemento é válido.
 
-Exemplos:
-  
+#### Exemplos:
+```js
 <input id="id1" type="number" max="100">
 <button onclick="myFunction()">OK</button>
 <p id="demo"></p>
@@ -2070,17 +2074,19 @@ function myFunction() {
 document.getElementById("demo").innerHTML = txt
 }
 </script>
+```
 
-
-OBJETOS EM JAVASCRIPT
+## Objetos em JavaScript:
 
 "Em JavaScript, objetos são reis. Se você entende objetos, você entende JavaScript."
 
 Valores primiticos são imutáveis (eles são codificados e, portanto, não podem ser alterados).
+
 Se x = 3.14, você pode mudar o valor de x, mas não pode mudar alterar o valor de 3.14.
 
-> Objetos são Variáveis:
+### Objetos são Variáveis:
 Objetos são variáveis também, porém podem conter muitos valores.
+
 Os valores são escritos em pares "nome : valor" (nome e valor separados por dois pontos). Ou seja: um objeto é uma coleção de valores nomeados.
 
 Os valores nomeados nos objetos são chamados de "propriedades". Os objetos escritos como valores nomeados são similares aos:
@@ -2090,11 +2096,12 @@ Os valores nomeados nos objetos são chamados de "propriedades". Os objetos escr
 - Mapas Hash em Java;
 - Hashes em Ruby e Perl.
 
-> Métodos:
+### Métodos:
 Métodos são ações que podem ser executadas em objetos. Propriedades de objeto podem ser tanto valores primitivos, outros objetos, e funções.
+
 Um método de objeto é uma propriedade de objeto que contém uma definição de função.
 
-> Criando um Objeto em JavaScript:
+### Criando um Objeto em JavaScript:
 
 Há diferentes formas de criar um novo objeto:
 1. Defina e crie um único objeto usando um literal de objeto.
@@ -2102,95 +2109,106 @@ Há diferentes formas de criar um novo objeto:
 3. Defina um objeto constructor, e então crie objetos do tipo construído.
 4. A partir do ECMAScript 5, um objeto também pode ser criado com a função "Object.create()".
 
-> Usando um Literal de Objeto:
+### Usando um Literal de Objeto:
 A maneira mais fácil de criar um objeto é usando um literal de objeto, no qual, você tanto pode definir e criar um objeto em uma declaração.
+
 Um Literal de Objeto é uma lista de pares de nome:valor (como "age:50") dentro de chaves { }.
 
-> Usando a keyword "new" para criar Objetos:
-
+### Usando a keyword "new" para criar Objetos:
+```js
 var person = new Object()
 person.firstName = "John"
 person.lastName = "Doe"
 person.age = 50
 person.eyeColor = "blue"
-
+```
 O exemplo acima não é necessário, além de ser mais difícil, menos legível, e mais lento do que o método em { }.
 
-> Objetos JS são Mutáveis:
+### Objetos JS são Mutáveis:
 Objetos são mutáveis: eles são endereçados pela referências, e não pelo valor. Se "person" é um objeto, a declaração seguinte não criará uma cópia de "person":
-
-var x = person	/ Isso não criará cópia de person.
-
+```js
+var x = person	// Isso não criará cópia de person.
+```
 O objeto x não é uma cópia de person. Ele É "person". Ambos "x" e "person" são o mesmo objeto.
-Qualquer alteração em x também mudará person, pois x e person são o mesmo objeto.
 
+Qualquer alteração em x também mudará person, pois x e person são o mesmo objeto.
+```js
 var person = {firstName: "John", lastName: "Doe", age: 50, eyeColor:"blue"}
 
 var x = person
 x.age = 10	/ muda x.age e x.person
+```
 
-
-PROPRIEDADES DE OBJETOS:
+## Propriedades de Objetos: 
 
 Propriedades podem usualmente ser alteradas, adicionadas e deletadas, mas algumas são de apenas leitura.
 
-> Acessando Propriedades em JavaScript:
+### Acessando Propriedades em JavaScript:
 A sintax para acessar a propriedade de um objeto é:
-
+```js
 objectName.property		/ person.age
 objectName["property"]	/ person["age"]
 objectName[expression]	/ x = "age"; person[x]
-
+```
 A expressão deve ser avaliada como um nome de propriedade.
 
-> Loop for...in :
+### Loop for...in :
 
 A declaração "for...in" repete através das propriedades de um objeto.
-Sintaxe:
 
+**Sintaxe:**
+```js
 for (variável in objeto) {
-  / código para ser executado
+  // código para ser executado
 }
-
+```
 O bloco de código dentro do loop for...in será executado uma vez para cada propriedade.
-  Iterando através das propriedades de um objeto:
-
+  
+Iterando através das propriedades de um objeto:
+```js
 var person = {fname: "John", lname: "Doe", age: 25}
 for (x in person) {
   txt += person[x] + " "
-}
-/ John Doe 25
-
-> Adicionando Novas Propriedades:
+} // John Doe 25
+```
+### Adicionando Novas Propriedades:
 Você pode adicionar novas propriedades a um objeto existente através de simplesmente dá-lo um valor.
+
 Assumindo que o objeto "person" já existe - você pode então dar-lo novas propriedades:
-
+```js
 person.nationality = "English"
-
-> Deletando Propriedades:
+```
+### Deletando Propriedades:
 A keyword "delete" deleta uma propriedade de um objeto:
-
+```js
 var person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"}
 delete person.age	/ ou delete person["age"]
-
+```
 A keyword "delete" deleta ambos os valores da propriedade e a propriedade por si só.
 Após deletar, a propriedade não pode ser usada antes de adicionada novamente.
+
 O operador "delete" foi projetado para ser usado em propriedades de objetos. Ele não tem efeito sobre variáveis ou funções.
+
 O operador não deve ser usado em propriedades de objeto predefinidas em JS. Isso pode quebrar sua aplicação.
 
-> Atributos de Propriedades:
+### Atributos de Propriedades:
 Todas as propriedades tem um nome. Além disso, elas também tem um valor. O valor é um dos atributos da propriedade.
+
 Outros atributos são: enumerable, configurable e writable.
-Esses atributos definem como a propriedade pode ser acessada (ela é legível? ela é escrevível?)
+
+Esses atributos definem como a propriedade pode ser acessada (ela é legível? ela é escrevível?).
+
 Em JS, todos atributos podem ser lidos, mas apenas o atributo de valor pode ser mudado (e apenas se a propriedade é escrevível).
+
 ECMAScript 5 tem métodos para ambos receber e definir todos atributos de propriedade.
 
-> Propriedades Prototype:
+### Propriedades Prototype:
 Objetos em JS herdam as propriedades de seus protótipos. 
+
 A keyword "delete" não deleta propriedades herdadas, mas se você deletar uma propriedade de protótipo, ela afetará todos os objetos herdados do protótipo.
 
-MÉTODOS DE OBJETOS:
-
+## Métodos de Objetos:
+```js
 var person = {
   firstName: "John",
   lastName: "Doe",
@@ -2199,64 +2217,62 @@ var person = {
     return this.firstName + " " + this.lastName
   }
 }
-
-> Acessando Métodos de Objetos:
+```
+### Acessando Métodos de Objetos:
 Você pode acessar métodos de objetos com a seguinte sintaxe:
-  
+```js
 objectName.methodName()
-
+```
 Você vai tipicamente descrever fullName() como um método do objeto "person", e fullName como uma propriedade.
+
 A propriedade "fullName" executará (como uma função) quando for invocada com ().
 Esse exemplo acessa o método:
-
+```js
 name = person.fullName()
-
+```
 Se você acessar a propriedade fullName sem (), ela retornará a definição da função:
-
+```js
 name = person.fullName
 / function() { return this.firstName + " " + this.lastName; }
-
-> Usando Métodos Embutidos:
+```
+### Usando Métodos Embutidos:
 Esse exemplo usa o método "toUpperCase()" do objeto String para converter um texto para caixa-alta:
-
+```js
 var message = "Hello World!"
 var x = message.toUpperCase()
-
-O valor de x após a execução do código acima será:
-
-HELLO WORLD!
-
-> Adicionando um Método ao Objeto:
-
+// O valor de x após a execução do código acima será: HELLO WORLD!
+```
+### Adicionando um Método ao Objeto:
+```js
 person.name = function () {
   return this.firstName + " " + this.lastName
 }
+```
 
-
-OBJETOS DE EXIBIÇÃO JAVASCRIPT
+## Objetos de Exibição JavaScript:
 Exibindo um objeto em JS vai retornar [object Object]
-
+```js
 var person = {name:"John", age:30, city:"New York"};
 document.getElementById("demo").innerHTML = person
-/ [object Object]
-
+// [object Object]
+```
 Algumas soluções comuns para exibir objetos em JS são:
 1. Exibindo as Propriedades de Objetos pelo nome;
 2. Exibindo as Propriedades de Objetos em um loop;
 3. Exibindo o Objeto usando Object.values()
 4. Exibindo o Objeto usando JSON.stringify()
 
-> Exibindo Propriedades de Objeto:
+### Exibindo Propriedades de Objeto:
 As propriedades de um objeto pode ser exibilidas como uma string:
-
+```js
 var person = {name:"John", age:30, city:"New York"}
 document.getElementById("demo").innerHTML = 
 person.name + ", " + person.age + ", " + person.city
-/ John, 30, New York
-
-> Exibindo o Objeto em um Loop:
+// John, 30, New York
+```
+### Exibindo o Objeto em um Loop:
 As propriedades de objeto pode ser coletadas em um loop:
-  
+```js
 var x, txt = ""
 var person = {name:"John", age:50, city:"New York"}
 
@@ -2264,70 +2280,69 @@ for (x in person) {
   txt += person[x] + " "
 }
 document.getElementById("demo").innerHTML = txt
-/ John 50 New York
-
+// John 50 New York
+```
 Atenção: Você deve usar "person[x]" no loop. "person.x" não irá funcionar (porque x é uma variável)
 
-> Usando Object.values()
+### Usando Object.values()
 Qualquer objeto em JavaScript pode ser converido em um vetor usando "Object.values()".
-
+```js
 var person = {name:"John", age:30, city:"New York"}
 var myArray = Object.values(person)
 
-myArray é agora um vetor, pronta para ser exibida:
-
-/ John,50,New York
-
-> Usando JSON.stringify()
+//myArray é agora um vetor, pronta para ser exibida:
+// John,50,New York
+```
+### Usando JSON.stringify()
 Qualquer objeto pode ser "stringuifado" (convertido para uma string) com a função JSON.stringify()
-
+```js
 var person = {name:"John", age:30, city: "New York"};
 
 var myString = JSON.stringify(person);
 document.getElementById("demo").innerHTML= myString;
-/ {"name":"John","age":50,"city":"New York"}
-
-> Stringify Datas:
+// {"name":"John","age":50,"city":"New York"}
+```
+### Stringify Datas:
 JSON.stringify converte datas em strings:
-
+```js
 var person = {name: "John", today: new Date()}
 var myString = JSON.stringify(person)
 document.getElementById("demo").innerHTML = myString
-/ {"name":"John","today":"2021-02-21T03:31:21.576Z"}
-
-> Stringify Funções:
+// {"name":"John","today":"2021-02-21T03:31:21.576Z"}
+```
+### Stringify Funções:
 JSON.stringify não converterá funções:
-
+```js
 var person = {name:"John", age:function () {return 30}}
 var myString = JSON.stringify(person)
 document.getElementById("demo").innerHTML = myString
-/ {"name":"John"}
-
+// {"name":"John"}
+```
 Isso pode ser "corrigido" se você converter a função em strings antes de "stringuifar".
-
+```js
 var person = {name:"John", age:function() {return 30}}
 person.age = person.age.toString()
 
 var myString = JSON.stringify(person)
 document.getElementById("demo").innerHTML = myString
-
-> Stringify Vetores:
+```
+### Stringify Vetores:
 É também possível stringify vetores em JavaScript:
-
+```js
 var arr = ["John", "Peter", "Sally", "Jane"]
 var myString = JSON.stringify(arr)
 document.getElementById("demo").innerHTML = myString
-/ ["John","Peter","Sally","Jane"]
+// ["John","Peter","Sally","Jane"]
+```
 
+## Acessores de Objetos em JavaScript:
 
-ACESSORES DE OBJETOS EM JAVASCRIPT
-
-> Acessores JavaScript (Getters e Setters)
+### Acessores JavaScript (Getters e Setters)
 Getters e Setters permitem-nos definir Acessores de Objetos (Propriedades Computadas).
 
-> Getter (a keyword get):
+#### Getter (a keyword get):
 Esse exemplo usa uma propriedade "lang" para receber o valor da propriedade "language":
-
+```js
 var person = {
   firstName: "John",
   lastName: "Doe",
@@ -2336,12 +2351,11 @@ var person = {
     return this.language
   }
 }
-document.getElementById("demo").innerHTML = person.lang
-/ "en"
-
-> Setter (a keyword set)
+document.getElementById("demo").innerHTML = person.lang // "en"
+```
+#### Setter (a keyword set)
 Esse exemplo usa uma propriedade "lang" para definir o valor da propriedade "language".
-
+```js
 var person = {
   firstName: "John",
   lastName: "Doe",
@@ -2352,17 +2366,19 @@ var person = {
 }
 person.lang = "en"
 document.getElementById("demo").innerHTML = person.language
-/ "en"
-
-> Função ou Getter?
+// "en"
+```
+### Função ou Getter?
 Uma função dentro do objeto é acessada: person.fullName().
+
 Um getter é acesso como uma propriedade: person.fullName.
+
 Ou seja: getters oferecem uma sintaxe mais simples.
 
-> Qualidade de Dados:
+### Qualidade de Dados:
 JavaScript pode assegurar melhores qualidades de dados ao usar getters e setters.
 Usando a propriedade "lang", nesse exemplo, retorna o valor da propriedade "language" em caixa-alta:
-
+```js
 var person = {
   firstName: "John",
   lastName: "Doe",
@@ -2372,10 +2388,10 @@ var person = {
   }
 }
 document.getElementById("demo").innerHTML = person.lang
-/ "EN"	
-
+// "EN"	
+```
 Usando a propriedade "lang", nesse exemplo, armazena um valor em caixa-alta na propriedade "language":
-
+```js
 var person = {
   firstName: "John",
   lastName: "Doe",
@@ -2386,21 +2402,21 @@ var person = {
 }
 person.lang = "en"
 document.getElementById("demo").innerHTML = person.language	
-
-> Por que Usar Getters e Setters:
+```
+### Por que Usar Getters e Setters:
 
 1. Fornece uma sintaxe mais simples;
 2. Permite sintaxes iguais para propriedades e métodos;
 3. Pode assegurar melhores qualidades de dados;
 4. É útil em fazer coisas "por trás do cenário".
 
-> Object.defineProperty()
+### Object.defineProperty()
 O método "Object.defineProperty()" pode também ser usado para adicionar Getters e Setters:
-
-/ define o objeto:
+```js
+// define o objeto:
 var obj = {counter: 0}
 
-/ Define os setters:
+// Define os setters:
 Object.defineProperty(obj, "reset", {
   get : function () {this.counter = 0}
 })
@@ -2417,7 +2433,7 @@ Object.defineProperty(obj, "subtract", {
   set : function (value) {this.counter -= value}
 })
 
-/ Brinque com o contador:
+// Brinque com o contador:
 obj.reset
 obj.add = 5
 obj.subtract = 1
@@ -2425,11 +2441,11 @@ obj.increment
 obj.decrement
 obj.decrement
 document.getElementById("demo").innerHTML = obj.counter
-/ "3"
+// "3"
+```
 
-
-OBJECTS CONSTRUCTORS:
-
+## Objects Constructors:
+```js
 function Person(first, last, age, eye) {
   this.firstName = first
   this.lastName = last
@@ -2440,20 +2456,21 @@ function Person(first, last, age, eye) {
 var myFather = new Person("John", "Doe", 50, "blue")
 
 document.getElementById("demo").innerHTML = "My father is " + myFather.age + "."
-/ "My father is 50.
+// "My father is 50.
+```
+**Atenção: É considerado uma boa prática nomear funções construtoras com a primeira letra em caixa-alta.**
 
-Atenção: É considerado uma boa prática nomear funções construtoras com a primeira letra em caixa-alta.
+### Tipos de Objeto (Blueprints) (Classes)
+Os exemplos dos capítulos anteriores são limitados. Eles apenas criam objetos únicos. Às vezes, nós precisamos de "blueprints" para criar muitos objetos do mesmo "tipo".
 
-> Tipos de Objeto (Blueprints) (Classes)
-Os exemplos dos capítulos anteriores são limitados. Eles apenas criam objetos únicos.
-Às vezes, nós precisamos de "blueprints" para criar muitos objetos do mesmo "tipo".
 A forma que criamos um "tipo de objeto" é usando uma "função construtora de objeto".
 No exemplo acima, "function Person()" é uma função construtora de objeto.
-Objetos do mesmo tipo são criados por invocação da função construtora com a keyword "new".
 
+Objetos do mesmo tipo são criados por invocação da função construtora com a keyword "new".
+```js
 var myFather = new Person("John", "Doe", 50, "blue")
 var myMother = new Person("Sally", "Rally", 48, "green")
-
+```
 > Keyword "this" em Construtores:
 Em uma função construtora, this não tem um valor. Ele é um substituto para o novo objeto. O valor de this tornará-se o novo objeto quando um novo objeto é criado.
 

@@ -4012,26 +4012,26 @@ Esse exemplo altera o estilo do elemento com id="id1", quando o usuário clica u
 ```js
 <button type="button" onclick="document.getElementById('id1').style.color = 'red'">Click Me!</button>
 ```
-https://www.w3schools.com/jsref/dom_obj_style.asp HTML DOM STYLE OBJECT REFERENCE
+Para mais formas, acesse a [HTML DOM STYLE OBJECT REFERENCE](https://www.w3schools.com/jsref/dom_obj_style.asp) 
 
-
-ANIMAÇÃO HTML DOM:
+## Animação HTML DOM:
 
 Para demonstrar como criar animações HTML com JavaScript, nós usaremos um simples webpage:
-
+```js
 <div id="animation">My animation will go here</div>
-
+```
 > Crie um Container de Animação:
 Todas as animações devem ser relativos ao elemento "container".
-
+```js
 <div id="container">
   <div id="animate">My animation will go here</div>
 </div>
-
-> Estilize os Elementos:
+```
+### Estilize os Elementos:
 O elemento container deve ser criado com estilo = "position: relative"
-O elemento animation deve ser criado com estilo = "position: absolute"
 
+O elemento animation deve ser criado com estilo = "position: absolute"
+```css
 #container {
   width: 400px;
   height: 400px;
@@ -4044,12 +4044,14 @@ O elemento animation deve ser criado com estilo = "position: absolute"
   position: absolute;
   background: red;
 }
-
-> Código de Animação:
+```
+### Código de Animação:
 Animações JavaScript são feitas por mudanças graduais de programação em um estilo do elemento.
-As mudanças são chamadas por um temporizador. Quando o intervalo do temporizador é pequena, a animação parece contínua.
-O código básico é:
 
+As mudanças são chamadas por um temporizador. Quando o intervalo do temporizador é pequena, a animação parece contínua.
+
+O código básico é:
+```js
 var id = setInterval(frame, 5)
 
 function frame() {
@@ -4059,9 +4061,9 @@ function frame() {
     / código para mudar o estilo do elemento
   }
 }
-
-> Crie a Animação Completa Usando JavaScript:
-
+```
+### Crie a Animação Completa Usando JavaScript:
+```js
 var id = null
 function myMove() {
   var elem = document.getElementById("animate")
@@ -4078,14 +4080,14 @@ function myMove() {
     }
   }
 }
-    
+```
 
-EVENTOS HTML DOM
+### EVENTOS HTML DOM
 
 Para executar um código quando um usuário clica em um elemento, adicione um código JS para um atributo de evento HTML:
-
+```js
 onclick=JavaScript
-
+```
 Exemplos:
 1. Quando um usuário clica o mouse;
 2. Quando uma página é carregada;
@@ -4095,12 +4097,12 @@ Exemplos:
 6. Quando um formulário HTML é submetido;
 7. Quando um usuário pressiona uma tecla.
 
-Nesse exemplo, o conteúdo do elemento <h1> é alterado quando um usuário clica sobre ele:
-
+Nesse exemplo, o conteúdo do elemento ```<h1>``` é alterado quando um usuário clica sobre ele:
+```js
 <h1 onclick="this.innerHTML = 'Ooops!'">Click on this text</h1>
-
+```
 Nesse exemplo, uma função é chamada de um manipulador de eventos:
-
+```js
 <h1 onclick="changeText(this)">Click on this text</h1>
 
 <script>
@@ -4108,17 +4110,17 @@ function changeText(id) {
   id.innerHTML = "Ooops!"
 }
 </script>
-
-> Atributos de Evento HTML:
+```
+### Atributos de Evento HTML:
 Para atribuir eventos a elementos HTML, você usa um atributo de evento:
-
+```js
 <button onclick="displayDate()">Try it</button>
-
+```
 No exemplo acima, uma função nomeada "displayDate" será executada quando o botão é clicado.
 
-> Atribuindo Eventos Usando o HTML DOM:		
+### Atribuindo Eventos Usando o HTML DOM:		
 O HTML DOM permite atribuir eventos a elementos HTML usando JavaScript:
-
+```js
 <script>
 document.getElementById("myBtn").onclick = displayDate
 
@@ -4126,15 +4128,18 @@ function displayDate() {
   document.getElementById("demo").innerHTML = Date()
 }
 </script>
+```
+**Atenção: Não coloque os (). Colocando você ativará a função automaticamente, sem pressionar o botão.**
 
-Atenção: Não coloque os (). Colocando você ativará a função automaticamente, sem pressionar o botão.
+### Alguns Atributos de Eventos HTML:
 
-> Alguns Atributos de Eventos HTML:
+* onload / onunload: são eventos que são causados quando o usuário entra ou deixa a página.
 
-:+: onload / onunload: são eventos que são causados quando o usuário entra ou deixa a página.
-"onload" pode ser usado para checar o tipo do navegador do visitante e sua versão, e carregar uma versão apropriada da página baseado nessa informação.
-"onload" e "onunload" podem ser usados para lidar com cookies.
+* "onload" pode ser usado para checar o tipo do navegador do visitante e sua versão, e carregar uma versão apropriada da página baseado nessa informação.
 
+* "onload" e "onunload" podem ser usados para lidar com cookies.
+
+```js
 <body onload="checkCookies()">
 <p id="demo"></p>
 <script>	
@@ -4149,111 +4154,126 @@ function checkCookies() {
 }
 </script>
 </body>
+```
 
-
-:+:  onchange é usado frequentemente em combinações com validação de campos inputs.
+* onchange é usado frequentemente em combinações com validação de campos inputs.
 Ambaixo é um exemplo de como usar o "onchange". A função "upperCase()" será chamada quando um usuário altera o conteúdo de um campo input:
 
-Enter your name: <input type="text" id="fname" onchange="myFunction()">
+```js
+Enter your name: 
+<input type="text" id="fname" onchange="myFunction()">
 <script>
 function myFunction() {
   var x = document.getElementById("fname")
   x.value = x.value.toUpperCase()
 }
 </script>
+```
+* "onmouseover" e "onmouseout" podem ser usados para chamar uma função quando o mouse desliza por cima ou para fora de um elemento HTML.
 
-:+: "onmouseover" e "onmouseout" podem ser usados para chamar uma função quando o mouse desliza por cima ou para fora de um elemento HTML.
+* "onmousedown", "onmouseup" e "onclick" são todos partes de um "mouse-click". Primeiro, quando o botão do mouse é pressionado, o "onmousedown" é chamado, então, quando o botão do mouse é levantado "onmouseup" é chamado. Finalmente, quando o mouse-click é completado, o evento "onclick" é chamado.
 
-:+: "onmousedown", "onmouseup" e "onclick" são todos partes de um "mouse-click". Primeiro, quando o botão do mouse é pressionado, o "onmousedown" é chamado, então, quando o botão do mouse é levantado "onmouseup" é chamado. Finalmente, quando o mouse-click é completado, o evento "onclick" é chamado.
+Para mais formas, acesse [HTML DOM EVENT OBJECT REFERENCE](https://www.w3schools.com/jsref/dom_obj_event.asp) 
 
-https://www.w3schools.com/jsref/dom_obj_event.asp HTML DOM EVENT OBJECT REFERENCE
-
-
-EVENTLISTENER HTML DOM:
+## EVENTLISTENER HTML DOM:
 
 Adiciona-se um "ouvinte" de evento que dispara quando um usuário pressiona um botão:
-
+```js
 document.getElementById("myBtn").addEventListener("click", displayDate)
-
+```
 O método "addEventListener()" junta um manipulador de evento ao elemento especificado.
 Este método une um manipulador de eventos ao elemento sem sobrescrever manipuladores de eventos existentes.
+
 Você pode adicionar vários manipuladores de eventos a um elemento.
+
 Você pode adicionar muitos manipuladores de eventos do mesmo tipo a um elemento, como eventos de "click duplo".
+
 Além disso, adicionar ouvintes de eventos para qualquer objeto DOM, não apenas elementos HTML, ou seja, também para o window object.
+
 O método torna mais fácil de controlar como o evento reage.
+
 Quando usamos o método "addEventListener()", o JavaScript é separado da marcação HTML, para melhor legibilidade e permitir que você adicione ouvintes de eventos mesmo quando você não controla a marcação HTML.
+
 Você pode facilmente remover um event listener usando o método "removeEventListener()".
 
 Sintaxe:
-
+```js
 element.addEventListener(event, function, useCapture)
-
+```
 O primeiro parâmetro é o tipo do evento (como "click" ou "mousedown" ou qualquer outro Evento HTML DOM)
+
 O segundo parâmetro é a função que você quer chamar quando o evento ocorre.
+
 O terceiro parâmetro é um valor booleano especificando se deve ser usado o "borbulhar" do evento ou a captura de evento. Esse parâmetro é opcional.
 
-Atenção: Note que você não usa o prefixo "on" para o evento: use "click" ao invés de "onclick".
+**Atenção: Note que você não usa o prefixo "on" para o evento: use "click" ao invés de "onclick".**
 
-> Adicione um Manipulador de Eventos
+### Adicione um Manipulador de Eventos
 
 Exemplo 01:
-  
+```js
 element.addEventListener("click", function(){ alert("Hello World") })
-
+```
 Exemplo 02:
-
+```js
 element.addEventListener("click", myFunction)
   
 function myFunction() {
   alert("Hello World")
 }
-
+```
 Você adicionar quandos Manipuladores de Eventos quiser sem sobrescrever eventos existentes:
-
+```js
 element.addEventListener("click", myFunction)
 element.addEventListener("click", mySecondFuncion)
-
+```
 Você pode adicionar eventos de diferentes tipos para o mesmo elemento:
-
+```js
 element.addEventListener("mouseover", myFunction)
 element.addEventListener("click", mySecondFunction)
 element.addEventListener("mouseout", myThirdFunction)
+```
 
-> Adicione um Manipulador de Eventos ao Objeto window
+### Adicione um Manipulador de Eventos ao Objeto window
 
 O método "addEventListener()" pertime que você adicione event listener a qualquer objeto HTML DOM, tais como elementos HTML, documento HTML, ao objeto window, ou outros objetos que suportam eventos, como o objeto "xmlHttpRequest":
-
+```js
 window.addEventListener("resize", function(){
   document.getElementById("demo").innerHTML = Math.random()
 })
-/ cria um número aleatório quando a janela é aumentada ou diminuída.
-
-> Passando Parâmetros:
+// cria um número aleatório quando a janela é aumentada ou diminuída.
+```
+### Passando Parâmetros:
 Quando passar valores de parâmetro, use uma "função anônima" que chama uma função específica com os parâmetros:
-
+```js
 element.addEventListener("click", function(){ myFunction(p1, p2) })
+```
 
-> Event Bubbling ou Event Capturing?
+### Event Bubbling ou Event Capturing?
 Há duas formas de propagação de eventos no HTML DOM, "bubbling" e "capturing".
-Propagação de evento é uma forma de definir a ordem do elemento quando um evento ocorre. Se você tem um elemento <p> dentro de um elemento <div>, e o usuário clica no elemento <p>, qual evento "click" de elemento deve ser manipulado primeiro?
-Em "bubbling", o evento do elemento mais interior é manipulado primeiro e então o mais externo: o elemento <p> vem primeiro, e então o <div> depois.
+
+Propagação de evento é uma forma de definir a ordem do elemento quando um evento ocorre. Se você tem um elemento ```<p>``` dentro de um elemento ```<div>```, e o usuário clica no elemento ```<p>```, qual evento "click" de elemento deve ser manipulado primeiro?
+
+Em "bubbling", o evento do elemento mais interior é manipulado primeiro e então o mais externo: o elemento ```<p>``` vem primeiro, e então o ```<div>``` depois.
+
 Em "capturing", o evento do elemento mais externo é manipulado primeiro.
+
 Com o método "addEventListener()" você pode especificar o tipo de propagação usando o parâmetro "useCapture".
-
+```js
 addEventListener(event, function, useCapture)
-
+```
 O valor padrão é "false", no qual vai usar a propagação bubbling. Quando o valor é definido para "true", o evento usa a propagação "capturing".
-
+```js
 document.getElementById("myP").addEventListener("click", myFunction, true)
 document.getElementById("myDiv").addEventListener("click", myFunction, true)
-
-> O método removeEventListener()
+```
+### O método removeEventListener()
 Remove manipuladores de evento que tem sido unidos com o método addEventListener()
-
+```js
 element.removeEventListener("mousemove", myFunction)
+```
 
-
-NAVEGAÇÃO DO HTML DOM:
+## Navegação do HTML DOM:
 
 Com o HTML DOM, você pode navegar pela "node tree" usando relações de nós.
 
@@ -4266,7 +4286,7 @@ De acordo com o padrão W3C HTML DOM, tudo no documento HTML é um nó:
 Com o HTML DOM, todos os nódulos na node tree podem ser acessados pelo JS.
 Novos nódulos podem ser criados, e todos nódulos podem ser modificados ou deletados.
 
-> Relações de Nódulos:
+### Relações de Nódulos:
 Os nós no node tree tem uma relação hierárquica para cada um.
 O termo parent, child, and sibling são usados para descrever as relações.
 
@@ -4274,7 +4294,7 @@ O termo parent, child, and sibling são usados para descrever as relações.
 - Cada nódulo tem exatamente um parent, exceto o root (que não tem parent).
 - Um nódulo pode ter um número de children.
 - Siblings (irmãos ou irmãs) são nódulos com o mesmo parent.
-
+```js
 <html>
   
     <head>
@@ -4287,22 +4307,24 @@ O termo parent, child, and sibling são usados para descrever as relações.
     </body>
 
 </html>
+```
 
 Do HTML acima você pode ler:
-  1. <html> é o root node;
-  2. <html> não tem parents;
-  3. <html> é o parent de <head> e <body>
-  4. <head> é o primeiro child de <html>
-  5. <body> é o último child de <html>
-  6. <head> tem um child: <title>
-  7. <title> tem um child (um text node): "DOM Tutorial"
-  8. <body> tem dois child: <h1> e <p>
-  9. <h1> tem um child: "DOM Lesson one".
-  10. <p> tem um child: "Hello world"
-  11. <h1> e <p> são siblings.
+  1. ```<html>``` é o root node;
+  2. ```<html>``` não tem parents;
+  3. ```<html>``` é o parent de ```<head>``` e ```<body>```
+  4. ```<head>``` é o primeiro child de ```<html>```
+  5. ```<body>``` é o último child de ```<html>```
+  6. ```<head>``` tem um child: ```<title>```
+  7. ```<title>``` tem um child (um text node): "DOM Tutorial"
+  8. ```<body>``` tem dois child: ```<h1>``` e ```<p>```
+  9. ```<h1>``` tem um child: "DOM Lesson one".
+  10. ```<p>``` tem um child: "Hello world"
+  11. ```<h1>``` e ```<p>``` são siblings.
 
-> Navegando Entre Nódulos:
+### Navegando Entre Nódulos:
 Você usar as seguintes propriedades de nódulos para navegar entre os nós com JavaScript:
+
 - parentNode
 - childNodes[nodenumber]
 - firstChild
@@ -4310,37 +4332,38 @@ Você usar as seguintes propriedades de nódulos para navegar entre os nós com 
 - nextSibling
 - previousSibling
 
-> "Child Nodes" e "Node Values":
+### "Child Nodes" e "Node Values":
 
 Atenção: Um erro comum em processamento de DOM é esperar que um nó de elemento possua texto.
-
+```js
 <title id="demo">DOM Tutorial</title>
+```
+O elemento ```<title>``` não contém texto. Ele contém um nódulo de texto com o valor "DOM Tutorial".
 
-O elemento <title> não contém texto. Ele contém um nódulo de texto com o valor "DOM Tutorial".
-O valor do nódulo de texto pode ser acesso pela propriedade "innerHTML".
-Você acessar da mesma forma por "nodeValue" do primeiro child:
-
+O valor do nódulo de texto pode ser acesso pela propriedade "innerHTML". Você acessar da mesma forma por "nodeValue" do primeiro child:
+```js
 var myTitle = document.getElementById("demo").firstChild.nodeValue.
-
+```
 Acessando o primeiro child pode também ser feito assim:
-
+```js
 var myTitle = document.getElementById("demo").childNodes[0].nodeValue;
-
-> Nódulos de DOM Root:
+```
+### Nódulos de DOM Root:
 Há duas propriedades especiais que permitem acessar o documento completo:
 
 - "document.body": o body do documento.
 - "document.documentElement" - o documento completo.
 
-> A Propriedade nodeName:
+### A Propriedade nodeName:
 Especifica o nome de um nódulo:
 
-:+: nodeName é de apenas-leitura;
-:+: nodeName de um nódulo de elemento é o mesmo que tag name
-:+: nodeName de um nódulo de atributo é o nome do atributo;
-:+: nodeName de um nódulo de texto é sempre #text
-:+: nodeName do nó de documento é sempre #document.
+- nodeName é de apenas-leitura;
+- nodeName de um nódulo de elemento é o mesmo que tag name
+- nodeName de um nódulo de atributo é o nome do atributo;
+- nodeName de um nódulo de texto é sempre #text
+- nodeName do nó de documento é sempre #document.
 
+```js
 <h1 id="id01">My First Page</h1>
 <p id="id02"></p>
 
@@ -4348,19 +4371,20 @@ Especifica o nome de um nódulo:
 document.getElementById("id02").innerHTML = 
 document.getElementById("id01").nodeName
 </script>
-/ A tag <p> será "H1".
+// A tag <p> será "H1".
+```
+**Atenção: "nodeName" sempre contém o nome da tag em caixa-alta de um elemento HTML.**
 
-Atenção: "nodeName" sempre contém o nome da tag em caixa-alta de um elemento HTML.
+### A Propriedade nodeValue:
 
-> A Propriedade nodeValue:
 Especifica o valor de um nódulo:
 - nodeValue para nódulos de elementos é "null"
 - nodeValue para nódulos de texto é o próprio texto.
 - nodeValue para nódulos de atributo é o valor do atributo.
 
-> A Propriedade nodeType:
+### A Propriedade nodeType:
 É de apenas-leitura. Retorna o tipo de um nódulo:
-
+```js
 <h1 id="id01">My First Page</h1>
 <p id="id02"></p>
 
@@ -4368,26 +4392,27 @@ Especifica o valor de um nódulo:
 document.getElementById("id02").innerHTML = 
 document.getElementById("id01").nodeType
 </script>
-
+```
 As propriedades mais importantes de nodeType são:
 
-ELEMENT_NODE	| 1 |  <h1 class="heading">W3Schools</h1>
-ATTRIBUTE_NODE	| 2 |  class = "heading" (descontinuado)
+| | | |
+|---|---|---|
+ELEMENT_NODE	| 1 |  ```<h1 class="heading">W3Schools</h1>```
+ATTRIBUTE_NODE	| 2 |  ```class = "heading" (descontinuado)```
 TEXT_NODE	| 3 |  W3Schools
-COMMENT_NODE	| 8 |  <!-- This is a comment -->
-DOCUMENT_NODE	| 9 |  O próprio documento HTML (o parent de <html>)
-DOCUMENT_TYPE_NODE | 10 |  <!Doctype html>
+COMMENT_NODE	| 8 |  ```<!-- This is a comment -->```
+DOCUMENT_NODE	| 9 |  O próprio documento HTML (o parent de ```<html>```)
+DOCUMENT_TYPE_NODE | 10 |  ```<!Doctype html>```
 
-Atenção: Tipo 2 foi descontinuado no HTML (embora ainda funcione). Porém, não foi descontinuado no XML DOM.
+**Atenção: Tipo 2 foi descontinuado no HTML (embora ainda funcione). Porém, não foi descontinuado no XML DOM.**
 
-
-NÓDULOS DO DOM:
+## Nódulos do DOM:
 
 Adicionando e Removendo nódulos (Elementos HTML):
 
-> Criando um Novo Elemento HTML (Nódulo):
+### Criando um Novo Elemento HTML (Nódulo):
 Para criar um novo elemento para o HTML DOM, você deve cria um elemento (nódulo de elemento) primeiro e, então, anexar a um elemento existente.
-
+```js
 <div id="div1">
     <p id="p1">This is a paragraph.</p>
     <p id="p2">This is another paragraph.</p>
@@ -4401,16 +4426,16 @@ Para criar um novo elemento para o HTML DOM, você deve cria um elemento (nódul
   var element = document.getElementById("div1")
   element.appendChild(para)
 </script>
-
-1. O código cria um novo elemento <p>
-2. Para adicionar um texto para o elemento <p>, você deve criar um nódulo de texto primeiro.
-3. Então você deve anexar o nódulo de texto ao elemento <p>
+```
+1. O código cria um novo elemento ```<p>```
+2. Para adicionar um texto para o elemento ```<p>```, você deve criar um nódulo de texto primeiro.
+3. Então você deve anexar o nódulo de texto ao elemento ```<p>```
 4. Finalmente, você deve anexar o novo elemento para um elemento existente.
 
-> Criando Novos Elementos HTML - insertBefore()
+### Criando Novos Elementos HTML - insertBefore()
 O método "appendChild()" anexa o novo elemento como o último child do parent.
 Se você não quer que isso aconteça, você pode usar o método "insertBefore()"
-
+```js
 <div id="div1">
     <p id="p1">This is a paragraph.</p>
   <p id="p2">This is another paragraph.</p>
@@ -4425,27 +4450,27 @@ var element = document.getElementById("div1")
 var child = document.getElementById("p1")
 element.insertBefore(para, child)
 </script>
-
-> Removendo Elementos HTML Existentes:
+```
+### Removendo Elementos HTML Existentes:
 Use o método "remove()":
-
+```js
 <script>
 var elmnt = document.getElementById("p1")
 elmnt.remove()
 </script>
+```
+**Atenção: O método remove() não funciona em navegadores antigos. Se necessário, utilize o método "removeChild()".**
 
-Atenção: O método remove() não funciona em navegadores antigos. Se necessário, utilize o método "removeChild()".
-
-> Removendo um Child Node:
+### Removendo um Child Node:
 Usando "removeChild()":
-
+```js
 var parent = document.getElementById("div1")
 var child = document.getElementById("p1")
 parent.removeChild(child)
-
-> Relocando Elementos HTML:
+```
+### Relocando Elementos HTML:
 Use o método "replaceChild()"
-
+```js
 var para = document.createElement("p")
 var node = document.createTextNode("This is new")
 para.apprendChild(node)
@@ -4453,101 +4478,113 @@ para.apprendChild(node)
 var parent = document.getElementById("div1")
 var child = document.getElementById("p1")
 parent.replaceChild(para, child)
-/ "p1" deixa de existir para dar lugar a "p" com "this is new".
+// "p1" deixa de existir para dar lugar a "p" com "this is new".
+```
 
+## Coleções de HTML DOM:
 
-COLEÇÕES DE HTML DOM:
-
-> Objeto HTMLCollection:
+### Objeto HTMLCollection:
 O método "getElementsByTagName()" retorna um objeto "HTMLCollection".
 Um objeto "HTMLCollection" é uma lista parecida com um vetor (coleção) de elementos HTML.
-O código a seguir seleciona todos os elementos <p> em um documento.
 
+O código a seguir seleciona todos os elementos ```<p>``` em um documento.
+```js
 var x = document.getElementsByTagName("p")
-
+```
 Os elementos na coleção podem ser acessados por número de indexação.
-Para cessar o segundo elemento <p>, você pode escrever:
-
+Para cessar o segundo elemento ```<p>```, você pode escrever:
+```js
 y = x[1]
+```
+**Atenção: Lembre-se sempre que a indexação começa em 0.**
 
-Atenção: Lembre-se sempre que a indexação começa em 0.
-
-> HTML HTMLCollection Length:
+### HTML HTMLCollection Length:
 A propriedade "length" define o número de elementos no "HTMLCollection".
-
+```js
 var myCollection = document.getElementsByTagName("p")
 document.getElementById("demo").innerHTML = myCollection.length
+```
+No exemplo acima, cria-se uma coleção de todos os elementos ```<p>```. Então, exibe o comprimento da coleção.
 
-No exemplo acima, cria-se uma coleção de todos os elementos <p>. Então, exibe o comprimento da coleção.
 A propriedade "length" é útil quando você quer repetir através dos elementos em uma coleção.
-Exemplo usando repetição para modificar a cor de fundo de todos elementos <p>:
 
+Exemplo usando repetição para modificar a cor de fundo de todos elementos ```<p>```:
+```js
 var myCollection = document.getElementsByTagName("p")
 var i
 for (i = 0; i < myCollection.length; i++) {
   myCollection[i].style.color = "red"
 }
-
-Atenção: Um HTMLCollection Não é um vetor.
+```
+**Atenção: Um HTMLCollection Não é um vetor.**
 
 Embora pareça um vetor, ele não é. Você pode aplicar repetições através da lista e referir-se aos elementos como um número.
+
 No entanto, você não pode usar métodos de vetor, como "valueOf()", "pop()", "push()", "join()" em um HTMLCollection.
 
+## Lista de Nódulos do HTML DOM:
 
-LISTAS DE NÓDULOS DO HTML DOM:
-
-> O Objecto NodeList:
+### O Objecto NodeList:
 Um objeto "NodeList" é uma lista (coleção) de nódulos extraídos de um documento.
+
 Um objeto "NodeList" é quase o mesmo que um objeto "HTMLCollection". 
+
 Alguns navegadores antigos retornam um objeto NodeList ao invés de um HTMLCollection para método como "getElementByClassName()".
+
 Todos os navegadores retornam um objeto NodeList para a propriedade "childNodes".
 A maioria dos navegadores retornam um objeto NodeList" para métodos "querySelectorAll()".
-O exemplo a seguir seleciona todos os nódulos <p> em um documento:
 
+O exemplo a seguir seleciona todos os nódulos ```<p>``` em um documento:
+```js
 var myNodeList = document.querySelectorAll("p")
-
-Os elementos no NodeList podem ser acessados pelo número de indexação. Para acessar o segundo nódulo <p> você pode escrever:
-
+```
+Os elementos no NodeList podem ser acessados pelo número de indexação. Para acessar o segundo nódulo ```<p>``` você pode escrever:
+```js
 y = myNodeList[1]
-
+```
 Da mesma forma que você pode usar a propriedade "length" com HTMLCollections, você também pode utilizar para NodeList.
+
 Dessa forma, você pode utilizar para repetições e atividades explicadas no capítulo anterior.
 
-> A Diferença Entre um HTMLCollection e um NodeList:
+### A Diferença Entre um HTMLCollection e um NodeList:
 
 Um HTMLCollection é uma coleção de elementos HTML. Enquanto que um NodeList é uma coleção de nódulos do documento.
+
 Os itens com HTMLCollection podem ser acessados pelos seus nomes, id, ou números de indexação.
+
 Por outro lado, os itens de NodeList podem apenas ser acessados pelos seus números de indexação.
+
 Apenas o NodeList podem conter nódulos de atributo e nódulos de texto.
 
-Atenção: Da mesma que HTMLCollection, NodeList também não é um vetor e, portanto, métodos de vetor não funcionarão sobre ele. 
+**Atenção: Da mesma que HTMLCollection, NodeList também não é um vetor e, portanto, métodos de vetor não funcionarão sobre ele. **
 
-
-BROWSER OBJECT MODEL - BOM
+## BROWSER OBJECT MODEL - BOM
 
 Não há um padrão oficial para o Browser Object Model (BOM). Desde que navegadores modernos têm implementado praticamente os mesmos métodos e propriedades para interatividade JavaScript, é frequentemente referido como métodos e propriedades do BOM.
 
-> O Objeto Window
+### O Objeto Window
 É suportado por todos os navegadores. Ele representa a janela do navegador.
+
 Todos os objetos globais, funções e variáveis automaticamente tornam-se membros do objeto window.
+
 Variáveis globais são propriedades do objeto window. Funções globais são também métodos do objeto window. Até mesmo o objeto "document" (do HTML DOM) é uma propriedade do objeto window.
-
+```js
 window.document.getElementById("header")
-
+```
 É o mesmo que:
-
+```js
 document.getElementById("header")
-
-> Tamanho da Janela:
+```
+### Tamanho da Janela:
 Duas propriedades podem ser usadas para determinar o tamanho da janela do navegador. Ambas as propriedades retornam os tamanhos em pixels:
 
-"window.innerHeight" - a altura interior da janela do navegador.
-"window.innerWidth" - a largura interior da janela do navegador.
+* "window.innerHeight" - a altura interior da janela do navegador.
+* "window.innerWidth" - a largura interior da janela do navegador.
 
-Atenção: A janela do navegador Não inclui barras de ferramentas ou barra de rolagem.
+**Atenção: A janela do navegador Não inclui barras de ferramentas ou barra de rolagem.**
 
-Atenção: Alguns navegadores como o Internet Explorer precisam usar propriedades diferentes para lidar com essa situação. Para isso, faça essa conversão:
-
+**Atenção: Alguns navegadores como o Internet Explorer precisam usar propriedades diferentes para lidar com essa situação. Para isso, faça essa conversão:**
+```js
 var w = window.innerWidth
 || document.documentElement.clientWidth
 || document.body.clientWidth
@@ -4555,21 +4592,22 @@ var w = window.innerWidth
 var h = window.innerHeight
 || document.documentElement.clientHeight
 || document.body.clientHeiht
-
+```
 Essa forma poderá ser usada para todos os navegadores, incluindo as versões antigas do IE.
 
-> Outros Métodos de Window:
+### Outros Métodos de Window:
 
-:+: "window.open()" - abre uma nova janela
-:+: "window.close()" - fecha a janela atual.
-:+: "window.moveTo()" - move a janela atual.
-:+: "window.resizeTo()" - altere o tamanho da janela atual.
+* "window.open()" - abre uma nova janela
+* "window.close()" - fecha a janela atual.
+* "window.moveTo()" - move a janela atual.
+* "window.resizeTo()" - altere o tamanho da janela atual.
 
-
-WINDOW SCREEN
+## WINDOW SCREEN
 
 O objeto window.screen contém informação sobre o screen do usuário.
+
 O objeto window.sceen pode ser escrito sem o prefixo window.
+
 Propriedades:
 
 - screen.width	
@@ -4579,107 +4617,107 @@ Propriedades:
 - screen.colorDepth
 - screen.pixelDepth
 
-> screen.width:
+### screen.width:
 É uma propriedade que retorna a largura da tela do visitante em pixels:	
-
+```js
 document.getElementById("demo").innerHTML = "Screen width: " + screen.width
-/ Resultado: 2049
-
-> screen.height:
-
-document.getElementById('demo").innerHTML = "Screen height: " + screen.height
-/ Resultado: 1152
-
-> Largura e Altura da Tela Disponível:
+// Resultado: 2049
+```
+### screen.height:
+```js
+document.getElementById('demo").innerHTML = "Screen height: " + screen.height)
+// Resultado: 1152
+```
+### Largura e Altura da Tela Disponível:
 A propriedade "screen.availWidth" retorna a largura da tela do visitante, em pixels, menos características de interface, como a barra de tarefas do Windows.
-
+```js
 document.getElementById("demo").innerHTML = 
 "Available Screen Widrh: " + screen.availWidth
-/ Resultado: 2049
-
+// Resultado: 2049
+```
 O mesmo pode ser feito com a altura disponível:
-
+```js
 document.getElementById("demo").innerHTML = 
 "Available Screen Height: " + screen.availHeight
-/  Resultado: 1092
-
-> Profundidade de Cor da Tela:
+//  Resultado: 1092
+```
+### Profundidade de Cor da Tela:
 A propriedade "screen.colorDepth" retorna o número de bits usados para exibir uma cor:
 Todos os computaodres modernos usam hardware de 24 bit ou 32 bit para resolução de cor:
 
-:+: 24 bits = 	16.777.216 "cores verdadeiras" diferentes.
-:+: 32 bits = 	4.294.967.296 "cores profundas" diferentes.
-
+* 24 bits = 	16.777.216 "cores verdadeiras" diferentes.
+* 32 bits = 	4.294.967.296 "cores profundas" diferentes.
+```js
 document.getElementById("demo").innerHTML= 
 "Screen Color Depth: " + screen.colorDepth
-/ Resultado: 24
+// Resultado: 24
+```
+**Atenção: Os valores #rrggbb (rgb) usados em representações HTML são "True Colors" (24 bits - 16.777.216 cores diferentes)**
 
-Atenção: Os valores #rrggbb (rgb) usados em representações HTML são "True Colors" (24 bits - 16.777.216 cores diferentes)
-
-> Profundidade de Pixel da Tela:
+### Profundidade de Pixel da Tela:
 Retorna a profundidade de pixels da tela:
-
+```js
 document.getElementById("demo").innerHTML = 
 "Screen Pixel Depth: " + screen.pixelDepth
-/ Resultado: 24
+// Resultado: 24
+```
+**Atenção: Para computadores modernos, Profundidade de Cor e Profundidade de Pixels são iguais.**
 
-Atenção: Para computadores modernos, Profundidade de Cor e Profundidade de Pixels são iguais.
-
-
-WINDOW LOCATION
+## WINDOW LOCATION
 
 O objeto "window.location" pode ser usado para receber endereços de páginas atuais (URLs) e redirecionar o navegador para uma nova página.
 
-> Window Location
+### Window Location
 O objeto "window.location" pode ser escrito sem o prefixo window.
+
 Alguns exemplos:
 
-:+: window.location.href  -  retorna a URL da página atual.
-:+: window.location.hostname  -  retorna o nome de domínio do host.
-:+: window.location.pathname  -  retorna o path e filename da página atual.
-:+: window.location.protocol  -  retorna o protocolo web usado (http: ou https:)
-:+: window.location.assign()  -  carrega um novo documento.
+* window.location.href  -  retorna a URL da página atual.
+* window.location.hostname  -  retorna o nome de domínio do host.
+* window.location.pathname  -  retorna o path e filename da página atual.
+* window.location.protocol  -  retorna o protocolo web usado (http: ou https:)
+* window.location.assign()  -  carrega um novo documento.
 
-> window.location.href:
+### window.location.href:
 É uma propriedade que retorna a URL da página atual:
-
+```js
 document.getElementById("demo").innerHTML = 
 "Page location is " + window.location.href
 / "Page location is https://www.w3schools.com/js/js_window_location.asp"
-
-> window.location.hostname:
+```
+### window.location.hostname:
 Propriedade que retorna o nome do host (da página atual).
-
+```js
 document.getElementById("demo").innerHTML = 
 "Page hostname is " + window.location.hostname
 / "Page hostname is www.w3schools.com"
-
-> window.location.pathname:
+```
+### window.location.pathname:
 Retorna o pathname da página atual:
-
+```js
 document.getElementById("demo").innerHTML = 
 "Page path is " + window.location.pathname
-/ "Page path is /js/js_window_location.asp
-
-> window.location.protocol
+// "Page path is /js/js_window_location.asp
+```
+### window.location.protocol
 Retorna o protocolo web da página.
-
+```js
 document.getElementById("demo").innerHTML = 
 "Page protocol is " + window.location.protocol
-/ "Page protocol is https:"
-
-> window.location.port:
+// "Page protocol is https:"
+```
+### window.location.port:
 Retorna o número da porta web do host (da página atual):
-
+```js
 document.getElementById("demo").innerHTML = 
 "Port number is " + window.location.port
-/ "Port number is "
+// "Port number is "
+```
+**Atenção: A maior parte dos navegadores não exibirão números (ou exibirá 0) de portas padrão (80 para http e 443 para https). **
 
-Atenção: A maior parte dos navegadores não exibirão números (ou exibirá 0) de portas padrão (80 para http e 443 para https). 
-
-> window.location.assign()
+### window.location.assign()
 Esse método carrega um novo documento:
-
+```html
 <html>
 <head>
 <script>
@@ -4693,22 +4731,23 @@ function newDoc() {
 <input type="button" value="Load new document" onclick="newDoc()">
 </body>
 </html>
-/ Retorna o carregamento da página da w3schools.com
+<!-- Retorna o carregamento da página da w3schools.com -->
+```
 
-
-WINDOW HISTORY
+## WINDOW HISTORY
 
 O objeto "window.history" contém o histórico dos navegadores.
 
 O objeto pode ser wscrito sem o prefixo window. Para proteger a privacidade dos usuários, há limitações de como JavaScript pode acessar esse objeto.
+
 Alguns métodos:
 
-:+: "history.back()" 		- igual a clicar de volta no navegador.
-:+: "history.forward()		- igual a clicar para frente no navegador.
+* "history.back()" 		- igual a clicar de volta no navegador.
+* "history.forward()		- igual a clicar para frente no navegador.
 
-> history.back()
+### history.back()
 Método que carrega a URL anterior na lista do histórico. É o mesmo que clicar no botão de voltar no navegador.
-
+```html
 <html>
 <head>
 <script>
@@ -4723,12 +4762,11 @@ Método que carrega a URL anterior na lista do histórico. É o mesmo que clicar
 
 </body>
 </html>
-
-/ Cria um botão que ao clicar, retorna apenas uma URL no histórico.
-
-> history.forward()
+<!-- Cria um botão que ao clicar, retorna apenas uma URL no histórico. -->
+```
+### history.forward()
 Método que carrega a próxima URL na lista do histórico. É o mesmo que clicar no botão de avançar no navegador:
-
+```html
 <html>
 <head>
 <script>
@@ -4743,92 +4781,91 @@ Método que carrega a próxima URL na lista do histórico. É o mesmo que clicar
 
 </body>
 </html>
+<!-- Cria um botão que ao clicar, avança apenas uma URL no histórico. --> 
+```
 
-/ Cria um botão que ao clicar, avança apenas uma URL no histórico. 
+## WINDOW NAVIGATOR:
 
+O objeto "window.navigator" contém informações sobre o navegador do visitante. O objeto pode ser escrito sem o prefixo "window".
 
-WINDOW NAVIGATOR:
-
-O objeto "window.navigator" contém informações sobre o navegador do visitante.
-O objeto pode ser escrito sem o prefixo "window".
 Alguns exemplos:
 
-:+: navigator.appName
-:+: navigator.appCodeName
-:+: navigator.platform
+* navigator.appName
+* navigator.appCodeName
+* navigator.platform
 
-> Cookies do Navegador:
+### Cookies do Navegador:
 A propriedade "cookieEnabled" retorna true se cookies estão habilitados, e false não estiver:
-
+```html
 <p id="demo"></p>
 
 <script>
 document.getElementById("demo").innerHTML = 
 "cookiesEnabled is " + navigator.cookieEnabled
 </script>
-/ Retorna "cookiesEnabled is true"
-
-> navigator.appName
+<!-- Retorna "cookiesEnabled is true" -->
+```
+### navigator.appName
 A propriedade retorna o nome da aplicação do navegador:
-
+```html
 <p id="demo"></p>
 
 <script>
   document.getElementById("demo").innerHTML =
   "navigator.appName is " + navigator.appName
 </script>
-/ "navigator.appName is Netscape"
+<!-- "navigator.appName is Netscape" -->
+```
+**Atenção: "Netscape" é o nome da aplicação para IE1, Chrome, Firefox e Safari.**
 
-Atenção: "Netscape" é o nome da aplicação para IE1, Chrome, Firefox e Safari.
-
-> navigator.appCodeName
+### navigator.appCodeName
 A propriedade retorna o nome do código da aplicação do navegador:
-
+```html
 <p id="demo"></p>
 
 <script>
 document.getElementById("demo").innerHTML =
 "navigator.appCodeName is " + navigator.appCodeName
 </script>
-/ "navigator.appCodeName is Mozilla"
+<!-- "navigator.appCodeName is Mozilla" -->
+```
+**Atenção: "Mozilla" é o nome do código da aplicação para Chrome, Firefox, IE, Safari e Opera.**
 
-Atenção: "Mozilla" é o nome do código da aplicação para Chrome, Firefox, IE, Safari e Opera.
-
-> navigator.product:
+### navigator.product:
 A propriedade retorna o nome do produto do motor de navegador:
-
+```html
 <p id="demo"></p>
 
 <script>
 document.getElementById("demo").innerHTML =
 "navigator.product is " + navigator.product
 </script>
-/ "navigator.product is Gecko"
+<!-- "navigator.product is Gecko" -->
+```
+**Atenção: Não confie nisso. A maioria dos navegadores retornam "Gecko" como nome de produto.**
 
-Atenção: Não confie nisso. A maioria dos navegadores retornam "Gecko" como nome de produto.
-
-> navigator.appVersion
+### navigator.appVersion
 A propriedade retorna informações sobre a versão do navegador:
-
+```html
 <p id="demo"></p>
 
 <script>
 document.getElementById("demo").innerHTML = 	navigator.appVersion
 </script>
-/ Retorna: "5.0 (Windows)"
-
-> navigator.userAgent
+<!-- Retorna: "5.0 (Windows)" -->
+```
+### navigator.userAgent
 A propriedade retorna o cabeçalho do agente do usuário enviado pelo navegador ao servidor:
-
+```html
 <p id="demo"></p>
 
 <script>
 document.getElementById("demo").innerHTML =
 navigator.userAgent
 </script>
-/ "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0"
-
-> Cuidado !!!
+<!-- "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0" -->
+```
+### Cuidado !!!
 A informação do objeto de navegação pode estar frequentemente errônea, e não deve ser usada para detectar a versão do navegador:
 
 - Diferentes navegadores podem usar o mesmo nome;
@@ -4836,7 +4873,7 @@ A informação do objeto de navegação pode estar frequentemente errônea, e n�
 - Alguns navegadores não identificam corretamente a si mesmos para ignorar os testes do site.
 - Navegadores não podem reportar novos sistemas operacionais, lançados depois do navegador.
 
-> navigator.platform
+### navigator.platform
 A propriedade retorna a plataforma do navegador (o sistema operacional):
 
 <p id="demo"></p>

@@ -3604,17 +3604,18 @@ myPromise.result
 ``` 
 **Atenção: Você não pode acessar as propriedades "state" e "result". Você deve usar um método Promise para manusear promises.**
 
-> Como Lidar com Promises:
+### Como Lidar com Promises:
 Aqui está como usar uma Promise:
-
+```js
 myPromise.then(
   function(value) { código se obtém sucesso },
   function(error)  {     código se obtém erro	  }
 }
+```
+**Atenção: "Promise.then()" recebe dois argumentos, um callback para sucesso e outro para falha.**
 
-Atenção: "Promise.then()" recebe dois argumentos, um callback para sucesso e outro para falha.
 Ambos são Opcionais, então você pode adicionar um callback para sucesso ou apenas para erros.
-
+```js
 function myDisplayer(some) {
   document.getElementById("demo").innerHTML = some
 }
@@ -3634,25 +3635,26 @@ myPromise.then(
   function(value) {myDisplayer(value)},
   function(error) {myDisplayer(error)}
 )
-/ "OK"
-
-> Exemplos de Promises:
+// "OK"
+```
+### Exemplos de Promises:
 Para demonstrar o uso de promises, nós usaremos os exemplos de callback dos capítulos anteriores:
-* Esperando pelo Tempo Limite;
-* Esperando por um Arquivo.
 
-> Esperando pelo Tempo Limite:
+- Esperando pelo Tempo Limite;
+- Esperando por um Arquivo.
+
+### Esperando pelo Tempo Limite:
 
 Exemplo usando Callback:
-
+```js
 setTimeout(function() { myFunction("I love you")}, 3000)
 
 function myFunction(value) {	
   document.getElementById("demo").innerHTML = value
 }
-
+```
 Exemplo usando Promise:
-
+```js
 let myPromise = new Promise(function(myResolve, myReject) {
   setTimeout(function() { myResolve("I love you")}, 3000)
 })
@@ -3660,11 +3662,11 @@ let myPromise = new Promise(function(myResolve, myReject) {
 myPromise.then(function(value) {
   document.getElementById("demo").innerHTML = value
 })
-
-> Esperando por um Arquivo:
+```
+### Esperando por um Arquivo:
 
 Exemplo com Callback:
-
+```js
 function getFile(myCallback) {
   let req = new XMLHttpRequest()
   req.open('GET', "mycar.html")
@@ -3678,9 +3680,9 @@ function getFile(myCallback) {
   req.send()
 }
 getFile(myDisplayer)
-
+```
 Exemplo usando Promise:
-
+```js
 let myPromise = new Promise(function(myResolve, myReject) {
   let req = new XMLHttpRequest()
   req.open('GET', "mycar.html")
@@ -3698,37 +3700,38 @@ myPromise.then(
   function(value) {myDisplayer(value)},
   function(error) {myDisplayer(error)}
 }
+```
 
-
-
-ASYNC
+## ASYNC
 
 Async e Await fazem promises mais fáceis de escrever.
+
 "async" faz uma função retorna uma promise.
+
 "await" faz uma função esperar por uma promise.
 
-> Sintaxe Async:
+### Sintaxe Async:
 A keyword "async" antes de uma função faz uma função retornar uma promise:
-
+```js
 async function myFunction() {
   return "Hello"
 }
-
+```
 É o mesmo que:
-
+```js
 async function myFunction() {
   return Promise.resolve("Hello")
 }
-
+```
 Aqui é como usar a Promise:
-
+```js
 myFunction().then(
   function(value) { / código se sucesso },
   function(error)  { / código se erro         }
 }
-
+```
 Exemplo:
-  
+```js
 async function myFunction() {
   return "Hello"
 }
@@ -3736,25 +3739,25 @@ myFunction().then(
   function(value) {myDisplayer(value)},
   function(error) {myDisplayer(error)}
 }	
-
+```
 Ou simplemente, desde que você espera um valor normal (uma resposta normal, não um erro):
-
+```js
 async function myFunction() {
   return "Hello"
 }
 myFunction().then(
   function(value) {myDisplayer(value)}
 )
-
-> Sintaxe Await:
+```
+### Sintaxe Await:
 A keyword "await" antes de uma função faz a função esperar por uma promise:
-
+```js
 let value = await promise
-
-Atenção: A keyword "await" pode apenas ser usada dentro de uma função "async".
+```
+**Atenção: A keyword "await" pode apenas ser usada dentro de uma função "async".**
 
 Exemplo de Sintaxe Básica:
-
+```js
 async function myDisplay() {
   let myPromise = new Promise(function(myResolve, myReject) {
     myResolve("I love you")
@@ -3763,9 +3766,9 @@ async function myDisplay() {
 }
 
 myDisplay()
-
+```
 Exemplo Esperando pelo Tempo Limite:
-
+```js
 async function myDisplay() {
   let myPromise = new Promise(function(myResolve, myReject) {
     setTimeout(function() { myResolve("I love you")}, 3000)
@@ -3774,9 +3777,9 @@ async function myDisplay() {
 }
 
 myDisplay()
-
+```
 Exemplo Esperando um Arquivo:
-
+```js
 async function getFile() {
   let myPromise = new Promise(function(myResolve, myReject) {
     let req = new XMLHttpRequest()
@@ -3791,12 +3794,12 @@ async function getFile() {
 }
 
 getFile()
+```
 
-
-
-HTML DOM
+## HTML DOM
 
 O HTML DOM é um modelo de objeto padrão e interface de programação para HTML. Ele define:
+
 * Os elementos HTML como Objetos;
 * As propriedades de todos elementos HTML;
 * Os métodos para acessar todos os elementos HTML;
@@ -3805,74 +3808,88 @@ O HTML DOM é um modelo de objeto padrão e interface de programação para HTML
 Em outras palavras: O HTML DOM é um padrão de como receber, mudar, adicionar, ou deletar elementos HTML.
 
 O padrão W3C DOM (World Wide Web Consortium, Document Object Model) é separado em 3 diferentes partes:
+
 1. Core DOM - modelo padrão para todos os tipos de documentos.
 2. XML DOM - modelo padrão para documentos XML.
 3. HTML DOM - modelo padrão para documentos HTML.
 
-HTML DOM MÉTODOS:
+## HTML DOM Métodos:
 
 Os métodos de HTML DOM são ações que você pode executar em elementos HTML. As propriedades do HTML DOM são valores (de elementos HTML) que você pode definir ou alterar.
 
-> Interface de Programação do DOM:
+### Interface de Programação do DOM:
 O HTML DOM pode ser acessado com JavaScript (e com outras linguagens de programação).
 No DOM, todos elementos HTML são definidos como objetos.
-A interface de programação é as propriedades e métodos de cada objeto.
-Uma propriedade é um valor que você receber ou definir (como alterando o conteúdo de um elemento HTML).
+
+A interface de programação é as propriedades e métodos de cada objeto. Uma propriedade é um valor que você receber ou definir (como alterando o conteúdo de um elemento HTML).
+
 Um método é uma ação que você pode fazer (como adicionar ou deletar um elemento HTML).
 
 "getElementById" é um método, enquanto "innerHTML" é uma propriedade.
 
-> Método getElementById:
-A forma mais comum de acessar um elemento HTML é usar o "id" do elemento.
-Nos exemplos anteriores, o método getElementById usa id="demo" para encontre o elemento.
+### Método getElementById:
+A forma mais comum de acessar um elemento HTML é usar o "id" do elemento. Nos exemplos anteriores, o método getElementById usa id="demo" para encontre o elemento.
 
-> Propriedade innerHTML:
+### Propriedade innerHTML:
 A maneira mais fácil de pegar o contéudo de um elemento é usando a propriedade "innerHTML".
+
 A propriedade "innerHTML" é útil para receber ou modificar o conteúdo de elementos HTML.
 
-Atenção: A propriedade "innerHTML" pode ser usada para receber ou alterar qualquer elemento HTML, incluindo o <html> e o <body>.
+**Atenção: A propriedade "innerHTML" pode ser usada para receber ou alterar qualquer elemento HTML, incluindo o <html> e o <body>.**
 
-
-DOCUMENTO HTML DOM
+## Documento HTML DOM
 
 O objeto do documento HTML DOM é o proprietário de todos os outros objetos em sua webpage.
 
 O objeto de documento representa sua webpage. Se você quer acessar qualquer elemento em uma página HTML, você sempre começar acessando o objeto do documento.
+
 Abaixo estão alguns exemplos de como você pode usar o objeto documento para acessar e manipular HTML.
 
-document.getElementById(id)		| 	Encontra um elemento 						pelo elemento id.
-document.getElementByTagName(name)	|	Elementos pelo nome da 					tag.
-document.getElementsByClassName(name) |	Elementos pela classe.
+<table>
+  <tr>
+    <td>document.getElementById(id)</td>
+    <td>Encontra um elemento pelo elemento id.</td>
+  </tr>
+  <tr>
+    <td>document.getElementByTagName(name)</td>
+    <td>Elementos pelo nome da tag.</td>
+  </tr>
+  <tr>
+    <td>document.getElementsByClassName(name)</td>
+    <td>Elementos pela classe.</td>
+  </tr>
+</table>
 
+### Alterando Elementos HTML:
 
-> Alterando Elementos HTML:
+|Propriedade|Uso|
+|---|---|
+|element.innerHTML = novo conteúdo html | Altera o HTML de um elemento.|
+|element.attribute = novo valor	| Altera o valor de um atributo|
+|element.style.property = novo estilo	| Altera o estilo de um elemento.|
 
-Propriedade:
-element.innerHTML = novo conteúdo html   |  Altera o HTML de um elemento.
-element.attribute = novo valor		   |  Altera o valor de um atributo
-element.style.property = novo estilo	   |  Altera o estilo de um elemento.
+|Métodos|Uso|
+|---|---|
+|element.setAttribute(atributo, valor) | Altera o valor do atributo de um elemento HTML|
 
-Métodos:
-element.setAttribute(atributo, valor)	   |  Altera o valor do atributo de um 			                        elemento HTML
+### Adicionando e Deletando Elementos:
 
-> Adicionando e Deletando Elementos:
+|Métodos|Uso|
+|---|---|
+|document.createElement(elemento)	| Cria um elemento HTML|
+|document.removeChild(elemento)	| Remove um elemento HTML|
+|document.appendChild(elemento)	| Adiciona um elemento HTML|
+|document.replaceChild(novo, antigo) | Altera um elemento HTML|
+|document.write(texto) | Escreve no fluxo de saída HTML|
 
-Métodos:
-document.createElement(elemento)	|  Cria um elemento HTML
-document.removeChild(elemento)	|  Remove um elemento HTML
-document.appendChild(elemento)	|  Adiciona um elemento HTML
-document.replaceChild(novo, antigo)	|  Altera um elemento HTML.
-document.write(texto)		|  Escreve no fluxo de saída HTML.
-
->  Adicionar Manipuladores de Eventos:
-
+###  Adicionar Manipuladores de Eventos:
+```js
 document.getElementById(id).onclick = function(){code}	
-Adiciona um código manipulador de evento para um evento onclick.
+//Adiciona um código manipulador de evento para um evento onclick.
+```
+**Atenção: Busque por listas de Manipuladores de Elementos de HTML DOM.]**
 
-Atenção: Busque por listas de Manipuladores de Elementos de HTML DOM.]
-
-
-ELEMENTOS DO HTML DOM:
+## Elementos do HTML DOM:
 
 Frequentemente, com JavaScript você deseja manipular elementos HTML. Para isso, você precisa encontrar os elementos primeiros. Há variás formas de fazer isso:
 
@@ -3882,27 +3899,28 @@ Frequentemente, com JavaScript você deseja manipular elementos HTML. Para isso,
 - Encontrando elementos HTML pelos seletores CSS.
 - Encontrando elementos HTML pelas coleções de objeto HTML.
 
-> Através do Nome da Tag:
+### Através do Nome da Tag:
 Esse exemplo encontra todos os elementos <p>
-
+```js
 var x = document.getElementByTagName("p")
-
+```
 Esse exemplo encontra o elemento com id="main" e então encontra todos os elementos dentro "main".
-
+```js
 var x = document.getElementById("main")
 var y = x.getElementByTagName("p")
-
-> Encontrando Elemento HTML por Seletores CSS:
+```
+### Encontrando Elemento HTML por Seletores CSS:
 Se você encontrar todos os elementos HTML que correspondem um seletor CSS especificado (id, class, nomes, tipos, atributos, valores de atributos, etc), use o método "querySelectorAll()"
+
 Esse exemplo retorna uma lista de todos os elementos <p> com class="intro".
-
+```js
 var x = document.querySelectorAll("p.intro")
-
+```
 Atenção: Esse método não funciona em IE8 e versões anteriores.
 
-> Encontrando Elementos HTML pelas Coleções de Objeto HTML:
+### Encontrando Elementos HTML pelas Coleções de Objeto HTML:
 Esse exemplo encontra o elemento "form" com id="frm1", na coleção de formulários, e exibe todos os valores do elemento:
-
+```js
 var x = document.forms["frm1"]
 var text = ""
 var i
@@ -3910,10 +3928,10 @@ for (i = 0; i < x.length; i++) {
   text += x.elements[i].value + "<br>"
 }
 document.getElementById("demo").innerHTML = text
-/ Donald
-/ Duck
-/ Submit
-
+// Donald
+// Duck
+// Submit
+```
 Os seguintes objetos HTML (e coleções de objetos) são também acessíveis:
 
 - document.anchors
@@ -3927,72 +3945,73 @@ Os seguintes objetos HTML (e coleções de objetos) são também acessíveis:
 - document.scripts
 - document.title
 
-
-HTML DOM - MUDANDO O HTML:
+## HTML DOM - Mudando o HTML:
 
 O HTML DOM permite que o JavaScript modifique o conteúdo de elementos HTML.
 
-> Alterando o Fluxo de Saída HTML:
+### Alterando o Fluxo de Saída HTML:
 JS pode criar conteúdo dinâmico HTML:
-
+```js
 <script>
 document.write(Date())
 </script>
-/ Fri Feb 26 2021 17:02:12 GMT-0300
-
+// Fri Feb 26 2021 17:02:12 GMT-0300
+```
 O exemplo acima escreve diretamente no fluxo de saída HTML.
 
-Atenção: Nunca use "document.write()" depois que o documento é carregado. Ele vai sobrescrever o documento.
+**Atenção: Nunca use "document.write()" depois que o documento é carregado. Ele vai sobrescrever o documento.**
 
-> Alterando Conteúdo HTML:
+### Alterando Conteúdo HTML:
 A maneira mais fácil de alterar o conteúdo de um elemento HTML é usando a propriedade "innerHTML".
+
 Use a sintaxe:
-
+```js
 document.getElementById(id).innerHTML = new HTML
-
+```
 Outro exemplo:
-
+```js
 var element = document.getElementById("id01")
 element.innerHTML = "New Heading"
-
-> Alterando o Valor de um Atributo:
+```
+### Alterando o Valor de um Atributo:
 Use a sintaxe:
-
+```js
 document.getElementById(id).attribute = novo valor
-
+```
 Esse exemplo altera o valor de um atributo src de um elemento <img>:
-
+```js
 <img id="myImage" src="smiley.gif">
 
 <script>
 document.getElementById("myImage").src = "landscape.jpg"
 </script>
+```
 
-
-HTML DOM - MODIFICANDO O CSS:
+## HTML DOM - Modificando o CSS:
 
 Alterar o estilo de um elemento HTML use essa sintaxe:
-
+```js
 document.getElementById(id).style.property = novo estilo
-
+```
 O exemplo a seguir modifica o estilo de um elemento <p>:
-
+```js
 <p id="p2">Hello World</p>
 
 <script>
 document.getElementById("p2").style.color = "blue"
 </script>
-
-> Usando Eventos:
+```
+### Usando Eventos:
 O HTML DOM permite executar códigos quando um evento ocorre. Eventos são gerados pelo navegador quando "coisas acontecem" para elementos HTML:
+
 - Um elemento é clicado;
 - A página é carregada;
 - Os campos de input são modificados, etc.
 
 Esse exemplo altera o estilo do elemento com id="id1", quando o usuário clica um botão:
-
+```js
 <button type="button" onclick="document.getElementById('id1').style.color = 'red'">Click Me!</button>
-
+```
 https://www.w3schools.com/jsref/dom_obj_style.asp HTML DOM STYLE OBJECT REFERENCE
 
 

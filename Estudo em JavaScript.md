@@ -6083,25 +6083,28 @@ delete mybj.cars.cars2
 ## Vetores em JSON:
 
 Você acessar valores de vetores dentro de objetos usando números de indexação:
-
+```js
 x = myObj.cars[0]
+```
 
-> Iterando através de um Vetor:
+### Iterando através de um Vetor:
+
 Você pode acessar valores de um vetor usando o loop "for-in":
-
+```js
 for (i in myObj.cars) {
   x += myObj.cars[i] + "<br>"
 }
-
+```
 Ou você pode usar um loop "for":
-
+```js
 for (i = 0; i < myObj.cars.length; i++) {
   x += myObj.cars[i] + "<br>"
 }
+```
 
-> Vetores Aninhados em Objetos JSON:
+### Vetores Aninhados em Objetos JSON:
 Valores em um vetor podem também estar em um outro vetor, ou mesmo em um outro objeto JSON:
-
+```js
 myObj = {
   "name":"John",
   "age":30,
@@ -6111,8 +6114,10 @@ myObj = {
       { "name":"Fiat", "models":[ "500", "Panda" ] }
   ]
 }
+```
 
 Para acessar vetores dentro de vetores, use o loop "for-in" para cada vetor: 
+```js
 var x = ""
 for (i in myObj.cars) {
     x += "<h2>" + myObj.cars[i].name + "</h2>"
@@ -6121,14 +6126,16 @@ for (i in myObj.cars) {
     }
 }
 document.getElementById("demo").innerHTML = x
+```
 
+## JSON PHP:
 
-JSON PHP:
+### O Arquivo PHP:
 
-> O Arquivo PHP:
 PHP tem alguma funções embutidas para lidar com JSON.
-Objetos em PHP pode ser convertidos em JSON através do uso da função PHP "json_encode()":
 
+Objetos em PHP pode ser convertidos em JSON através do uso da função PHP "json_encode()":
+```php
 <?php
 $myObj->name = "John";
 $myObj->age = 30;
@@ -6138,12 +6145,14 @@ $myJSON = json_encode($myObj)
 
 echo $myJSON
 ?>
-/ {"name":"John","age":30,"city":"New York"}
+// {"name":"John","age":30,"city":"New York"}
+```
 
-> O Cliente JavaScript:
+### O Cliente JavaScript:
+
 Aqui está um código JS no cliente, usando uma chamada AJAX para solicitar o arquivo PHP do exemplo acima.
 Use JSON.parse() para converter o resultado em um objeto JS:
-
+```js
 var xmlhttp = new XMLHttpRequest()
 xmlhttp.onreadystatechange = function()
     if (this.readyState == 4 && this.status == 200) {
@@ -6153,11 +6162,12 @@ xmlhttp.onreadystatechange = function()
 }
 xmlhttp.open("GET", "demo_file.php", true)
 xmlhttp.send()
-/ "John"
+// "John"
+```
 
-> Vetor em PHP:
+### Vetor em PHP:
 Vetores em PHP também serão convertidos em JSON ao usar a função "json_encode()":
-
+```php
 <?php
 $myArr = array("John", "Mary", "Peter", "Sally")
 
@@ -6165,10 +6175,11 @@ $myJSON = json_encode($myArr)
 
 echo $myJSON
 ?>
-/ ["John","Mary","Peter","Sally"]
+// ["John","Mary","Peter","Sally"]
+```
 
 Usando o JSON.parse() para converter o resultado em um vetor JS:
-
+```js
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -6178,14 +6189,18 @@ xmlhttp.onreadystatechange = function() {
 }
 xmlhttp.open("GET", "demo_file_arry.php", true)
 xmlhttp.send()
-/ "Peter"
+// "Peter"
+```
 
-> PHP Database:
+### PHP Database:
 PHP é uma linguagem de programação do lado servidor, e pode ser usada para acessar um database.
-Imagine que você tem um database em seu servidor, e você quer enviar uma solicitação para ele a partir do cliente onde você pede as 10 primeiras colunas em uma tabela chamada "customers".
-No lado cliente, faça um objeto JSON que descreve o número de colunas que você deseja retornar.
-Antes de enviar a solicitação para o servidor, converta o objeto JSON em uma string e envie-a como um parâmetro para a url da página PHP:
 
+Imagine que você tem um database em seu servidor, e você quer enviar uma solicitação para ele a partir do cliente onde você pede as 10 primeiras colunas em uma tabela chamada "customers".
+
+No lado cliente, faça um objeto JSON que descreve o número de colunas que você deseja retornar.
+
+Antes de enviar a solicitação para o servidor, converta o objeto JSON em uma string e envie-a como um parâmetro para a url da página PHP:
+```js
 var obj, dbParam, xmlhttp
 obj = { "limit":10 }
 dbParam = JSON.stringify(obj)
@@ -6197,6 +6212,7 @@ xmlhttp.onreadystatechange = function()
 }
 xmlhttp.open("GET", "json_demo_db.php?x=" + dbParam, true)
 xmlhttp.send()
+```
 
 Explicação do exemplo:
 1. Defina um objeto contendo uma propriedade "limite" e o valor.
@@ -6205,8 +6221,8 @@ Explicação do exemplo:
 4. Espere até a requisição retornar com o resultado (como JSON)
 5. Exiba o resultado recebido do arquivo PHP.
 
-O arquivo PHP:
-
+### O arquivo PHP:
+```php
 <?php
 header("Content-Type: application/json; charset=UTF-8");
 $obj = json_decode($_GET["x"], false);
@@ -6220,15 +6236,16 @@ $outp = $result->fetch_all(MYSQLI_ASSOC);
 
 echo json_encode($outp);
 ?>
+```
 
 Explicação do Arquivo PHP:
 1. Converta a solicitação em um objeto usando a função PHP "json_decode()"
 2. Acessa o database e prencha o vetor com os dados requeridos.
 3. Adicione o vetor para um objeto e retorne o objeto como JSON usando a função "json_encode().
 
-> Itere Através do Resultado:
+### Itere Através do Resultado:
 Converta o resultado recebido de um arquivo PHP em um objeto JS, ou nesse caso, um vetor JS:
-
+```html
 <script>
 var obj, dbParam, xmlhttp, myObj, x, txt = ""
 obj = { "limit":5 }
@@ -6246,13 +6263,14 @@ xmlhttp.onreadystatechange = function() {
 xmlhttp.open("GET", "json_demo_db.php?x=" + dbParam, true)
 xmlhttp.send()
 </script>
-/ Alfreds Futterkiste, Ana Trujillo Emparedados y helados, Antonio Moreno Taqueria, Around the Horn, Berglunds snabbkop
+<!--  Alfreds Futterkiste, Ana Trujillo Emparedados y helados, Antonio Moreno Taqueria, Around the Horn, Berglunds snabbkop -->
+```
+### Método PHP = POST
 
-> Método PHP = POST
 Quando enviamos dados a um servidor, é frequemente melhor usarmos o método HTTP "POST". 
-Para enviar requisições AJAX usando o método POST, especifique o método e o cabeçalho correto.
-O dado enviado para o servidor deve agora ser um argumento para o método "send()":
 
+Para enviar requisições AJAX usando o método POST, especifique o método e o cabeçalho correto. O dado enviado para o servidor deve agora ser um argumento para o método "send()":
+```js
 obj = { "limit":10 }
 dbParam = JSON.stringify(obj)
 xmlhttp = new XMLHttpRequest()
@@ -6268,9 +6286,10 @@ xmlhttp.onreadystatechange = function() {
 xmlhttp.open("POST", "json_demo_db.php", true)
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
 xmlhttp.send("x=" + dbParam)
+```
 
 A única diferença no arquivo PHP é o método para receber o dado transferido:
-
+```php
 <?php
 header("Content-Type: application/json; charset=UTF-8");
 $obj = json_decode($_POST["x"], false);
@@ -6284,16 +6303,16 @@ $outp = $result->fetch_all(MYSQLI_ASSOC);
 
 echo json_encode($outp);
 ?>
+```
 
-
-JSON HTML
+## JSON HTML
 
 JSON pode ser muito facilmente traduzido em JavaScript.
 JavaScript pode ser usado para produzir HTML em suas páginas web.
 
-> Tabela HTML:
+### Tabela HTML:
 Faça uma tabela HTML com os dados recebidos como JSON:
-
+```js
 obj = { table: "customers", limit: 20 }
 dbParam = JSON.stringify(obj)
 xmlhttp = new XMLHttpRequest()
@@ -6311,11 +6330,12 @@ xmlhttp.onreadystatechange = function() {
 xmlhttp.open("POST", "json_demo_db_post.php", true)
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
 xmlhttp.send("x=" + dbParam)
-/ Retorna uma tabela de nomes com 20 itens.
+// Retorna uma tabela de nomes com 20 itens.
+```
 
-> Tabela Dinâmica HTML:
+### Tabela Dinâmica HTML:
 Faça uma tabela HTML baseado no valor de um menu "drop down":
-
+```html
 <select id="myselect" onchange="change_myselect(this.value)">
     <option value="">Escolha uma opção:</option>
     <option value="customers">Customers</option>
@@ -6345,11 +6365,12 @@ function change_myselect(sel) {
     xmlhttp.send("x=" + dbParam)
 }
 </script>         
-/ Retornará uma lista em formato tabela segundo o valor escolhido no menu.
+<!-- Retornará uma lista em formato tabela segundo o valor escolhido no menu. -->
+```
+### Lista HTML Drop Down:
 
-> Lista HTML Drop Down:
 Fazendo uma lista HTML Drop Down com os dados recebidos como JSON:
-
+```html
 <p id="demo"></p>
 
 <script>
@@ -6372,46 +6393,52 @@ xmlhttp.open("POST", "json_demo_html_table.php", true)
 xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
 xmlhttp.send("x=" + dbParam
 </script>   
+```
 
-
-JSONP
+## JSONP
 
 JSONP é um método para envio de dados JSON sem se preocupar com questões entre domínios.
+
 JSONP não usa o objeto "XMLHttpRequest"
-Ao invés disso, JSONP usa a tag <script>			
 
-> Introdução ao JSONP
+Ao invés disso, JSONP usa a tag ```<script>```			
+
+### Introdução ao JSONP
 JSONP significa JSON com Preenchimento (padding). 
+
 Solicitando um arquivo de um outro domínio pode causar problemas, devido à política de domínio-cruzado.
+
 Solicitando um script externo de um outro domínio não conduz a esse problema.
+
 JSONP usa essa vantagem, e solicita arquivos usando a tag "script" ao invés do objeto XMLHttpRequest:
-
+```html
 <script src="demo_json.php">
-
-> O Arquivo Servidor:
+```
+### O Arquivo Servidor:
 O arquivo no servidor envelopa o resultado dentro de uma chamada de função:
-
+```php
 <?php
 $myJSON = '{ "name":"John", "age":30, "city":"New York" }';
 
 echo "myFunc(".$myJSON.");";
 ?>
-
+```
 O resultado retorna um chamado para uma função chamada "myFunc" com os dados JSON como um parâmetro
+
 Tenha certeza que a função existe no lado cliente.
 
-> A Função JavaScript:
+### A Função JavaScript:
 A função chamada "myFunc" está localizada no lado cliente, e pronta para lidar com os dados JSON:
-
+```js
 function myFunc(myObj)
   document.getElementById("demo").innerHTML = myObj.name
 }
-/ John
-
-> Criando uma Tag Script Dinâmica:
+// John
+```
+### Criando uma Tag Script Dinâmica:
 O exemplo acima executará a função "myFunc" quando a página está carregando, baseado sobre onde você coloca a tag script, no qual não é muito satisfatório.
 A tag script deveria apenas ser criada quando necessária:
-
+```js
 function clickButton() {
   var s = document.createElement("script")
   s.src = "demo_jsonp.php"
@@ -6420,11 +6447,13 @@ function clickButton() {
 function myFunc(myObj) {
   document.getElementById("demo").innerHTML = myObj.name
 }
+```
 
-> Reultado JSONP Dinâmico:
+### Reultado JSONP Dinâmico:
+
 Os exemplos anteriores são ainda bastante estáticos.
 Faça o exemplo dinâmico pelo envio de JSON para o arquivo php, e faça o arquivo php retornar um objeto JSON com base nas informações que obtém.
-
+```php
 <?php
 header("Content-Type: application/json; charset=UTF-8");
 $obj = json_decode($_GET["x"], false);
@@ -6436,6 +6465,7 @@ $outp = $result->fetch_all(MYSQLI_ASSOC);
 
 echo "myFunc(".json_encode($outp).")";
 ?>
+```
 
 Arquivo PHP explicado:
 1. Converte a requisição em um objeto, usando a função PHP "json_decode()".
@@ -6445,7 +6475,7 @@ Arquivo PHP explicado:
 5. Envelopa "myFunc()" ao redor do objeto de retorno.
 
 Exemplo JavaScript, no qual a função "myFunc" será chamada do arquivo php:
-
+```js
 function clickButton() {
   var obj, s
   obj = { table: "products", limit: 10 }
@@ -6460,11 +6490,12 @@ function myFunc(myObj) {
   }
   document.getElementById("demo").innerHTML = txt
 }
+```
 
-> Função Callback:
+### Função Callback:
 Quando você não possui controle sobre o arquivo do servidor, como obter o arquivo do servidor para chamar a função correta?
 Às vezes o servidor oferece uma função callback como um parâmetro:
-
+```js
 function clickButton() {
   var s = document.createElement("script")
   s.src = "jsonp_demo_db.php?callback=myDisplayFunction"
@@ -6474,25 +6505,26 @@ function clickButton() {
 function myDisplayFunction(myObj) {
   document.getElementById("demo").innerHTML = myObj.name
 }
-/ John
+// John
+```
 
-
-INTRODUÇÃO A WEB API
+## Introdução a Web API:
 
 Uma Web API é um sonho para programadores:
 1. Ela pode extender a funcionalidade do navegador;
 2. Ela pode simplificar bastante funções complexas;
 3. Ela pode prover uma sintaxe fácil para códigos complexos.
 
-> O Que É Uma Web API?
-API significa Application Programming Interface.
-Uma Web API é uma interface de programação de aplicativo para a Web.
+### O Que É Uma Web API?
+API significa Application Programming Interface. Uma Web API é uma interface de programação de aplicativo para a Web.
+
 Uma API  de Navegador pode extender suas funcionalidades, enquanto que uma API de Servidor extende as funcionalidades de servidores web.
 
-> APIs de Navegador:
+### APIs de Navegador:
 Tods os navegadores possuem um conjunto de APIs embutidas para suportar operações complexas, e ajudar ao acesso de dados.
-Por exemplo, a API de Geolocalização pode retornar as coordenadas de onde o navegador está localizado:
 
+Por exemplo, a API de Geolocalização pode retornar as coordenadas de onde o navegador está localizado:
+```js
 var x = document.getElementById("demo")
 
 function getLocation() {
@@ -6507,26 +6539,27 @@ function showPosition(position) {
     x.innerHTML = "Latitude: " + position.coords.latitude + 
     "<br>Longitude: " + position.coords.longitude
 }
+```
 
-> APIs de Terceiros:
+### APIs de Terceiros:
 APIs de Terceiros não são construídos em seu navegador.
+
 Para usar essas APIs você terá que baixar o código da Web.
 
 Exemplos:
 1. Youtube API - Permite exibir vídeos na página web.
 2. Twitter API - Permite exibir Tweets na página web.
-3. Facebook API  - permite exibir informações de Facebook na página.
-etc.
+3. Facebook API  - permite exibir informações de Facebook na página. etc.
 
-
-API DE HISTÓRICO DA WEB:
+## API de Histórico da Web: 
 
 A API de Histórico Web provê métodos fáceis para acessar o obejto "windows.history".
+
 O objeto window.history contém as URLs visitadas pelo usuário.
 
-> Método de Histórico "back()":
+### Método de Histórico "back()":
 O método "back()" carrega a URL anterior na lista window.history. É o mesmo que clica na "seta de retorno" em seu navegador.
-
+```html
 <button onclick="myFunction()">Go Back</button>
 
 <script>
@@ -6534,10 +6567,11 @@ function myFunction() {
   window.history.back()
 }
 </script>
+```
 
-> Método de Histórico "go()":
+### Método de Histórico "go()":
 O método "go()" carrega uma URL específica da lista do histórico:
-
+```html
 <button onclick="myFunction()">Go Back 2 Pages</button>
 
 <script>
@@ -6545,76 +6579,87 @@ function myFunction() {
   window.history.go(-2)
 }
 </script>
+```
 
-> Propriedades de Objetos de Histórico:
+### Propriedades de Objetos de Histórico:
 
-length	|	Retorna o número de URLs na lista de histórico.
+* length =>	Retorna o número de URLs na lista de histórico.
 
-> Métodos de Objeto de Histórico:
+### Métodos de Objeto de Histórico:
 
+| | |
+|---|---|
 back()	|	Carrega a URL anterior na lista de histórico;
 forward()	|	Carrega a URL posterior na lista de histórico;
 go()	|	Carrega uma URL específica da lista de histórico.
 
-
-API DE ARMAZENAMENTO WEB:
+## API de Armazenamento Web:
 
 A API de Armazenamento Web é uma sintaxe simples para armazenar e recuperar dados no navegador. É bastante fácil de usar:
-
+```js
 localStorage.setItem("name", "John Doe")
 document.getElementById("demo").innerHTML = 
 localStorage.getIttem("name")
-/ "John Doe"
+// "John Doe"
+```
 
-> Objeto "localStorage":	
+### Objeto "localStorage":	
 O objeto "localStorage" provê acesso ao armazenamento local para uma página web em particular. Ele permite você armazenar, ler, adicionar, modificar, e deletar itens de dados para aquele domínio.
+
+
 Os dados são armazenados sem data de expiração, e não serão deletados quando o navegador é fechado.
+
 Os dados ficarão disponíveis por dias, semanas e anos.
 
-> O Método "setItem()":
+### O Método "setItem()":
 O método "localStorage.setItem()" armazena um item de dado em um armazenamento.
+
 Ele recebe um nome e um valor como parâmetros:
-
+```js
 localStorage.setItem("name", "John Doe")
+```
 
-> O Método "getItem()"
-O método "localStorage.getItem()" recupera um item de dado a partir do armazenamento.
-Ele recebe um nome como parâmetro:
-
+### O Método "getItem()"
+O método "localStorage.getItem()" recupera um item de dado a partir do armazenamento. Ele recebe um nome como parâmetro:
+```js
 localStorage.getItem("name")
+```
 
-> O Objeto "sessionStorage"
+### O Objeto "sessionStorage"
 O objeto "sessionStorage" é idêntico ao objeto localStorage. A diferença é que o objeto "sessionStorage" armazena dados por uma sessão.
-Os dados é deletado quando o navegador é fechado. 
 
+Os dados é deletado quando o navegador é fechado. 
+```js
 sessionStorage.setItem("name","John Doe")
 document.getElementById("demo").innerHTML =
 sessionStorage.getItem("name")
-/ "John Doe"
+// "John Doe"
+```
+**Atenção: O objeto "sessionStorage" também utiliza da mesma forma os métodos getItem() e setItem().**
 
-Atenção: O objeto "sessionStorage" também utiliza da mesma forma os métodos getItem() e setItem().
+### Métodos e Propriedades do Objeto de Armazenamento:
 
-> Métodos e Propriedades do Objeto de Armazenamento:
-
+| | |
+|---|---|
 key(n)		|	Retorna o nome do nth chave no armazenamento.
 length		|	Retorna o número de itens de dados armazenados.
 getItem(nome)	|	Retorna o valor do nome da chave específica.
-setItem(nome, valor)	|	Adiciona aquela chave ao armazenamento, ou 			atualiza aquele valor de chave se ele já existe.
+setItem(nome, valor)	|	Adiciona aquela chave ao armazenamento, ou atualiza aquele valor de chave se ele já existe.
 removeItem(nome)	|	Remove aquela chave do armazenamento.
 clear()		|	Esvazia todas as chaves do armazenamento.
 
-
-WEB WORKERS API
+## WEB WORKERS API
 
 Um web worker é um script de JS executando no fundo, sem afetar a performance da página.
 
-> O Que É Um Web Worker?
+### O Que É Um Web Worker?
 Quando executando scripts em uma página HTML, a página não responde até que o script seja finalizado.
+
 Um web worker é um JavaScript que executa nos fundos, independentemente de outros scripts, sem afetar a performance da página. Você pode continuar a fazer o que desejar: clicar, selecionar coisas, etc., enquanto o web worker executa.
 
-> Exemplo de Web Worker:
+### Exemplo de Web Worker:
 O exemplo abaixo cria um web worker simples que conta números ao fundo:
-
+```html
 <p>Count numbers: <output id="result"></output></p>
 <button onclick="startWorker()">Start Worker</button>
 <button onclick="stopWorker()">Stop Worker</button>
@@ -6639,19 +6684,21 @@ function stopWorker() {
     w.terminate()
     w = undefined
 }	
+```
 
-Atenção: Note que primeiro foi preciso verificar se o navegador possui a API de Web Worker. Navegadores como IE9 ou versões anteriores não possuem. Para verificar faça:
-
+**Atenção: Note que primeiro foi preciso verificar se o navegador possui a API de Web Worker. Navegadores como IE9 ou versões anteriores não possuem. Para verificar faça:**
+```js
 if (typeof(Worker) !== "undefined") {
     / Sim! Há suporte para Web Worker
     / Bloco de código
 } else {
     / Desculpe! Não há suporte para Web Worker
 }
+```
 
-> Criando um Arquivo Web Worker:
+### Criando um Arquivo Web Worker:
 Agora criaremos nosso web worker em um JavaScript externo. Aqui criaremos um script que conta. O script é armazenado no arquivo "demo_workers.js":
-
+```js
 var i = 0
 
 function timedCount() {
@@ -6661,26 +6708,26 @@ function timedCount() {
 }
 
 timedCount()
-
+```
 A importante importante do código acima é o método "postMessage()" - no qual é suado para postar uma mensagem de volta à página HTML.
 
-Atenção: Normalmente web workers não são usados para tais scripts simples, mas por mais tarefas que exigem mais CPU.
+**Atenção: Normalmente web workers não são usados para tais scripts simples, mas por mais tarefas que exigem mais CPU.**
 
-> Criando um Objeto Web Worker:
+### Criando um Objeto Web Worker:
 Agora que nós temos o arquivo web worker, precisamos chama-lo de uma página HTML.
-As linhas a seguir verificam se o worker já existe. Se não, ele cria um novo objeto web worker e executa 
 
+As linhas a seguir verificam se o worker já existe. Se não, ele cria um novo objeto web worker e executa 
+```js
 if (type(w) == "undefined") {
     w = new Worker("demo_workers.js")
 }
-
-Então podemos enviar e receber messagens do web worker.
-Adicione um evento listener "onmessage" para o web worker:
-
+```
+Então podemos enviar e receber messagens do web worker. Adicione um evento listener "onmessage" para o web worker:
+```js
 w.onmessage = function(event){
     document.getElementById("result").innerHTML = event.data
 }
-
+```
 Quando o web worker posta uma messagem, o código dentro do evento listener é executado. Os dados do web worker são armazenados em event.data.
 
 Atenção: "event.data" é um método de eventos vinculado ao JQuery. É uma propriedade que contém os dados opcionais passados para um método de evento quando o manipulador atual em execução é vinculado.

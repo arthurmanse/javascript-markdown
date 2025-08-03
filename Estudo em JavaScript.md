@@ -2537,7 +2537,7 @@ O mesmo vale para outros valores primitivos, funções, RegExp, vetores, etc.
 
 ## Protótipos de Objetos em JS:
 
-> Herança em Protótipos:
+### Herança em Protótipos:
 Todos os objetos em JavaScript herdam propriedades e métodos de um protótipo.
 - Objetos de Data herdam o "Date.prototype".
 - Objetos de Vetor herdam o "Array.prototype".
@@ -2546,11 +2546,11 @@ Todos os objetos em JavaScript herdam propriedades e métodos de um protótipo.
 O "Object.prototype" é no topo do cadeia de herança de protótipos:
 Objetos de Data, Vetores, e "Person" herdam do "Object.prototype".
 
-> Adicionando Propriedades e Métodos aos Objetos:
+### Adicionando Propriedades e Métodos aos Objetos:
 
-* Usando a Propriedade "prototype":
+- Usando a Propriedade "prototype":
 A propriedade "prototype" permite adicionar novas propriedades a construtores de objetos:
-
+```js
 function Person(first, last, age, eyecolor) {
   this.firstName = first
   this.lastName = last
@@ -2558,9 +2558,9 @@ function Person(first, last, age, eyecolor) {
   this.eyeColor = eyecolor
 }
 Person.prototype.nationality = "English"
-
+```
 A propriedade "prototype" também permite adicionar novos métodos a construtores de objetos:
-
+```js
 function Person(first, last, age, eyecolor) {
   this.firstName = first
   this.lastName = last
@@ -2570,88 +2570,88 @@ function Person(first, last, age, eyecolor) {
 Person.prototype.name = function() {
   return this.firstName + " " + this.lastName
 }
+```
+**Atenção: Apenas altere seus próprios protótipos. Nunca modifique os protótipos dos objetos padrões do JavaScript.**
 
-Atenção: Apenas altere seus próprios protótipos. Nunca modifique os protótipos dos objetos padrões do JavaScript.	
 
-
-MÉTODOS DE OBJETO ES5:
+## Métodos de Objeto ES5:
 ES5 adicionou vários novos métodos:
-
-/ Adicionar ou mudar uma propriedade de objeto:
+```js
+// Adicionar ou mudar uma propriedade de objeto:
 Object.defineProperty(object, property, descriptor)
 
-/ Adicionar ou mudar várias propriedades de objeto:
+// Adicionar ou mudar várias propriedades de objeto:
 Object.defineProperties(object, descriptors)
 
-/ Acessar propriedades
+// Acessar propriedades
 Object.getOwnPropertyDescriptor(object, property)
 
-/ Retorna todas propriedades como um vetor:
+// Retorna todas propriedades como um vetor:
 Object.getOwnPropertyNames(object)
 
-/ Retorna propriedades enumeradas como um vetor:
+// Retorna propriedades enumeradas como um vetor:
 Object.keys(object)
 
-/ Acessar o protótipo:
+// Acessar o protótipo:
 Object.getPrototypeOf(object)
 
-/ Previne adicionar propriedades a um objeto:
+// Previne adicionar propriedades a um objeto:
 Object.preventExtensions(object)
 
-/ Retorna true se propriedades podem ser adicionadas a um objeto:
+// Retorna true se propriedades podem ser adicionadas a um objeto:
 Object.isExtensible(object)
 
-/ Previne mudanças de propriedades de objeto (não valores):
+// Previne mudanças de propriedades de objeto (não valores):
 Object.seal(object)
 
-/ Retorna true se o objeto está selado:
+// Retorna true se o objeto está selado:
 Object.isSealed(object)
 
-/ Previne qualquer mudança a um objeto:
+// Previne qualquer mudança a um objeto:
 Object.freeze(object)
   
-/ Retorna true se object está "congelado":
+// Retorna true se object está "congelado":
 Object.isFrozen(object)
-
-> Mudando um Valor de Propriedade:
-
+```
+### Mudando um Valor de Propriedade:
+```js
 Object.defineProperty(object, property, {value : value}}
-
-Exemplo:
-
+```
+**Exemplo:**
+```js
 var person = {
   firstName: "John",
   lastName: "Doe",
   language: "EN"
 }
 Object.defineProperty(person, "language", {value : "NO"})
-
-> Alterando Metadados:
+```
+### Alterando Metadados:
 ES5 permite que as propriedades de metadados a seguir sejam alterados:
-
-writable: true	/ valor da propriedade pode ser alterado
-enumerable: true	/ propriedade pode ser enumerada
-configurable: true	/ propriedade pode ser reconfigurada
-
+```js
+writable: true	// valor da propriedade pode ser alterado
+enumerable: true	// propriedade pode ser enumerada
+configurable: true	// propriedade pode ser reconfigurada
+```
 ES5 permite que getters e setters sejam alterados:
-
-  / definindo um getter:
+```js
+// definindo um getter:
 get: function () { return language } 
 
-/ definindo um setter:
+// definindo um setter:
 set: function(value) { language = value }
-
+```
 Esse exemplo faz "language" apenas-leitura:
-
+```js
 Object.defineProperty(person, "language", {writable: false})
-
+```
 Esse exemplo faz "language" não enumerável:
-
+```js
 Object.defineProperty(person, "language", {enumerable: false})
-
-> Listando Todas as Propriedades:
+```
+### Listando Todas as Propriedades:
 Esse exemplo lista todas as propriedades de um objeto:
-
+```js
 var person = {
   firstName: "John",
   lastName: "Doe",
@@ -2659,10 +2659,10 @@ var person = {
 }
 Object.defineProperty(person, "language", {enumerable: false})
 Object.getOwnPropertyNames(person)
-/ firstName,lastName,language
-
-> Listando Propriedades Enumeráveis:	
-
+// firstName,lastName,language
+```
+### Listando Propriedades Enumeráveis:	
+```js
 var person = {
   firstName: "John",
   lastName: "Doe",
@@ -2670,19 +2670,19 @@ var person = {
 }
 Object.defineProperty(person, "language", {enumerable: false})
 Object.keys(person)
-/ firstName,lastName
-
-> Adicionando uma Propriedade:
-
+// firstName,lastName
+```
+### Adicionando uma Propriedade:
+```js
 var person = {
   firstName: "John",
   lastName: "Doe",
   language: "EN"
 }
 Object.defineProperty(person, "year", {value: "2008"}) 
-
-Exercício:
-
+```
+**Exercício:**
+```js
 var person = {
     firstName: "John",
     lastName : "Doe",
@@ -2694,128 +2694,136 @@ Object.defineProperty(person, adt, {value:valor})
 var release = person[adt]
 
 document.getElementById("demo").innerHTML = release;
-/ 2008
-
-> Adicionando Getters e Setters:
+// 2008
+```
+### Adicionando Getters e Setters:
 O método Object.defineProperty() também pode ser usado para adicionar Getters e Setters:
-  
+```js  
 var person = {firstName: "John", lastName: "Doe"}
 
 Object.defineProperty(person, "fullName", {
   get : function() { return this.firstName + " " + this.lastName}
 })
-
-FUNÇÕES EM JAVASCRIPT:
+```
+## Funções em JavaScript:
   
-> Expressão de Função
+### Expressão de Função
 Uma função pode também ser definida usando uma expressão. Uma expressão de função pode ser armezenada como uma variável:
-
+```js
 var x = function (a, b) {return a * b}
-
+```
 Após uma expressão de função ter sido armazenada em uma variável, a variável pode ser usada como função:
-
+```js
 var x = function (a, b) {return a * b};
 var z = x(4, 3);
-
+```
 A função acima é realmente uma "função anônima" (uma função sem um nome). Uma função armazenada em variáveis não necessitam de nomes de funções. Elas são sempre invocadas usando o nome da variável.
 
-Atenção: A função acima termina com um ponto e vírgula porque é parte de uma declaração executável.
+**Atenção: A função acima termina com um ponto e vírgula porque é parte de uma declaração executável.**
 
-> O Constructor Function()
+### O Constructor Function()
 Como visto nos exemplos anteriores, funções são definidas com a keyword "function".
 As funções podem também ser definidas com uma função construtora embutida chamada "Function()"
-
+```js
 var myFunction = new Function("a", "b", "return a * b")
 var x = myFunction(4, 3)
-
+```
 Você realmente não precisa usar a função construtora, pois funciona da mesma forma que o exemplo anterior.
 
-Atenção: Na maior parte do tempo, você pode evitar de usar a keyword "new" em JavaScript.
+**Atenção: Na maior parte do tempo, você pode evitar de usar a keyword "new" em JavaScript.**
 
-> Funções Auto-Invocadas:
+### Funções Auto-Invocadas:
 Expressões de funções podem ser "auto-invocadas". Uma expressão auto-invocada é invocada (iniciada) automaticamente, sem ser chamada.
+
 Expressões de função executarão automaticamente se a expressão é seguida por ().
 Você não pode auto-invocar uma declaração de função.
-Você tem que adicionar parênteses ao redor da função para indicar que é uma expressão de função:
 
+Você tem que adicionar parênteses ao redor da função para indicar que é uma expressão de função:
+```js
 (function () {
   document.getElementById("demo").innerHTML = 
 "Hello! I called myself"
 })()
-/ A função é executada ao carregar a página.
-
+// A função é executada ao carregar a página.
+```
 A função acima é realmente uma função anônima auto-invocadora (função sem nome):
 
-> Funções Podem Ser Usadas Como Valores:
-
+### Funções Podem Ser Usadas Como Valores:
+```js
 function myFunction(a, b) {
   return a * b
 }
 var x = myFunction(4, 3) * 2
-/ 24
-
-> Funções São Objetos:
+// 24
+```
+### Funções São Objetos:
 O operador "typeof" em JavaScript retorna "function" para funções. Porém, funções em JS podem ser melhor descritas como objetos.
-Funções tem ambos "propriedade" e "métodos".
-A propriedade "arguments.length" retorna o número de argumentos recebidos quando a função foi invocada:
 
+Funções tem ambos "propriedade" e "métodos".
+
+A propriedade "arguments.length" retorna o número de argumentos recebidos quando a função foi invocada:
+```js
 function myFunction(a, b) {
   return arguments.length
 }
-/ 2
-
+// 2
+```
 O método "toString()" retorna a função como string:
-
+```js
 function myFunction(a, b) {
   return a * b
 }
 var txt = myFunction.toString()
-/ "function myFunction(a, b) { return a * b; }"
-
+// "function myFunction(a, b) { return a * b; }"
+```
 Atenção: Uma função designada para criar novos objetos é chamada de um construtor de objetos.
 
-> Arrow Functions:
+### Arrow Functions:
 Arrow functions permitem uma sintaxe mais curta para escrever expressões de funções.
 Você não precisa da keyword "function", da keyword "return", e das chaves { }.
-
-/ ES5
+```js
+// ES5
 var x = function(x, y) {
   return x * y
 }
 
-/ ES6
+// ES6
 const x = (x, y) => x * y
-
+```
 Arrow functions não possuem seus próprios "this". Eles não são bem adequados em definir métodos de objetos.
+
 Arrow functions não são içadas. Eles devem ser definidas antes de serem usadas.
 Usando const é mais seguro do que var, porque uma expressão de função está sempre em valor constante.
+
 Você pode apenas omitir a keyword "return" e as chaves se a função é de apenas uma única declaração. Por isso, pode ser um bom hábito sempre manter assim:
-
+```js
 const x = (x, y) => { return x * y )
+```
 
-
-PARÂMETROS DE FUNÇÃO:
+## Parâmetros de Função: 
 
 Uma função JavaScript não executa qualquer verificação sobre valores de parâmetro (argumentos).
 
-> Argumentos e Parâmetros:
+### Argumentos e Parâmetros:
 Parâmetros de função são os nomes listados na definição de função.
 Argumentos de função são os valores reais passados para a (e recebidos pela) função.
-
+```js
 function functionName(parameter1, parameter2, parameter3) {
-  / código a ser executado
+  // código a ser executado
 }
-
-> Regras de Parâmetros:
+```
+### Regras de Parâmetros:
 Definições de função não especificam tipos de dados para parâmetros.
+
 Funções não executam checagem de tipo sobre argumentos passados.
+
 Funções não verificam o número de argumentos recebidos.
 
-> Objetos de Argumentos:
-Funções tem objetos embutidos chamados de objeto de argumento.
-Os objetos de argumento contém um vetor dos argumentos usados quando a função é invocada.
-Dessa forma, você pode simplesmente usar uma função para encontrar (por exemplo) o valor mais alto em uma lista de números:
+### Objetos de Argumentos:
+Funções tem objetos embutidos chamados de objeto de argumento. Os objetos de argumento contém um vetor dos argumentos usados quando a função é invocada.
 
+Dessa forma, você pode simplesmente usar uma função para encontrar (por exemplo) o valor mais alto em uma lista de números:
+```js
 x = findMax(1, 123, 500, 115, 44, 88)
 
 function findMax() {
@@ -2828,9 +2836,9 @@ function findMax() {
   }
   return max
 }
-
+```
 Ou crie uma função para somar todos os valores de entrada:
-
+```js
 x = sumAll(1, 125, 500, 115, 44, 88) 
 
 function sumAll() {
@@ -2841,72 +2849,77 @@ function sumAll() {
   }
   return sum
 }
+```
+**Atenção: Se uma função é invocada com muitos argumentos (mais do que declarado), esses argumentos podem ser alcançados usando os objetos de argumentos.**
 
-Atenção: Se uma função é invocada com muitos argumentos (mais do que declarado), esses argumentos podem ser alcançados usando os objetos de argumentos.
+### Argumentos São Passados Pelo Valor:
+Os parâmetros, em uma chamada de função, são argumentos de função. Os argumentos em JS são passados pelo valor: a função apenas recebe para conhecer os valores, não as localizações dos argumentos.
 
-> Argumentos São Passados Pelo Valor:
-Os parâmetros, em uma chamada de função, são argumentos de função.
-Os argumentos em JS são passados pelo valor: a função apenas recebe para conhecer os valores, não as localizações dos argumentos.
 Se uma função altera um valor de argumento, ela não altera o valor original do parâmetro.
+
 Alterações em argumentos não são visíveis (refletidas) fora da função.
 
-> Objetos são Passados pela Referência:
+### Objetos são Passados pela Referência:
 Em JS, referências de objetos são valores. Por causa idsso, objetos se comportarão como se fossem passadas pela referência:
+
 Se uma função altera uma propriedade de objeto, ela muda o valor original.
 Alterações em propriedades de objetos são visíveis (refletidas) fora da função.
 
-INVOCAÇÃO DA FUNÇÃO:
+## Invocação da Função:
 
-> Invocando uma Função como uma Função:
-
+### Invocando uma Função como uma Função:
+```js
 function myFunction(a, b) {
   return a * b
 }
-myFunction(10, 2)		/ retorna 20
-
+myFunction(10, 2)	// retorna 20
+```
 A função acima acima não pertence a qualquer objeto. Porém, em JS sempre há um objeto padrão global.
-Em HTML, o objeto global é a própria página HTML. Então a função pertence à página HTML.
-Em um navegador, o objeto da página é o window do navegador. A função acima automaticamente torna-se uma função de window.
-myFunction() e window.myFunction() é a mesma função:
 
+Em HTML, o objeto global é a própria página HTML. Então a função pertence à página HTML.
+
+Em um navegador, o objeto da página é o window do navegador. A função acima automaticamente torna-se uma função de window.
+
+myFunction() e window.myFunction() é a mesma função:
+```js
 function myFunction(a, b) {
   return a * b
 }
-window.myFunction(10, 2) 	/ retorna 20
+window.myFunction(10, 2) 	// retorna 20
+```
+**Atenção: Embora seja uma forma comum de invocar uma função JS, não é uma prática muito boa, no qual, pode gerar conflitos e bugs no objeto global.**
 
-Atenção: Embora seja uma força comum de invocar uma função JS, não é uma prática muito boa, no qual, pode gerar conflitos e bugs no objeto global.
+**Atenção: Quando uma função é chamada sem um objeto proprietário, o valor de "this" torna-se o objeto global. Com isso, evite essa prática.**
 
-Atenção: Quando uma função é chamada sem um objeto proprietário, o valor de "this" torna-se o objeto global. Com isso, evite essa prática.
-
-> Invocando uma Função com a Função Construtora:
+### Invocando uma Função com a Função Construtora:
 Se uma função construtora é precedida com a keyword "new", ela é uma invocação construtora.
-Parece que você uma nova função, mas já que em JavaScript as funções são objetos, você na verdade cria um novo objeto:
 
-/ Essa é uma função construtora:
+Parece que você uma nova função, mas já que em JavaScript as funções são objetos, você na verdade cria um novo objeto:
+```js
+// Essa é uma função construtora:
 function myFunction(arg1, arg2) {
   this.firstName = arg1
   this.lastName = arg2
 }
 
-/ Isso cria um novo objeto:
+// Isso cria um novo objeto:
 var x = new myFunction("John", "Doe")
 x.firstName	/ retorna "John"
-
+```
 Uma invocação construtora cria um novo objeto. O novo objeto herda as propriedades e métodos de seu construtor.
 
-Atenção: "this" na construtora não tem um valor. O valor será o novo objeto criado quando a função é invocada.
+**Atenção: "this" na construtora não tem um valor. O valor será o novo objeto criado quando a função é invocada.**
 
+## Chamada da Função: 
 
-CHAMADA DA FUNÇÃO:
-
-> Método de Reuso:
+### Método de Reuso:
 Com o método "call()", você pode escrever um método que pode ser usado em diferentes objetos.
 
-> Todas Funções são Métodos:
-Em JavaScript, todas as funções são métodos de obejtos.
-Se uma função não é um método de um objeto JS, ela é uma função do objeto global.
-O exemplo abaixo cria um objeto com 3 propriedades, firstName, lastName, fullName.
+### Todas Funções são Métodos:
+Em JavaScript, todas as funções são métodos de obejtos. Se uma função não é um método de um objeto JS, ela é uma função do objeto global.
 
+O exemplo abaixo cria um objeto com 3 propriedades, firstName, lastName, fullName.
+```js
 var person = {
   firstName:"John",
   lastName:"Doe",
@@ -2914,18 +2927,19 @@ var person = {
     return this.firstName + " " + this.lastName
   }
 }
-person.fullName()	/ retorna "John Doe"
-
+person.fullName()	// retorna "John Doe"
+```
 No exemplo acima, o "this" pertence à função fullName. Em outras palavras, this.firstName significa a propriedade "firstName" desse objeto.
 
-> Método call()
+### Método call()
 O método call() é um método predefinido em JavaScript.
+
 Ele pode ser usado para invocar (chamar) um método com um objeto proprietário como um argumento (parâmetro).
 
-Atenção: Com call(), um objeto pode usar um método pertencente a um outro objeto.
+**Atenção: Com call(), um objeto pode usar um método pertencente a um outro objeto.**
 
 Esse exemplo chama o método fullName de "person", usando o "person1":
-
+```js
 var person = {
   fullName: function() {
     return this.firstName + " " + this.lastName
@@ -2939,11 +2953,11 @@ var person2 = {
   firstName:"Mary",
   lastName:"Doe"
 }
-person.fullName.call(person1)		/ retorna "John Doe"
-
-> O Método call() com Argumentos:
+person.fullName.call(person1)	// retorna "John Doe"
+```
+### O Método call() com Argumentos:
 O método call() pode aceitar argumentos:
-  
+```js  
 var person = {	
   fullName: function(city, country) {
     return this.firstName + " " + this.lastName + ", " + city + ", " + country
@@ -2954,17 +2968,17 @@ var person1 = {
   lastName: "Doe"
 }
 person.fullName.call(person1, "Oslo", "Norway")
+```
 
+## Function Apply:
 
-FUNCTION APPLY
-
-> Método de Reuso:
+### Método de Reuso:
 Com o método "apply()", você pode escrever um método que pode ser usado em diferentes objetos.
 
-> O Método "apply()":
+### O Método "apply()":
 O método "apply()" é similar ao método "call()".
 Nesse exemplo, o método fullName de "person" é aplicado no "person1":
-
+```js
 var person = {
   fullName: function() {
     return this.firstName + " " + this.lastName
@@ -2974,19 +2988,19 @@ var person1 = {
   firstName: "Mary",
   lastName: "Doe"
 }
-person.fullName.apply(person1)	/ "Marry Doe"
-
-> A Diferença Entre call() e apply()
+person.fullName.apply(person1)	// "Marry Doe"
+```
+### A Diferença Entre call() e apply()
 A diferença é:
 
 - O método "call()" pega argumentos separadamente.
 - O método "apply()" pega argumentos como um vetor.
 
-Atenção: O método "apply()" é bastante conveniente se você quer usar um vetor ao invés de uma lista de argumentos.
+**Atenção: O método "apply()" é bastante conveniente se você quer usar um vetor ao invés de uma lista de argumentos.**
 
-> O Método apply() com Argumentos:
+### O Método apply() com Argumentos:
 O método apply() aceita argumentos em um vetor:
-
+```js
 var perosn = {
   fullName: function(city, country) {
     return this.firstName + " " + this.lastName + ", " + city + ", " + country
@@ -2997,38 +3011,38 @@ var person1 = {
   lastName: "Doe"
 }
 person.fullName.apply(person1, ["Oslo", "Norway"])
-/ John Doe, Oslo, Norway
-
-> Simulando um Método Max em Vetores:
+// John Doe, Oslo, Norway
+```
+### Simulando um Método Max em Vetores:
 Você pode encontrar o maior número (em uma lista de números) usando o método "Math.max()":
-
-Math.max(1, 2, 3)	/ retorna 3
-
+```js
+Math.max(1, 2, 3)	// retorna 3
+```
 Embora vetores em JS não tenham um método "max()", você pode aplicar o método "Math.max()".
-
-Math.max.apply(null, [1, 2, 3]) 	/ retorna 3
-
+```js
+Math.max.apply(null, [1, 2, 3]) // retorna 3
+```
 O primeiro argumento (null) não importa. Não é usado nesse exemplo.
 Esse exemplo dará o mesmo resultado:
+```js
+Math.max.apply(Math, [1, 2, 3]) // retorna 3
 
-Math.max.apply(Math, [1, 2, 3]) 	/ retorna 3
+Math.max.apply(" ", [1, 2, 3]) // retorna 3
 
-Math.max.apply(" ", [1, 2, 3])		/ retorna 3
-
-Math.max.apply(0, [1, 2, 3])		/ retorna 3
-
-> Modo Estrito
+Math.max.apply(0, [1, 2, 3]) // retorna 3
+```
+### Modo Estrito
 No Modo Estrito, se o primeiro argumento do método "apply()" não é um objeto, ele torna-se o proprietário (objeto) da função invocada. No modo "não-estrito", ele torna-se o objeto global.
 
+## Fechamento em Funções JavaScript:
 
-FECHAMENTOS EM FUNÇÕES JAVASCRIPT:
+**Atenção: Variáveis criadas sem uma keyword de declaração (var, let ou const) são sempre globais, mesmo se elas são criadas dentro de uma função.**
 
-Atenção: Variáveis criadas sem uma keyword de declaração (var, let ou const) são sempre globais, mesmo se elas são criadas dentro de uma função.
-
-> O Dilema do Contador:
+### O Dilema do Contador:
 Suponha que você queira usar uma variável para contar algo, e você quer que esse contador seja disponível para todas as funções.
-Você poderia usar uma variável global, e uma função para incrementar o contador:
 
+Você poderia usar uma variável global, e uma função para incrementar o contador:
+```js
 var counter = 0
 
 function add() {
@@ -3038,10 +3052,10 @@ function add() {
 add()
 add()
 add()
-/ O contador deve agora ser 3
-
+// O contador deve agora ser 3
+```
 Há um problema com a solução acima: Qualquer código na página pode mudar o contador sem chamar add(). O contador deve ser local para função add() para prevenir que outro código o altere:
-
+```js
 var counter = 0
 
 function add() {
@@ -3052,11 +3066,11 @@ function add() {
 add() 
 add()
 add()
-/ O contador deveria ser 3, mas é 0
-
-  Ele não funciona por que nós exibimos o contador global ao invés do contador local.
+// O contador deveria ser 3, mas é 0
+```
+Ele não funciona por que nós exibimos o contador global ao invés do contador local.
 Nós podemos remover o contador global e acessar o contador local deixando a função retorna-la:
-
+```js
 function add() {
   var counter = 0
   counter += 1
@@ -3066,30 +3080,32 @@ function add() {
 add()
 add()
 add()
-/ O contador deveria ser 3, mas é 1.
-
+// O contador deveria ser 3, mas é 1.
+```
 Isso não funciona porque nós resetamos o contador local toda vez que chamamos a função.
 Uma função interna do JS pode resolver isso:
 
-> Funções Aninhadas
+### Funções Aninhadas
 Todas as funções têm acesso ao escopo global. De fato, em JS, todas as funções tem acesso ao escopo acima delas.
+
 JavaScript permite funções aninhadas. Elas tem acesso ao escopo acima delas. 
 Nesse exemplo, a função interna "plus()" tem acesso à variável "counter" na função-mãe:
-
+```js
 function add() {
   var counter = 0
   function plus() { counter +=1 }
   plus ()
   return counter
 }
-
+```
 Isso poderia ter resolvido o dilema do contador se pudessemos alcançar a função "plus()" a partir de fora.
+
 Nós também precisamos encontrar uma forma de executar "counter = 0" apenas uma vez.
 Vamos precisar de um fechamento.
 
-> Fechamentos em JavaScript:
+### Fechamentos em JavaScript:
 Lembra-se das funções auto-invocadas?
-
+```js
 var add = (function () {
   var counter = 0
   return function () { counter += 1; return counter}
@@ -3097,23 +3113,25 @@ var add = (function () {
 add()
 add()
 add()
-/ O contador é 3.
-
-> Exemplo Explicado:
+// O contador é 3.
+```
+### Exemplo Explicado:
 A variável "add" é atribuída ao valor de retorno de uma função auto-invocada.
+
 A função auto-invocada apenas executa uma vez. Ela define o contador em zero, e retorna uma expressão de função. Dessa forma, "add" tornar-se uma função. 
+
 A parte "maravilhosa" é que ela pode acessar o contador no escopo acima.
 Isso é chamado de Fechamento em JavaScript. Isso torna possível para uma função ter variáveis privadas.
+
 O contador é protegido pelo escopo da função anônima e pode apenas ser alterada usando a função "add".
 
-Atenção: Um Fechamento é uma função tendo acesso ao escopo acima, mesmo depois que a função-pai foi fechada.
+**Atenção: Um Fechamento é uma função tendo acesso ao escopo acima, mesmo depois que a função-pai foi fechada.**
 
+## Classes em JavaScript:
 
-CLASSES EM JAVASCRIPT
+**Atenção: O método constructor é chamado automaticamente quando um novo objeto é criado.**
 
-Atenção: O método constructor é chamado automaticamente quando um novo objeto é criado.
-
-> O Método Constructor:
+### O Método Constructor:
 O método constructor é um método especial:
   
 - Tem de ser do mesmo nome "constructor";
@@ -3122,19 +3140,19 @@ O método constructor é um método especial:
 
 Se você não definir o método constructor, JS vai adicionar um método constructor vazio.
 
-> Métodos de Classe:
+### Métodos de Classe:
 São criados com a mesma sintaxe como métodos de objeto.
 Use a keyword "class" para criar uma classe. Sempre adicione um método "constructor()". Então adicione qualquer número de métodos:
-
+```js
 class ClassName {
   constructor() { ... }
   method_1 { ... }
   method_2 { ... }
   method_3 { ... }
 }
-
+```
 Crie um método de classe chamado "age" que retorna a idade do carro:
-
+```js
 clas Car {
   constructor(name, year) {
     this.name = name
@@ -3148,9 +3166,9 @@ clas Car {
 
 let myCar = new Car("Ford", 2014)
 document.getElementById("demo").innerHTML = "My car is " + myCar.age() + " years old."
-
+```
 Você pode enviar parâmetros para métodos de classe:
-
+```js
 class Car {
   constructor(name, year) {
     this.name = name
@@ -3167,12 +3185,11 @@ let year = date.getFullYear()
 let myCar = new Car("Ford", 2014)
 document.getElementById("demo").innerHTML = "My car is " + myCar.age(year) + " years old."
 
-/ o this.name é escopo local. O "year" em myCar.age(year) refere-se a variável let year de escopo global.
-
-> "use strict"
-A sintaxe em classes devem ser escritas em "modo estrito".
-Você irá receber um erro se não seguir as regras do "modo estrito".
-
+// o this.name é escopo local. O "year" em myCar.age(year) refere-se a variável let year de escopo global.
+```
+### "use strict"
+A sintaxe em classes devem ser escritas em "modo estrito". Você irá receber um erro se não seguir as regras do "modo estrito".
+```js
 class Car {	
   constructor(name, year) {
     this.name = name
@@ -3184,12 +3201,13 @@ age() {
   return date.getFullYear() - this.year
 }
 }
+```
 
-HERANÇA DE CLASSE:
+## Herança de Classe: 
 
 Para criar uma herança de classe, use a keyword "extends"
 Uma classe criada com uma herança de classe herda todos os métodos de uma outra classe:
-
+```js
 class Car {
   constructor(brand) {
     this.carname = brand
@@ -3211,17 +3229,20 @@ class Model extends Car {
 
 let myCar = new Model("Ford", "Mustang")
 document.getElementById("demo".innerHTML = myCar.show()
-
+```
 O método "super()" refere-se à classe-pai.
+
 Ao chamar o método "super()" no método constructor, nós chamamos o método constructor do "pai" e recebemos acesso às propriedades dos pais e métodos.
 
-Atenção: Herança é útil para reusabilidade de código: reusar propriedades e métodos de uma classe existente quando você cria uma nova classe.
+**Atenção: Herança é útil para reusabilidade de código: reusar propriedades e métodos de uma classe existente quando você cria uma nova classe.**
 
-> Getters e Setters:
+### Getters e Setters:
 Classes também permitem usar getters e setters.
-Pode ser inteligente usar getters e setters para suas propriedades, especialmente se você quer fazer algo especial com o valor antes de retorná-lo, ou antes de defini-los. 
-Para adicionar getters e setters numa classe, use keywords "get" e "set".
 
+Pode ser inteligente usar getters e setters para suas propriedades, especialmente se você quer fazer algo especial com o valor antes de retorná-lo, ou antes de defini-los. 
+
+Para adicionar getters e setters numa classe, use keywords "get" e "set".
+```js
 class Car {
   constructor(brand) {
     this.carname = brand
@@ -3236,13 +3257,14 @@ class Car {
 
 let myCar = new Car("Ford")
 document.getElementById("demo").innerHTML = myCar.cnam
-/ "Ford"
-
-Atenção: Mesmo se o getter é um método, você não precisa usar parênteses quando quer receber um valor de propriedade.
+// "Ford"
+```
+**Atenção: Mesmo se o getter é um método, você não precisa usar parênteses quando quer receber um valor de propriedade.**
 
 O nome de método getter/setter não pode ser o mesmo nome da propriedade, nesse caso "carname".
-Muitos programadores usam um caractere underscore (_) antes do nome da propriedade para separar o getter/setter da propriedade real:
 
+Muitos programadores usam um caractere underscore (_) antes do nome da propriedade para separar o getter/setter da propriedade real:
+```js
 class Car {
   constructor(brand) {
     this._carname = brand
@@ -3257,10 +3279,11 @@ class Car {
 
 let myCar = new Car("Ford")
 document.getElementById("demo").innerHTML = myCar.carname
-
+```
 Para usar um setter, use a mesma sintaxe como quando você define um valor de propriedade, sem parênteses:
-Mudando o "carname" para "Volvo".
 
+Mudando o "carname" para "Volvo".
+```js
 class Car {
   constructor(brand, year) {
     this._carname = brand
@@ -3272,24 +3295,25 @@ class Car {
   set carname(x) {
     this._carname = x
   }
+}
 
-  let myCar = new Car("Ford", 2014)
-  myCar.carname = "Volvo"
-  document.getElementById("demo").innerHTML = myCar.carname
-  / Volvo 2014
+let myCar = new Car("Ford", 2014)
+myCar.carname = "Volvo"
+document.getElementById("demo").innerHTML = myCar.carname
+// Volvo 2014
+```
+### Içamento:
+Diferentemente de funções, e outras declarações JS, declarações de classe não são içadas.
 
-> Içamento:
-Diferentemente de funções, e outras declarações JS, declarações de classe não são içadas. 
 Isso significa que você deve declara uma classe antes de você usá-la.
 
-Atenção: Para outras declarações, como funções, você não receberá um erro quando tentar usar antes de ser declado, porque o comportamento padrão de declarações JS são de içamento (movendo a declaração para o topo).
+**Atenção: Para outras declarações, como funções, você não receberá um erro quando tentar usar antes de ser declado, porque o comportamento padrão de declarações JS são de içamento (movendo a declaração para o topo).
+**
 
+## Métodos Estáticos:
 
-MÉTODOS ESTÁTICOS:
-
-Métodos de classe estáticas são definidos na própria classe.
-Você não pode chamar um método estático em um objeto, apenas numa classe de objeto.
-
+Métodos de classe estáticas são definidos na própria classe. Você não pode chamar um método estático em um objeto, apenas numa classe de objeto.
+```js
 class Car {
   constructor(name) {
     this.name = name
@@ -3301,15 +3325,15 @@ class Car {
 
 let myCar = new Car("Ford")
 
-/ Você pode chamar "hello()" na Classe Car:
+// Você pode chamar "hello()" na Classe Car:
 document.getElementById("demo").innerHTML = Car.hello()
 
-/ Mas não no objeto Car:
-/ document.getElementById("demo").innerHTML = myCar.hello()
-/ Isso gerará um erro.
-
+// Mas não no objeto Car:
+// document.getElementById("demo").innerHTML = myCar.hello()
+// Isso gerará um erro.
+```
 Se você quer usar o objeto myCar dentro do método "static", você pode envia-lo como um parâmetro:
-
+```js
 class Car {
   constructor(name) {
     this.name = name
@@ -3320,10 +3344,10 @@ class Car {
 }
 let myCar = new Car("Ford")
 document.getElementById("demo").innerHTML = Car.hello(myCar)
-/ "Hello Ford"
-
+// "Hello Ford"
+```
 Para chamar um método estático dentro de outro método estático da mesma classe, podemos utilizar a palavra reservada "this":
-
+```js
 class ChamadaDoMetodoEstatico {
   static metodoEstatico() {		
     return "O método estático foi chamado"
@@ -3333,13 +3357,13 @@ class ChamadaDoMetodoEstatico {
   }
 }
 ChamadaDoMetodoEstatico.metodoEstatico()
-/ "O método estático foi chamado"
+// "O método estático foi chamado"
 
 ChamadaDoMetodoEstatico.outroMetodoEstatico()
-/ "O método estático foi chamado de outro método estático"
-
+// "O método estático foi chamado de outro método estático"
+```
 Exemplo:
-
+```js
 class Tripple {
   static tripple(n) {
   n = n || 1;
@@ -3353,21 +3377,22 @@ class BiggerTripple extends Tripple {
     }
 }
 
-console.log(Tripple.tripple()); 		/ 3
-console.log(Tripple.tripple(4));		/ 12	
-console.log(BiggerTripple.tripple(3));	/ 81
+console.log(Tripple.tripple()); 		// 3
+console.log(Tripple.tripple(4));		// 12	
+console.log(BiggerTripple.tripple(3));	// 81
+```
 
+## ASYNC - CALLBACKS
 
-ASYNC - CALLBACKS
+Um Callback é uma função passada como um argumento para uma outra função. Essa técnica permite que uma função chame uma outra função.
 
-Um Callback é uma função passada como um argumento para uma outra função.
-Essa técnica permite que uma função chame uma outra função.
 Uma função callback pode executar após que uma outra função foi finalizada.
 
-> Sequência de Função:
+### Sequência de Função:
 Funções em JS são executadas na sequência em que elas são chamadas, e não na sequência que elas são definidas.
-Esse exemplo vai finalizar exibindo "Goodbye":
 
+Esse exemplo vai finalizar exibindo "Goodbye":
+```js
 function myDisplayer(some) {
   document.getElementById("demo").innerHTML = some
 }
@@ -3381,14 +3406,14 @@ function mySecond() {
 
 myFirst()
 mySecond()
-/ "Goodbye"
-/ Ao trocar a ordem, será exibido "Hello".
+// "Goodbye"
+// Ao trocar a ordem, será exibido "Hello".
+```
+### Controle de Sequência:
+Às vezes, você gostaria de ter um melhor controle sobre quando executar uma função.Suponhamos que você queira realizar um cálculo e, então, disponibilizar o resultado.
 
-> Controle de Sequência:
-Às vezes, você gostaria de ter um melhor controle sobre quando executar uma função.
-Suponhamos que você queira realizar um cálculo e, então, disponibilizar o resultado.
 Você poderia chamar uma função calculadora (myCalculator), salvar o resultado, e então chamar uma outra função (myDisplayer) para exibir o resultado:
-
+```js
 function myCalculator(some) {
   document.getElementById("demo").innerHTML = some
 }
@@ -3399,10 +3424,10 @@ function myCalculator(num1, num2) {
 
 let result = myCalculator(5, 5)
 myDisplayer(result)
-/ 10
-
+// 10
+```
 Ou, você poderia chamar uma função calculadora (myCalculator) e deixar a função calculadora chamar a função de exibilização (myDisplayer):
-
+```js
 function myDisplayer(some) {
   document.getElementById("demo").innerHTML = some
 }
@@ -3411,14 +3436,15 @@ function myCalculator(num1, num2) {
   myDisplayer(sum)
 }
 myCalculator(5, 5)
-/ 10
-
+// 10
+```
 O problema com o primeiro exemplo acima é que você tem que chamar duas funções para exibir o resultado.
+
 O problema do segundo exemplo é que você não pode prevenir a função calculadora de exibir o resultado.
 
-> Callbacks:
+### Callbacks:
 Usando um callback, você pode chamar a função calculadora (myCalculator) com um callback, e permitir que a função calculadora execute o callback após o cálculo ser finalizado:
-
+```js
 function myDisplayer(some) {
     document.getElementById("demo").innerHTML = some;
 }
@@ -3429,50 +3455,48 @@ function myCalculator(num1, num2, myCallback) {
 }
 
 myCalculator(5, 5, myDisplayer)
-/ 10
-
+// 10
+```
 No exemplo acima, "myDisplayer" é o nome de uma função. Ela é passada para "myCalculator()" como um argumento.
 
-Atenção: Quando passar uma função como argumento, não use parênteses.
+**Atenção: Quando passar uma função como argumento, não use parênteses.**
 
-> Quando Usar Um Callback?
+### Quando Usar Um Callback?
 Os exemplos acima não são tão interessantes. Eles são simplificados para ensinar a sintaxe callback. 
+
 Onde callbacks realmente brilham são em funções assíncronas, onde uma função tem que esperar por uma outra função (como esperando por um arquivo para carregar).
 
-
-ASSINCRONICIDADE EM JAVASCRIPT
+## Assincronicidade em JavaScript:
 
 Funções executando em paralelo com outras funções são chamadas assíncronas. Um bom exemplo é o "setTimeout()" do JavaScript.
 
-Nos exemplos anteriores, observou-se a sintaxe de um callback. 
-No mundo real, callbacks são mais frequentemente usados em funções assíncronas.
+Nos exemplos anteriores, observou-se a sintaxe de um callback. No mundo real, callbacks são mais frequentemente usados em funções assíncronas.
 
-> Esperando por um Tempo Esgotado:
+### Esperando por um Tempo Esgotado:
 Quando usando uma função JS "setTimeout()", você pode especificar uma função callback para ser executada no tempo limite:
-
+```js
 setTimeout(myFunction, 3000)
   
 function myFunction() {
   document.getElementById("demo").innerHTML = "I love you!"
 }
-/ Definiu a função para ser executada após 3000 milissegundos (3s)
-
-No exemplo acima, myFunction é usado como um callback. O nome da função é passado para setTimeout() como um argumento.
-3000 é o número de milissegundos antes do tempo limite e, então, myFunction() será chamado após 3 segundos.
+// Definiu a função para ser executada após 3000 milissegundos (3s)
+```
+No exemplo acima, myFunction é usado como um callback. O nome da função é passado para setTimeout() como um argumento. 3000 é o número de milissegundos antes do tempo limite e, então, myFunction() será chamado após 3 segundos.
 
 Ao invés de passar o nome da função como um argumento para uma outra função, você pode, ao invés disso, sempre passar uma função inteira:
-
+```js
 setTimeout(function() { myFunction("I love you") }, 3000)
 
 function myFunction(value) {
   document.getElementById("demo").innerHTML = value
 }
-
+```
 No exemplo acima, "function(){ myFunction("I love you") }" é usado como um callback, mas é uma função completa. A função completa é passada para setTimeout() como um argumento.
 
-> Esperando por Intervalos:
+### Esperando por Intervalos:
 Quando usar a função setInterval(), você pode especificar uma função callback para ser executada a cada intervalo:
-
+```js
 setInterval(myFunction, 1000);
 
 function myFunction() {
@@ -3488,16 +3512,17 @@ function myFunction() {
     document.getElementById("demo").innerHTML=
     hhh + ":" + mmm + ":" + seg
   }
-/ Irá mostrar um cronômetro sendo atualizado a cada segundo.
-
+// Irá mostrar um cronômetro sendo atualizado a cada segundo.
+```
 No exemplo acima, myFunction é usado como um callback. O nome da função é passado para setInterval() como um argumento.
+
 1000 é o número de milissegundos entre intervalos, então myFunction() será chamado a cada segundo.
 
-> Esperando por Arquivos:
-Se você cria uma função para carregar um recurso externo (como um script ou um arquilo), você não pode usar o conteúdo antes dele ser totalmente carregado.
-Isso é o momento perfeito para usar um callback.
-Esse exemplo carrega um arquivo HTML (mycar.html), e exibe o arquivo HTML em uma página web, após o arquivo ser totalmente carregado:
+### Esperando por Arquivos:
+Se você cria uma função para carregar um recurso externo (como um script ou um arquilo), você não pode usar o conteúdo antes dele ser totalmente carregado. Isso é o momento perfeito para usar um callback.
 
+Esse exemplo carrega um arquivo HTML (mycar.html), e exibe o arquivo HTML em uma página web, após o arquivo ser totalmente carregado:
+```js
 function myDisplayer(some) {		
   document.getElementById("demo").innerHTML = some
 }
@@ -3516,23 +3541,23 @@ function getFile(myCallback) {
 }
 
 getFile(myDisplayer)
+// Algumas pendências serão aprendidas em AJAX.
+```
+No exemplo acima, myDisplayer é usado como um callback. O nome da função é passado para getFile() como um argumento.
 
-/ Algumas pendências serão aprendidas em AJAX.
-
-No exemplo acima, myDisplayer é usado como um callback.
-O nome da função é passado para getFile() como um argumento.
-
-
-PROMISES EM JAVASCRIPT:
+## Promises em JavaScript:
 
 "Produzindo código" é código que pode tomar algum tempo.
+
 "Consumindo código" é código que deve esperar pelo resultado. 
+
 Uma Promise é um objeto em JavaScript que une produzir código e consumir código.
 
-> Objeto Promise:
+### Objeto Promise:
 Um objeto promise contém ambos os códigos de produção e chamadas para o código de consumo. 
-Sintaxe:
 
+Sintaxe:
+```js
 let myPromise = new Promise(function(myResolve, myReject) {
   / "Produzindo código" (pode levar algum tempo)
 
@@ -3545,30 +3570,39 @@ myPromise.then(
   function(value) { código se obtém sucesso },
   function(error)  { código se ontém um erro	  }
 }
-
+```
 Quando o código a executar obtém o resultado, deve chamar um dos dois callbacks:
 
-Sucesso		|	myResolve(valor de resultado)
-Erro		|	myReject(objeto de erro)
+<table>
+  <tr>
+    <td>Sucesso</td>
+    <td>myResolve(valor de resultado)</td>
+  </tr>
+  <tr>
+      <td>Erro</td>
+    <td>myReject(objeto de erro)</td>
+  </tr>
+</table>
 
-> Propriedades de Objeto:
+### Propriedades de Objeto:
 Um objeto Promise pode estar:
 
 - Pendente,
 - Completado,
 - Rejeitado.
 
-O objeto Promise suporta duas propriedades: "state" e "result".
-Enquanto um objeto Promise está "pendente" (trabalhando), o resultado é indefinido.
-Quando está "completado", o resultado é um valor.
-Quando é "rejeitado", o resultado é um objeto de erro.
+O objeto Promise suporta duas propriedades: "state" e "result". Enquanto um objeto Promise está "pendente" (trabalhando), o resultado é indefinido.
 
-myPromise.state			myPromise.result
-"pending"			|		undefined
-"fulfilled"			|	um valor de resultado
-"rejected"			|	um objeto de erro
-
-Atenção: Você não pode acessar as propriedades "state" e "result". Você deve usar um método Promise para manusear promises.
+- Quando está "completado", o resultado é um valor.
+- Quando é "rejeitado", o resultado é um objeto de erro.
+```js
+myPromise.state	
+myPromise.result
+"pending"	//		undefined
+"fulfilled"	//	um valor de resultado
+"rejected" //	um objeto de erro
+``` 
+**Atenção: Você não pode acessar as propriedades "state" e "result". Você deve usar um método Promise para manusear promises.**
 
 > Como Lidar com Promises:
 Aqui está como usar uma Promise:

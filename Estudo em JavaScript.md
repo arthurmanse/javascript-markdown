@@ -4875,72 +4875,77 @@ A informação do objeto de navegação pode estar frequentemente errônea, e n�
 
 ### navigator.platform
 A propriedade retorna a plataforma do navegador (o sistema operacional):
-
+```html
 <p id="demo"></p>
 
 <script>
 document.getElementById("demo").innerHTML =
 navigator.platform
 </script>
-/ Win32
-
-> navigator.language
+<!-- Win32 -->
+```
+### navigator.language
 A propriedade retorna a linguagem do navegador:
-
+```html
 <p id="demo"></p>
 
 <script>
 document.getElementById("demo").innerHTML =
 navigator.language
 </script>
-/ pt-BR
-
-> navigator.onLine
+<!-- pt-BR -->
+```
+### navigator.onLine
 A propriedade retorna true se o navegador está online:
-
+```html
 <p id="demo"></p>
 
 <script>
 document.getElementById("demo").innerHTML = 
 navigator.onLine
 </script>
-/ true
-
-> navigator.javaEnabled()
+<!-- true -->
+```
+### navigator.javaEnabled()
 O método retorna true se Java está habilidade:
-
+```html
 <p id="demo"></p>
 
 <script>
 document.getElementById("demo").innerHTML =
 navigator.javaEnabled()
 </script>
+```
 
+## Caixas POPUP
 
-CAIXAS POPUP
-
-> Caixa de Alerta:
+### Caixa de Alerta:
 Uma caixa de alerta é frequentemente usado se queremos ter certeza que uma informação foi recebida do usuário.
+
 Quando um popup da caixa de alerta aparece, o usuário terá que clicar em "OK" para continuar:
-
+```js
 alert("I am an alert box!")
-
-> Caixa de Confirmação:
+```
+### Caixa de Confirmação:
 Uma caixa de confirmão é usada frequentemente se queremos que o usuário verifique ou aceite algo.
-Quando a caixa de confirmação aparece, o usuário terá que clicar ou "OK" ou "Cancel" para prosseguir.
-Se o usuário clica "OK", a caixa retorna "true". Se o usuário clica "Cancel", a caixa retorna "false"
 
+Quando a caixa de confirmação aparece, o usuário terá que clicar ou "OK" ou "Cancel" para prosseguir.
+
+Se o usuário clica "OK", a caixa retorna "true". Se o usuário clica "Cancel", a caixa retorna "false"
+```js
 if (confirm("Press a Button!")) {
   txt = "You pressed OK"
 } else {
   txt = "You pressed Cancel"
 }
-
-> Caixa de Prompt:
+```
+### Caixa de Prompt:
 Uma caixa de prompt é usada frequentemente se queremos que o usuário coloque um valor antes de entrar em uma página.
-Quando a caixa de prompt, o usuário terá que clicar ou "OK" ou "Cancel" para proceder depois de colocar um valor de input.
-Se o usuário clica "OK", a caixa retorna o valor de input. Se o usuário clica "Cancel", a caixa retorna null.
 
+Quando a caixa de prompt, o usuário terá que clicar ou "OK" ou "Cancel" para proceder depois de colocar um valor de input.
+
+Se o usuário clica "OK", a caixa retorna o valor de input. Se o usuário clica "Cancel", a caixa retorna null.
+```html
 <button onclick="myFunction()">Try it</button>
 <p id="demo"></p>
 
@@ -4956,40 +4961,41 @@ function myFunction() {
   document.getElementById("demo").innerHTML = txt
 }
 </script>
-/ "Hello, Arthur! How are you today!"
-
-> Quebras de Linha:
+<!-- "Hello, Arthur! How are you today!" -->
+```
+### Quebras de Linha:
 Para exibir quebras de linhas dentro de uma caixa popup, use uma barra invertida seguido de "n":
-
+```js
 alert("Hello\nHow are You?")
+```
 
-
-EVENTOS DE TEMPO:
+## Eventos de Tempo:
 
 Você pode utilizar o "setTimeout()" e "setInterval()" para executar ações de eventos de temporizador. Ambos são métodos do objeto Window do HTML DOM.
 
-> Como Parar a Execução?
+### Como Parar a Execução?
 O método "clearTimeout()" para a executação de uma função especificada em setTimeout().
-O método pode ser escrito sem o prefixo window. 
 
+O método pode ser escrito sem o prefixo window. 
+```js
 myVar = setTimeout(function, milissegundos)
 clearTimeout(myVar)
-
+```
 Se a função não já tem sido executada, você pode parar a execução chamando o método "clearTimeout()"
-
+```html
 <button onclick="myVar = setTimeout(myFunction, 3000)">Try it</button>
 
 <button onclick="clearTimeout(myVar)">Stop it</button>
-
+```
 O exemplo acima impede a execução da função do primeiro botão.
 
 Para parar a execução do método "setInterval()", use o método "clearInterval()". Esse método funciona semelhante ao "clearTimeout()", interrompendo a execução ao assinalar a variável que está atribuída o "setInterval()".
-
+```js
 myVar = setInterval(function, milissegundos)
 clearInterval(myVar)
-
+```
 Exemplo:
-
+```html
 <p id="demo"></p>
 <button onclick="clearInterval(myVar)">Stop time</button>
 
@@ -5000,96 +5006,104 @@ function myTimer() {
   document.getElementById("demo").innerHTML = d.toLocaleTimeString()
 }
 </script>
-
+```
 O exemplo acima gera um contador que exibe o horário do navegador e continua atualizando a cada segundo. Então o botão para a contagem.
 
-
-COOKIES
+## Cookies:
 
 Cookies permitem você armazenar informações do usuário em páginas web.
 
-> O Que São Cookies?
+### O Que São Cookies?
 Cookies são dados, armazenados em pequenos arquivos de texto, em seu computador.
+
 Quando um servidor web tem enviado uma página web para um navegador, a conexão é desligada, e o servidor esquece tudo sobre o usuário.
+
 Cookies foram inventados para resolver o problema de "como lembrar a informação sobre o usuário":
-:§: Quando um usuário visita uma webpage, seu nome pode ser armazenado em um cookie.
-:§: Na próxima vez que o usuário visita a página, o cookie "lembra" seu nome.
+
+* Quando um usuário visita uma webpage, seu nome pode ser armazenado em um cookie.
+* Na próxima vez que o usuário visita a página, o cookie "lembra" seu nome. 
+
 Cookies são salvos em pares de nome-valor como:
-
+```js
 username = John Doe.
-
+```
 Quando um navegador realiza uma requisição de uma página web a partir de um servidor, cookies pertencentes à página são adicionados à requisição.
 
-> Crie um Cookie com JavaScript:
+### Crie um Cookie com JavaScript:
 JavaScript pode criar, ler, e deletar cookies com a propriedade "document.cookie".
 Com o JavaScritp, um cookie pode ser criado assim:
-
+```js
 document.cookie = "username=John Doe"
-
+```
 Você pode também adicionar um tempo de expiração (em hora UTC). Por padrão, o cookie é deletado quando o navegador é fechado:
-
+```js
 document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC"
-
+```
 Com um parâmetro "path", você fala ao navegagor qual path o cookie pertence. Por padrão, o cookie pertence à página atual. 
 
-> Leia um Cookie com JavaScript:
+### Leia um Cookie com JavaScript:
 Com JS, cookies podem ser lidos dessa forma:
-
+```js
 var x = document.cookie
+```
+**Atenção: "document.cookie" retornará todos os cookies em uma string tal como: "cookie1=value; cookie2=value; cookie3=value"**
 
-Atenção: "document.cookie" retornará todos os cookies em uma string tal como: "cookie1=value; cookie2=value; cookie3=value"
-
-> Altere um Cookie com JavaScript:
+### Altere um Cookie com JavaScript:
 Com JavaScript você pode modificar um cookie da mesma forma que você o cria:
-
+```js
 document.cookie = "username=John Smith; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/"
-
+```
 O antigo cookie foi sobrescrito.
 
-> Deletando um Cookie com JavaScript:
+### Deletando um Cookie com JavaScript:
 Deletar um cookie é bastante simples. Você não precisa especificar um valor de cookie quando for deletar um cookie. 
+
 Apenas defina o parâmetro de expiração para uma data que já passou:
-
+```js
 document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/"
+```
+**Atenção: Você deve definir o path do cookie para assegurar que você deletou o cookie correto. Alguns navegadores não vão permitir que você delete um cookie se você não especifica o path.**
 
-Atenção: Você deve definir o path do cookie para assegurar que você deletou o cookie correto. Alguns navegadores não vão permitir que você delete um cookie se você não especifica o path.
+### A String Cookie:
+A propriedade "document.cookie" parece uma string de texto normal. Mas não é. Mesmo se você escrever uma string de cookie inteira para document.cookie, quando você a ler novamente, você pode apenas ver o par nome-valor dela.
 
-> A String Cookie:
-A propriedade "document.cookie" parece uma string de texto normal. Mas não é.
-Mesmo se você escrever uma string de cookie inteira para document.cookie, quando você a ler novamente, você pode apenas ver o par nome-valor dela.
 Se você definir um novo cookie, antigos cookies não serão sobrescritos. O novo cookie é adicionado para document.cookie e, então, se você ler document.cookie novamente, você receberá algo assim:
-
+```js
 cookie1 = value; cookie2 = value
-
+```
 Se você quer encontrar o valor de um cookie específico, você deve escrever uma função JS que busca pelo valor do cookie na string de cookie.
 
-> Exemplo de Cookie em JavaScript:
-No exemplo a seguir, criaremos um cookie que armazena o nome de um visitante.
-A primeira vez que um visitante chega à uma página, será pedido que ele preencha seu nome. O nome é então armazenado em um cookie.
+### Exemplo de Cookie em JavaScript:
+No exemplo a seguir, criaremos um cookie que armazena o nome de um visitante. A primeira vez que um visitante chega à uma página, será pedido que ele preencha seu nome. O nome é então armazenado em um cookie.
+
 A próxima vez que o visitante chega a mesma página, ele receberá uma mensagem de boas-vindas.
+
 Por exemplo, nós criaremos 3 funções em JavaScript:
 
 1. Uma função para definir um valor de cookie.
 2. Uma função para receber um valor de cookie.	
 3. Uma fração para checar um valor de cookie.
 
-> Uma Função Para Definir um Cookie:
+### Uma Função Para Definir um Cookie:
 Primeiro, nós criamos uma função que armazena o nome do visitante em uma variável de cookie:
-
+```js
 function setCookie(cname, cvalue, exdays) {
   var d = new Date()
   d.setTime(d.getTime() + (exdays*24*60*60*1000))
   var expires = "expires="+d.toUTCString()
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/"
 }
-
+```
 Explicação do exemplo:
+
 Os parâmetros da função acima são o nome do cookie (cname), o valor do cookie (cname), e o número de dias até que o cookie deva expirar (exdays).
+
 A função define um cookie ao adicionar junto o cookiename, o cookie value, e a string de expiração.
 
-> Uma Função Para Receber um Cookie:
-  Então, criamos uma função que retorna o valor de um cookie específico:
+### Uma Função Para Receber um Cookie:
 
+Então, criamos uma função que retorna o valor de um cookie específico:
+```js
 function getCookie(cname) {
   var name = cname + "="
   var decodedCookie = decodeURIComponent(document.cookie)
@@ -5105,21 +5119,30 @@ function getCookie(cname) {
   }
   return ""
 }
-
+```
 Função explicada:
+
 Pegue o cookiename como parâmetro (cname).
+
 Crie uma variável (name) com o texto para ser buscado (cname + "=")
+
 Decodifique a string do cookie, para manusear cookies com caracteres especiais, como '$'
+
 Divida document.cookie em ponto e vírgulas dentro de um vetor chamado "ca" (ca = decodedCookie.split(';')).
+
 Itere através do vetor "ca" (i = 0; i < ca.length; i++), e leia cada valor c = ca[i]).
 Se o cookie é encontrado (c.indexOf(name) == 0), retorne o valor do cookie (c.substring(cname.length, c.length).
+
 Se o cookie não é encontrado, retorne ""
 
-> Uma Função Para Checar um Cookie:
-Por último, criamos a função que checa se um cookie é definido.
-Se o cookie é definido, ele exibirá uma saudação.
-Se o cookie não está definido, ele exibirá uma caixa prompt perguntado pelo nome do usuário, e armazena o cookie "username" por 365 dias, ao chamar a função "setCookie":
+### Uma Função Para Checar um Cookie:
 
+Por último, criamos a função que checa se um cookie é definido.
+
+Se o cookie é definido, ele exibirá uma saudação.
+
+Se o cookie não está definido, ele exibirá uma caixa prompt perguntado pelo nome do usuário, e armazena o cookie "username" por 365 dias, ao chamar a função "setCookie":
+```js
 function checkCookie() {
   var username = getCookie("username")
   if (username != "") {
@@ -5131,11 +5154,10 @@ function checkCookie() {
     }
   }
 }
+```
+**Atenção: Essas funções são escritas juntas, pois, funcionam juntas. Essa informação ficará salva até o navegador ser fechado e não apenas a aba.**
 
-Atenção: Essas funções são escritas juntas, pois, funcionam juntas. Essa informação ficará salva até o navegador ser fechado e não apenas a aba.
-
-
-INTRODUÇÃO AO AJAX:
+## Introdução ao AJAX:
 
 AJAX é um sonho dos desenvolvedores, pois você poderá:
   
@@ -5144,7 +5166,7 @@ AJAX é um sonho dos desenvolvedores, pois você poderá:
 3. Enviar dados ao servidor web - no background.
 
 Exemplo:
-
+```html
 <!DOCTYPE html>
 <html>
 <body>
@@ -5156,12 +5178,12 @@ Exemplo:
 
 </body>
 </html>
-
-A página contém uma seção <div> e um <button>
-A seção <div> é usada para exibir informações de um servidor.
-O botão chama a função (quando clicada).
-A função requisita dados de um servidor web e a exibe:
-
+```
+* A página contém uma seção ```<div>``` e um ```<button>```
+* A seção ```<div>``` é usada para exibir informações de um servidor.
+* O botão chama a função (quando clicada).
+* A função requisita dados de um servidor web e a exibe:
+```js
 function loadDoc() {
   var xhttp = new XMLHttpRequest()
   xhttp.onreadystatechange = function() {
@@ -5172,20 +5194,22 @@ function loadDoc() {
   xhttp.open("GET", "ajax_info.txt", true)
   xhttp.send()
 }
-
+```
 A função altera o conteúdo trazendo um texto de um documento requerido ao servidor.
 
-> O Que É AJAX?
+### O Que É AJAX?
 AJAX = Asynchronous JavaScript And XML.
-AJAX não é uma linguagem de programação. AJAX apenas usa uma combinação de:
-:+: Um navegador com o objeto "XMLHttpRequest" embutido (para realizar requisições de dados de um servidor web).
-:+: JavaScript e HTML DOM (para exibir ou usar os dados).
 
-Atenção: AJAX é um nome errôneo. Aplicações AJAX podem usar XML para transporte de dados, mas também comum transporte de dados como textos simples ou textos JSON.
+AJAX não é uma linguagem de programação. AJAX apenas usa uma combinação de:
+
+* Um navegador com o objeto "XMLHttpRequest" embutido (para realizar requisições de dados de um servidor web).
+* JavaScript e HTML DOM (para exibir ou usar os dados).
+
+**Atenção: AJAX é um nome errôneo. Aplicações AJAX podem usar XML para transporte de dados, mas também comum transporte de dados como textos simples ou textos JSON.**
 
 AJAX permite que páginas web sejam atualizadas de forma assíncrona por trocas de dados com um servidor web "por trás da cena". Isso significa que é possível atualizar partes de uma página web sem recarregar a página inteira.
 
-> Como AJAX Funciona?
+### Como AJAX Funciona?
 
 1. Navegador:
   - Um evento ocorre.
@@ -5198,45 +5222,47 @@ AJAX permite que páginas web sejam atualizadas de forma assíncrona por trocas 
   - Processa os dados retornados usando JavaScript;
   - Atualiza o conteúdo da página através da ação requisitada.
 
-
-O OBJETO XMLHttpRequest
+## O OBJETO XMLHttpRequest
 
 Todos os navegadores modernos suportam o objeto XMLHttpRequest. O objeto pode ser usado para trocar daos de um servidor web "por trás das cenas". 
 
-> Criando um Objeto XMLHttpRequest:
+### Criando um Objeto XMLHttpRequest:
 Todos os navegadores modernos têm esse objeto embutido.
+
 Sintaxe para criação:
-
+```js
 variável = new XMLHttpRequest()
-
+```
 Exemplo: 
-
+```js
 var xhttp = new XMLHttpRequest()
-
-> Acesso Em Vários Domínios:
+```
+### Acesso Em Vários Domínios:
 Por questões de segurança, navegadores modernos não permitem acesso a varios domínios. Isso significa que tanto a página web, quanto o arquivo XML que ele tenta carregar, devem estar localizados no mesmo servidor.
-Os exemplos na W3Schools todos abrem arquivos XML localizados no domínio W3Schools.
-Se você deseja usar o exemplo anteior em suas próprias páginas web, os arquivos XML que você carregar devem estar localizados em seu próprio servidor.
 
-> Navegadores Modernos (Fetch API)
+Os exemplos na W3Schools todos abrem arquivos XML localizados no domínio W3Schools. Se você deseja usar o exemplo anteior em suas próprias páginas web, os arquivos XML que você carregar devem estar localizados em seu próprio servidor.
+
+### Navegadores Modernos (Fetch API)
 Navegadores modernos usam Fetch API ao invés do Objeto XMLHttpRequest.
+
 A interface da Fetch API permite que os navegadores web façam requisições HTTP para os servidores web.
+
 Se você usa o objeto XMLHttpRequest, Fetch pode fazer o mesmo em uma maneira mais simples.
 
-> Navegadores Antigos (IE5 e IE6)
+### Navegadores Antigos (IE5 e IE6)
 Esses navegadores usam um objeto ActiveX ao invés de XMLHttpRequest.
-
+```js
 variável = new ActiveXObject ("Microsoft.XMLHTTP")
-
+```
 Para lidar com IE e IE6, cheque se o navegador suporta o objeto XMLHttpRequest, ou então cire um objeto "ActiveX":
-
+```js
 if (window.XMLHttpRequest) {
   xmlhttp = new XMLHttpRequest()
 } else {
   xmlhttp = new ActiveXObject("Microsoft.XMLHTTP)
 }
-
-> Métodos do Objeto XMLHttpRequest:
+```
+### Métodos do Objeto XMLHttpRequest:
 
 :+: new XMLHttpRequest()	|	Cria um novo objeto XMLHttpRequest
 :+: abort()			|	Cancela a requisição atual.

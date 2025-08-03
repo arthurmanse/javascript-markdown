@@ -6730,89 +6730,95 @@ w.onmessage = function(event){
 ```
 Quando o web worker posta uma messagem, o código dentro do evento listener é executado. Os dados do web worker são armazenados em event.data.
 
-Atenção: "event.data" é um método de eventos vinculado ao JQuery. É uma propriedade que contém os dados opcionais passados para um método de evento quando o manipulador atual em execução é vinculado.
+**Atenção: "event.data" é um método de eventos vinculado ao JQuery. É uma propriedade que contém os dados opcionais passados para um método de evento quando o manipulador atual em execução é vinculado.**
 
-> Evento onmessage:
+### Evento onmessage:
 O evento "onmessage" ocorre quando uma messagem é recebida através de uma fonte de evento.
-
+```js
 var source = new EventSource("demo_sse.php")
 source.onmessage = function(event) {
     document.getElementById("myDIV").innerHTML += event.data + "<br>"
 }
+```
 
 O objeto de evento para o evento "onmessage" suporta as seguintes propriedades:
-:+: data - Contém a messagem atual
-:+: origin - A URL do documento que invocou o evento
-:+: lastEventId - o identificador da última messagem vista no fluxo de evento.
+* data - Contém a messagem atual
+* origin - A URL do documento que invocou o evento
+* lastEventId - o identificador da última messagem vista no fluxo de evento.
 
-> Encerre um Web Worker:
+### Encerre um Web Worker:
 Quando um objeto web worker é criado, ele continuará a "ouvir" as mensagens (mesmo depois que o script externo seja finalizado) até que ele seja encerrado.
 Para encerrar um web worker, e liberar os recursos do navegador/computador, use o método "terminate()":
-
+```js
 w.terminate()
+```
 
-> Reutilize o Web Worker:
+### Reutilize o Web Worker:
 Se você define a variável worker como "undefined" logo após ela tenha sido encerrada, você poderá reutilizar o código:
-
+```js
 w = undefined
+```
 
-> Web Worker e o DOM:
-  Estando os Web Workers em arquivos externos, eles não terão acesso aos seguintes objetos JavaScript:
-:+: O objeto window
-:+: O objeto document
-:+: O objeto parent.
+### Web Worker e o DOM:
+
+Estando os Web Workers em arquivos externos, eles não terão acesso aos seguintes objetos JavaScript:
+* O objeto window
+* O objeto document
+* O objeto parent.
 
 Portanto, direcione com códigos na página HTML para que o evento ocorra utilizando como evento o script externo.
 
-
-FETCH API EM JAVASCRIPT:
+## FETCH API em JAVASCRIPT:
 
 A interface Fetch API permite ao navegador web realizar requisições HTTP aos servidores web.
+
 Se você usa o objeto XMLHttpRequest, Fetch API pode fazer o mesmo em uma maneira mais simples.
 
-> Um Exemplo de Fetch API:
+### Um Exemplo de Fetch API:
 O exemplo abaixo busca um arquivo e exibe o conteúdo:
-
+```js
 let file = "fetch_info.txt"
 
 fetch(file)
 .then(x => x.test())
 .then(y => document.getElementById("demo").innerHTML = y)
-
+```
 Já que o Fetch API é baseado em async e await, o exemplo acima pode ser melhor entendido dessa forma:
-
+```js
 getText("fetch_info.txt")
 async function getText(file) {
   let x = await fetch(file)
   let y = await x.text()
   document.getElementById("demo").innerHTML = y
 }
-
-Atenção: "text()" não aceita qualquer argumento e pode ser usado para documentos XML e HTML. Resulta em uma string contendo o texto combinado de todos os elementos correspondentes.
+```
+**Atenção: "text()" não aceita qualquer argumento e pode ser usado para documentos XML e HTML. Resulta em uma string contendo o texto combinado de todos os elementos correspondentes.**
 
 Ou ainda melhor: Use nomes inteligíveis ao invés de x e y:
-
+```js
 getText("fetch_info.txt")
 async function getText(file) {
   let myObject = await fetch(file)
   let myText = await myObject.text()
   document.getElementById("demo").innerHTML = myText
 }
+```
 
-
-API DE GEOLOCALIZAÇÃO WEB
+## API de Geolocalização Web:
 
 A HTML Geolocation API é usado para receber a posição geográfica de um usuário.
+
 Porém, já que isso compromete a privacidade, a posição não está disponível a menos que o usuário aprove.
 
-Atenção: Geolocalização é mais acurada para dispositivos com GPS, como smartphones.
+**Atenção: Geolocalização é mais acurada para dispositivos com GPS, como smartphones.**
 
-Atenção: A partir do Chrome 50, o API apenas funcionará sob contextos seguros, como HTTPS. Se seu site é hospedado em uma origem insegura (tais como HTTP), a requisição para receber a localização do usuário não funcionará.
+**Atenção: A partir do Chrome 50, o API apenas funcionará sob contextos seguros, como HTTPS. Se seu site é hospedado em uma origem insegura (tais como HTTP), a requisição para receber a localização do usuário não funcionará.**
 
-> Usando o Geolocation API:
+### Usando o Geolocation API:
 O método "getCurrentPosition()" é usado para retornar a posição do usuário. 
-O exemplo abaixo retorna a latitude e longitude da posição do usuário:
 
+O exemplo abaixo retorna a latitude e longitude da posição do usuário:
+```js
 var x = document.getElementById("demo")
 function getLocation() {
     if (navigator.geolocation) {
@@ -6826,6 +6832,7 @@ function showPosition(position) {
     x.innerHTML = "Latitude: " + position.coords.latitude +
     "<br>Longitude: " + position.coords.longitude
 }
+```
 
 Exemplo explicado:
 1. Verifique se Geolocalização é suportada;
@@ -6835,9 +6842,9 @@ Exemplo explicado:
 
 O exemplo acima é um script de geolocalização bastante básico, sem manejamento de erros.
 
-> Lidando com Erros e Rejeições:
+### Lidando com Erros e Rejeições:
 O segundo parâmetro do método "getCurrentPosition()" é usado para lidar com erros. Ele especifica uma função para executar se há falhas em receber a localização do usuário:
-
+```js
 function showError(error) {
     switch(error.code) {
         case error.PERMISSION_DENIED:
@@ -6854,11 +6861,13 @@ function showError(error) {
             break
     }
 }
+```
 
-> Exibindo o Resultado em um Mapa:
+### Exibindo o Resultado em um Mapa:
 Para exibir o resultado em um mapa, você precisa acessar um serviço de mapas, como o Google Maps.
-No exemplo abaixo, a latitude e longitude retornadas são usadas para mostrar a localização no Google Maps (usando uma imagem estática).
 
+No exemplo abaixo, a latitude e longitude retornadas são usadas para mostrar a localização no Google Maps (usando uma imagem estática).
+```js
 function showPosition(position) {
     var latlon = position.coords.latitude + "," + position.coords.longitude
     
@@ -6867,17 +6876,22 @@ function showPosition(position) {
     document.getElementById("mapholder").innerHTML = "<img src=' " 
     +img_url+"'>"
 }
+```
 
-> Informação de uma Localização Específica:
+### Informação de uma Localização Específica:
+
 Essa página tem demonstrado como mostrar uma posição de usuário em um mapa.
+
 Geolocalização é também bastante útil para informações de localização específica, como:
 - Informações locais atualizadas.
 - Mostrando Pontos de Interesse próximos ao usuário.
 - Navegação passo-a-passo (GPS)
 
-> O Método getCurrentPosition() - Retorno de dado:
+### O Método getCurrentPosition() - Retorno de dado:
 O método "getCurrentPosition()" retorna um objeto se houver sucesso. As propriedades "latitude", "longitude" e "accuracy" sempre serão retornadas. As outras propriedades são retornadas se disponíveis:
 
+| | |
+|---|---|
 coords.latitude	|	Latitude em número decimal
 coords.longitude	|	Longitude em número decimal
 coords.accuracy	|	A precisão da posição.
@@ -6887,14 +6901,15 @@ coords.heading	|	Valor em graus no sentido horário a partir do Norte.
 coords.speed	|	A velocidade em metros por segundo
 timestamp		|	A data/tempo da resposta.
 
-Objeto Geolocation - Outros Métodos Interessantes:
+### Objeto Geolocation - Outros Métodos Interessantes:
+
 O objeto Geolocation também tem outros métodos interessantes:
 
-:+: watchPosition() - Retorna a posição atual do usuário e continua a retornar a posição atualizada enquanto o usuário se move (como o GPS em um carro)
-:+: clearWatch() - Para o método "watchPosition()".
+* watchPosition() - Retorna a posição atual do usuário e continua a retornar a posição atualizada enquanto o usuário se move (como o GPS em um carro)
+* clearWatch() - Para o método "watchPosition()".
 
 O exemplo abaixo mostra o método "watchPosition()". Você precisa de um dispositivo GPS preciso para testar isso (como smartphones):
-
+```js
 <script>
 var x = document.getElementById("demo")
 function getLocation() {
@@ -6909,132 +6924,163 @@ function showPosition(position) {
     "<br>Longitude: " + position.coords.longitude
 }
 </script>
+```
 
-
-JAVASCRIPT / JQUERY DOM SELECTORS:
+## JAVASCRIPT / JQUERY DOM SELECTORS:
 
 jQuery foi criado em 2006 por John Resig. Ele foi desenhado para lidar com Imcompatibilidades de Navegadores e para simplificar a Manipulação de HTML DOM, Event Handiling, Animações e Ajax.
+
 Por mais de 10 anos, jQuery tem sido a biblioteca JavaScript mais popular no mundo.
+
 No entanto, após a Versão 5 do JavaScript (2009), a maioria das utilidades jQuery podem ser resolvidas com poucas linhas de JavaScript padrão:
 
-> Encontrando Elementos HTML pelo Id:
+### Encontrando Elementos HTML pelo Id:
 
 jQuery:
-  var myElement = $("#id01")
-
+```js
+var myElement = $("#id01")
+```
 JavaScript:
-  var myElement = document.getElementById("id01")
+```js
+var myElement = document.getElementById("id01")
+```
 
-> Encontrando Elementos HTML pelo Nome da Tag:
-Retorna todos os elementos <p>:
+### Encontrando Elementos HTML pelo Nome da Tag:
+Retorna todos os elementos ```<p>```:
 
 jQuery:
-  var myElements = $("p")
+```js
+var myElements = $("p")
+```
 
 JavaScript:
-  var myElements = document.getElementsByTagName("p")
+```js
+var myElements = document.getElementsByTagName("p")
+```
 
-> Encontrando Elementos HTML pelo Nome da Classe:
+### Encontrando Elementos HTML pelo Nome da Classe:
 Retorna todos os elemenos com class="intro"
 
 jQuery:
-  var myElements = $(".intro")
-
+```js
+var myElements = $(".intro")
+```
 JavaScript:
-  var myElements = document.getElementsByClassName("intro")
+```js
+var myElements = document.getElementsByClassName("intro")
+```
 
-> Encontrando Elementos HTML por Seletores CSS:
-Retorna uma lista de todos elementos <p> com class="intro"
+### Encontrando Elementos HTML por Seletores CSS:
+Retorna uma lista de todos elementos ```<p>``` com class="intro"
 
 jQuery:
-  var myElements = $("p.intro")
-
+```js
+var myElements = $("p.intro")
+```
 JavaScript:
-  var myElements = document.querySelectorAll("p.intro")
+```js
+var myElements = document.querySelectorAll("p.intro")
+```
 
+## JAVASCRIPT / JQUERY ELEMENTOS HTML:
 
-JAVASCRIPT / JQUERY ELEMENTOS HTML:
-
-> Definindo um Conteúdo de Texto:
+### Definindo um Conteúdo de Texto:
 Defina um texto interno de um elemento HTML:
 
 jQuery:
-  myElement.text("Hello World!")
-
+```js
+myElement.text("Hello World!")
+```
 JavaScript:
-  myElement.textContent = "Hello World!"
-
-> Obtendo um Conteúdo de Texto:
+```js
+myElement.textContent = "Hello World!"
+```
+### Obtendo um Conteúdo de Texto:
 Obtenha o texto interno de um elemento HTML:
 
 jQuery:
-  var myText = myElement.text()
-
+```js
+var myText = myElement.text()
+```
 JavaScript:
-  var myText = myElement.textContent || myElement.innerText
-
-> Defina um Conteúdo HTML:
+```js
+var myText = myElement.textContent || myElement.innerText
+```
+### Defina um Conteúdo HTML:
 
 jQuery:
-  var myElement.html("<p>Hello World</p>")
-
+```js
+var myElement.html("<p>Hello World</p>")
+```
 JavaScript:
-  var myElement.innerHTML = "<p>Hello World</p>"
-
-> Obtenha Conteúdo HTML:
+```js
+var myElement.innerHTML = "<p>Hello World</p>"
+```
+### Obtenha Conteúdo HTML:
 
 jQuery:
-  var content = myElement.html()
-
+```js
+var content = myElement.html()
+```
 JavaScript:
-  var content = myElement.innerHTML
+```js
+var content = myElement.innerHTML
+```
 
+## JQUERY CSS:
 
-JQUERY CSS:
-
-> Escondendo Elementos HTML:
+### Escondendo Elementos HTML:
 
 jQuery:
-  myElement.hide()
-
+```js
+myElement.hide()
+```
 JavaScript:
-  myElement.style.display = "none"
-
-> Mostrando Elementos HTML:
+```js 
+myElement.style.display = "none"
+```
+### Mostrando Elementos HTML:
 
 jQuery:
-  myElement.show()
-
+```js
+myElement.show()
+```
 JavaScript:
-  myElement.style.display = ""
+```js
+myElement.style.display = ""
+```
+**Atenção: Esse método permite que o elemento selecionado seja mostrando enquanto que o resto seja escondido.**
 
-Atenção: Esse método permite que o elemento selecionado seja mostrando enquanto que o resto seja escondido.
-
-> Estilizando Elementos HTML:
+### Estilizando Elementos HTML:
 
 jQuery:
-  myElement.css("font-size","35px")
-
+```js
+myElement.css("font-size","35px")
+```
 JavaScript:
-  myElement.style.fontSize = "35px"
+```js
+myElement.style.fontSize = "35px"
+```
 
+## JQUERY DOM HTML:
 
-JQUERY DOM HTML:
-
-> Removendo Elementos:
+### Removendo Elementos:
 
 jQuery:
-  $("#id").remove()
-
+```js
+$("#id").remove()
+```
 JavaScript:
-  element.parentNode.removeChild(element)
-
-> Receba Elementos Pais:
+```js
+element.parentNode.removeChild(element)
+```
+### Receba Elementos Pais:
 
 jQuery:
-  var myParent = myElement.parent()
-
+```js
+var myParent = myElement.parent()
+```
 JavaScript:
-  var myParent = myElement,parentNode
-
-*/
+```js
+var myParent = myElement,parentNode
+```

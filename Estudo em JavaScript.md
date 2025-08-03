@@ -5264,100 +5264,100 @@ if (window.XMLHttpRequest) {
 ```
 ### Métodos do Objeto XMLHttpRequest:
 
-:+: new XMLHttpRequest()	|	Cria um novo objeto XMLHttpRequest
-:+: abort()			|	Cancela a requisição atual.
-:+: getAllResponseHeaders()	|	Retorna a informação de cabeçalho.
-:+: getResponseHeader()	|	Retorna uma específica informação de cabeçalho.
-:+: open(método, url, async, user, psw	|	Especifica a requisição:
-      * Método: requisição do tipo GET ou POST.
-      * url: o enderço do arquivo.
-      async: true (assíncrono) ou falso (síncrono).
-      * user: nome opcional de usuário.
-      * psw: senha opcional.
-:+: send()		    	|	Envia a requisição para o servidor. Usado para requisições GET.
-:+: send(string)		|	Envia a requisição ao servidor. Usado para requisições POST.
-:+: setRequestHeader()	|	Adiciona um par camada/valor ao cabeçalho para ser enviado.
+| | |
+|---|---|
+| new XMLHttpRequest()	|	Cria um novo objeto XMLHttpRequest
+| abort()			|	Cancela a requisição atual.
+| getAllResponseHeaders()	|	Retorna a informação de cabeçalho.
+| getResponseHeader()	|	Retorna uma específica informação de cabeçalho.
+| open(método, url, async, user, psw)	|	Especifica a requisição: Método: requisição do tipo GET ou POST. / url: o enderço do arquivo. / async: true (assíncrono) ou falso (síncrono). / user: nome opcional de usuário. / psw: senha opcional.
+| send()		    	|	Envia a requisição para o servidor. Usado para requisições GET.
+| send(string)		|	Envia a requisição ao servidor. Usado para requisições POST.
+| setRequestHeader()	|	Adiciona um par camada/valor ao cabeçalho para ser enviado.
 
-> Propriedades de Objeto XMLHttpRequest:
+### Propriedades de Objeto XMLHttpRequest:
 
+| | |
+|---|---|
 onreadystatechange		|	Define uma função para ser chamada quando a propriedade readyState é alterada.
-readyState:		        |	Detém o status do XMLHttpRequest.
-      0: Requisição não inicializada.
-      1: Conexão com servidor estabelecida.
-      2: Requisição recebida.
-      3: Processando requisição.
-      4: Requisição finalizada e resposta está pronta.
+readyState:		        |	Detém o status do XMLHttpRequest. 0: Requisição não inicializada. / 1: Conexão com servidor estabelecida. / 2: Requisição recebida. / 3: Processando requisição. / 4: Requisição finalizada e resposta está pronta.
 responseText		|	Retorna os dados de resposta como uma string.
 responseXML		    |	Retorna os dados de resposta como dados XML.
-status			    |	Retorna o número-status de uma requisição:
-          200: "OK"
-          403: "Forbidden"
-          404: "Not Found".
+status			    |	Retorna o número-status de uma requisição: 200: "OK" / 403: "Forbidden" / 404: "Not Found".
 statusText			|	Retorna o texto-status ("OK", ou "Not Found")
 
-https://www.w3schools.com/tags/ref_httpmessages.asp HTTP STATUS MESSAGES
+Para mais formas, acesse [HTTP STATUS MESSAGES](https://www.w3schools.com/tags/ref_httpmessages.asp) 
 
-
-AJAX - ENVIANDO UMA REQUISIÇÃO AO SERVIDOR.
+## AJAX - Enviando uma Requisição ao Servidor:
 
 Para enviar uma requisição so servidor, usamos os métodos open() e send() do objeto XMLHttpRequest.
-
+```js
 xhttp.open("GET", "ajax_info.txt", true)
 xhttp.send()
+```
+### GET ou POST?
 
-> GET ou POST?
 GET é mais simples e mais rápido do que POST, e pode ser usado na maioria dos caso.
 No entanto, sempre use requisições POST quando:
+
 1. Um arquivo em cache não é uma opção (atualizar um arquivo ou database no servidor).
 2. Enviando uma grande quantidade de dados ao servidor (POST não tem limitações de tamanho).
 3. Enviando input de usuários (no qual pode conter caracteres desconhecidos), POST é mais robusto e seguro do que GET.
 
-> Requisições GET:
-
+### Requisições GET:
+```js
 xhttp.open("GET", "demo_get.asp", true)
 xhttp.send()
-
+```
 Se você deseja enviar informações com o método GET, adicione a informação à URL.
-
+```js
 xhttp.open("GET", "demo_get2.asp?fname=Henry&lname=Ford", true)
 xhttp.send()
-
-> Requisições POST:
-
+```
+### Requisições POST:
+```js
 xhttp.open("POST", "demo_post.asp", true)
 xhttp.send()
-
+```
 Para dados de POST, como um formulário HTML, adicione um cabeçalho HTTP com "setRequestHeader()". Especifique os dados que você quer enviar no método "send()"
-
+```js
 xhttp.open("POST", "ajax_text.asp", true)
 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
 xhttp.send("fname=Henry&lname=Ford")
+```
+```js
+setRequestHeader(header, value)	
+//	Adiciona cabeçados HTTP à requisição.
+// * header: especifica o nome do cabeçalho.
+// * value: especifica o valor do cabeçalho.
+```
 
-setRequestHeader(header, value)	|	Adiciona cabeçados 					HTTP à requisição.
-        * header: especifica o 						nome do cabeçalho.
-        * value: especifica o valor 					do cabeçalho.
+### A URL - Um Arquivo Em Um Servidor:
 
-> A URL - Um Arquivo Em Um Servidor:
 O parâmetro de url do método "open()" é um endereço para um arquivo no servidor:
 
+```js
 xhttp.open("GET", "ajax_text.asp", true)
-
+```
 O arquivo pode ser qualquer tipo de arquivo, como .txt e .xml, ou arquivos de script do servidor como .asp e .php (no qual pode executar ações no servidor antes de enviar a resposta de volta).
 
-> Assíncrono - True ou False?
+### Assíncrono - True ou False?
 Os requerimentos de servidor devem ser enviados de forma assíncrona.
 O parâmetro async do método "open()" deve ser definido para true:
-
+```js
 xhttp.open("GET", "ajax_test.asp", true)
+```
 
 Ao enviar de forma assíncrona, o JS não tem que esperar pela resposta do servidor, mas pode ao invés disso:
 - executar outros scripts enquanto espera pela resposta do servidor.
 - lida com a resposta depois que a resposta está pronta.
 
-> A Propriedade onreadystatechange:
-Com o objeto "XMLHttpRequest", você pode definir uma função para ser executada quando a requisição receber uma resposta.
-A função é definida na propriedade "onreadystatechange" do objeto XMLHttpRequest:
+### A Propriedade onreadystatechange:
 
+Com o objeto "XMLHttpRequest", você pode definir uma função para ser executada quando a requisição receber uma resposta.
+
+A função é definida na propriedade "onreadystatechange" do objeto XMLHttpRequest:
+```js
 xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 400) {
     document.getElementByI("demo").innerHTML=	
@@ -5366,31 +5366,33 @@ xhttp.onreadystatechange = function() {
 }
 xhttp.open("GET", "ajax_info.txt", true)
 xhttp.send()
+```
 
-> A Requisição Síncrona:
+### A Requisição Síncrona:
+
 Para executar uma requisição síncrona, mude o terceiro parâmetro no "open()" para false.
-Às vezes, async=false é usado para testes rápidos. Você poderá encontrar algumas requisições síncronas em antigos códigos JavaScript.
-Desde que o código esperará pela completação do servidor, não há necessidade por uma função "onreadystatechange":
 
+Às vezes, async=false é usado para testes rápidos. Você poderá encontrar algumas requisições síncronas em antigos códigos JavaScript.
+
+Desde que o código esperará pela completação do servidor, não há necessidade por uma função "onreadystatechange":
+```js
 xhttp.open("GET", "ajax_info.txt", false)
 xhttp.send()
 document.getElementById("demo").innerHTML = 
 xhttp.responseText
+```
+**Atenção: XMLHttpRequest síncrono (async = false) não é recomendado porque o JS parará de executar até o servidor responder que está pronto. Se o servidor está lento ou ocupado, a aplicação vai travar ou parar. Esse formato está no processo de ser removido do padrão web, mas esse processo pode tomar muitos anos. Ferramentas modernas para desenvolvedores são encorajadas a alertar sobre usar requisições síncronas e podem lançar exceções InvalidAccessError quando elas ocorrem.**
 
-Atenção: XMLHttpRequest síncrono (async = false) não é recomendado porque o JS parará de executar até o servidor responder que está pronto. Se o servidor está lento ou ocupado, a aplicação vai travar ou parar.
-Esse formato está no processo de ser removido do padrão web, mas esse processo pode tomar muitos anos.
-Ferramentas modernas para desenvolvedores são encorajadas a alertar sobre usar requisições síncronas e podem lançar exceções InvalidAccessError quando elas ocorrem.
-
-
-AJAX - A RESPOSTA DO SERVIDOR:
+## AJAX - A Resposta do Servidor:
 
 A propriedade "readyState" mantém o status da XMLHttpRequest.
+
 A propriedade "onreadystatechange" define uma função para ser executada quando a "readyState" é alterada.
+
 As propriedades "status" e "statusText" mantêm o status do objeto XMLHttpRequest.
 
-  A função "onreadystatechange" é chamada toda vez que "readyState" altera.
-Quando "readyState" é 4 e o status é 200, a resposta está pronta:
-
+A função "onreadystatechange" é chamada toda vez que "readyState" altera. Quando "readyState" é 4 e o status é 200, a resposta está pronta:
+```js
 function loadDoc() {
   var xhttp = new XMLHttpRequest()
   xhttp.onreadystatechange = function() {
@@ -5401,14 +5403,16 @@ function loadDoc() {
   xhttp.open("GET", "ajax_info.txt", true)
   xhttp.send()
 }
+```
+**Atenção: O evento "onreadystatechange" é chamado quatro vezes (1-4), uma vez para cada mudança no readyState.**
 
-Atenção: O evento "onreadystatechange" é chamado quatro vezes (1-4), uma vez para cada mudança no readyState.
-
-> Usando uma Função Callback:
+### Usando uma Função Callback:
 Uma função callback é uma função que é passada como parâmetro para uma outra função.
-Se você tem mais do que uma tarefa AJAX em um website, você deveria criar uma função para executar o objeto XMLHttpRequest, e uma função callback para cada tarefa AJAX.
-A chamada da função deveria conter a URL e o que a função chamar quando a resposta está pronta:
 
+Se você tem mais do que uma tarefa AJAX em um website, você deveria criar uma função para executar o objeto XMLHttpRequest, e uma função callback para cada tarefa AJAX.
+
+A chamada da função deveria conter a URL e o que a função chamar quando a resposta está pronta:
+```js
 onclick="loadDoc('ajax_info.txt', myFunction)"	
 
 function loadDoc(url, cFunction) {
@@ -5426,25 +5430,29 @@ function myFunction(xhttp) {
   document.getElementById("demo").innerHTML = 
   xhttp.responseText
 }
+```
 
-> Propriedades de Resposta do Servidor:
-
+### Propriedades de Resposta do Servidor:
+| | |
+|:---:|---|
 responseText	|	recebe o dado de resposta como uma string.
 responseXML 	|	recebe o dado de resposta como dado XML.
 
-> Métodos de Resposta do Servidor:
+### Métodos de Resposta do Servidor:
 
-getResponseHeader()	|	Retorna uma informação de 				cabeçalho específico de uma fonte 				de servidor.
-getAllResponseHeaders()	|	Todas as informações de cabeçalho 				de uma fonte de servidor.
+| | |
+|---|---|
+getResponseHeader()	|	Retorna uma informação de cabeçalho específico de uma fonte de servidor.
+getAllResponseHeaders()	|	Todas as informações de cabeçalho de uma fonte de servidor.
 
-
-> responseXML:
+### responseXML:
 O objeto XMLHttpRequest tem um analisador XML embutido.
+
 A propriedade "responseXML" retorna a resposta do servidor como um objeto XML DOM.
 Usando essa propriedade, você pode analisar a resposta como um objeto XML DOM:
 
 Exemplo requerindo o arquivo "cd_catalog.xml" e analisando a resposta:
-
+```js
 var http, xmlDoc, txt, x, i
 xhttp = new XMLHttpRequest()
 xhttp.onreadystatechange = function() {
@@ -5474,10 +5482,10 @@ xhttp.open("GET", "ajax_info.txt", true)
 xhttp.send()
 accept-ranges: bytes age: 6005 cache-control: public,max-age=14400,public content-encoding: gzip content-length: 245 content-type: text/plain date: Thu, 04 Mar 2021 06:27:54 GMT etag: "15bfdeee0ffd21:0" last-modified: Tue, 18 Jul 2017 16:14:29 GMT server: ECS (mic/9B49) vary: Accept-Encoding x-cache: HIT x-firefox-spdy: h2 x-frame-options: SAMEORIGIN x-powered-by: ASP.NET 
 
-/ retorna informações de cabeçalho de uma fonte, como length, server-type, content-type, last-modified, etc.
-
-> getResponseHeader()
-
+// retorna informações de cabeçalho de uma fonte, como length, server-type, content-type, last-modified, etc.
+```
+### getResponseHeader()
+```js
 var xhttp = new XMLHttpRequest()
 xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
@@ -5487,15 +5495,15 @@ xhttp.onreadystatechange = function() {
 }
 xhttp.open("GET", "ajax_info.txt", true)
 xhttp.send()	
-/ Last modified: Tue, 18 Jul 2017 16:14:29 GMT
+// Last modified: Tue, 18 Jul 2017 16:14:29 GMT
+```
 
-
-AJAX XML
+## AJAX XML
 
 AJAX pode ser usado para comunicações interativas com um arquivo XML
 
 O exemplo a seguir demonstra como uma página web pode buscar informações de um arquivo XML com AJAX:
-
+```html
 <button type="button" onclick="loadDoc()">Get my CD Collection</button>
 <br><br>
 <table id="demo"></table>
@@ -5525,19 +5533,21 @@ function myFunction(xml) {
   document.getElementById("demo").innerHTML = table
 }
 </script>
+```
 
-> Explicação do Exemplo:
+### Explicação do Exemplo:
 Quando um usuário clica no botão "Get CD info", a função loadDoc() é executada.
+
 A função loadDoc() cria um objeto XMLHttpRequest, adiciona a função para ser executada quando o servidor está pronto, e envia a solicitação para o servidor.
+
 Quando o servidor response que está pornto, uma tabela HTML é construída, nódulos (elementos) são extraídos do arquivo XML, e é finalmente atualizado o elemento "demo" com a tabela HTML preenchida com dados XML. 
 
-
-AJAX PHP - EXEMPLO:
+## AJAX PHP - Exemplo:
 
 AJAX é usado para criar mais aplicações interativas.
 
 O exemplo a seguir demonstra como uma página web pode comunicar com um servidor web enquanto um usuário digita caracteres em um campo de input:
-
+```html
 <p> Suggestions: <span id="txtHint"></span></p>
 
 <form>
@@ -5561,9 +5571,12 @@ function showHint(str) {
     }
 }
 </script>
+```
 
-> Explicação do Código:
+### Explicação do Código:
+
 Primeiro, verifica se o campo de input está vazio (str.length == 0). Se ele está, limpa o conteúdo do espçao reservado ao txtHint e sai da função.
+
 No entanto, se o campo de input não está vazio, o código faz:
 1. Cria um objeto XMLHttpRequest
 2. Cria a função para ser executada quando a resposta do servidor está pronta.
@@ -5571,7 +5584,7 @@ No entanto, se o campo de input não está vazio, o código faz:
 4. Note que o parâmetro "q" é adicionado ao "gethint.php?q="+str.
 5. A variável str detém o conteúdo do campo de input.
 
-Atenção: O parâmetro "q" em uma URL define que o campo que será buscado e por qual critério. Por exemplo, se você desejar uma informação com "DNA" no título do artigo, nós contruiríamos a seguinte URL:
+**Atenção: O parâmetro "q" em uma URL define que o campo que será buscado e por qual critério. Por exemplo, se você desejar uma informação com "DNA" no título do artigo, nós contruiríamos a seguinte URL:**
 
 http://api.plos.org/search?q=title:DNA
 
@@ -5579,15 +5592,14 @@ Com conhecimento de campos disponíveis, queries complexas podem ser construída
 
 http://www.google.com?q=facebook
 
-Atenção: O mesmo código utilizado em PHP pode ser utilizado em ASP, ou seja, arquivos .asp para realizar a mesma tarefa.
+**Atenção: O mesmo código utilizado em PHP pode ser utilizado em ASP, ou seja, arquivos .asp para realizar a mesma tarefa.**
 
-
-AJAX DATABASE:
+## AJAX DATABASE:
 
 AJAX pode ser usado para comunicações interativas com um database.
 
 O seguinte exemplo demonstrará como uma página web busca informações a partir de um database com AJAX:
-
+```html
 <style>
 table,th,td {
   border: 1px solid black;
@@ -5629,15 +5641,14 @@ function showCustomer(str) {
     xhttp.send()
 }
 </script>	
+```
+**Atenção: A parte destinada ao CSS está destinada para os documentos dentro do arquivo PHP, no qual, contém tabelas com identificações para estilização.**
 
-Atenção: A parte destinada ao CSS está destinada para os documentos dentro do arquivo PHP, no qual, contém tabelas com identificações para estilização.
+## AJAX - Aplicações XML:
 
-
-AJAX - APLICAÇÕES XML:
-
-> Exibindo o Primeiro CD em um Elemento HTML div
+### Exibindo o Primeiro CD em um Elemento HTML div
 Esse exemplo usa uma função para exibir o primeiro elemento CD em um elemento HTML com id="showCD":
-
+```js
 displayCD(0)
 
 function displayCD(i) {
@@ -5658,19 +5669,20 @@ function myFunction(xml, i) {
     x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue + "<br>Year: " +
     x[i].getElementsByTagName("YEAR")[0].childNodes[0].nodeValue;
 }
+```
+**Atenção: Ao mudar o número, você pode acessar outros artistas, títulos de álbuns e ano de lançamento.**
 
-Atenção: Ao mudar o número, você pode acessar outros artistas, títulos de álbuns e ano de lançamento.
+### Navegar Entre os CDs:
 
-> Navegar Entre os CDs:
 Para facilitar, você criar dois botões (um "próximo", e outro "anterior") para navegar entre as informações:
-
+```js
 function next() {
     if (i < len-1) {
         i++
         displayCD(i)
     }
 }
-/ Adiciona 1 toda vez que o botão é apertado. Subtrai 1 do length de CDs até chegar no último valor, quando não consegue mais executar.
+// Adiciona 1 toda vez que o botão é apertado. Subtrai 1 do length de CDs até chegar no último valor, quando não consegue mais executar.
 
 function previous() {
     if (i > 0) {
@@ -5678,9 +5690,10 @@ function previous() {
         displayCD(i)
     }
 }
+```
 
 > Mostra Informações de Álbuns Quando Clicar Sobre um CD:
-
+```html
 <p>Click on a CD to display album information>/p>
 <p id="showCD"></p>
 <table id=demo"></table>
@@ -5712,102 +5725,100 @@ function displayCD(i) {
     x[i].getElementsByTagName("YEAR")[0].childNodes[0].nodeValue 
 }
 </script>
-/ O clique identifica o valor de "i" e retorna como parâmetro na função "displayCD(i)".
+<!-- O clique identifica o valor de "i" e retorna como parâmetro na função "displayCD(i) -->
+```
 
-
-INTRODUÇÃO AO JSON:
-
+## Introdução ao JSON:
 
 Quando trocamos dados entre um navegador e um servidor, dados podem apenas ser textuais.
+
 JSON é textom e nós podemos converter qualquer objeto JavaScript em JSON, e enviá-lo para o servidor.
-Nós podemos também converter qualquer JSON convertido do servidor em objetos JS. 
-Dessa maneira podemos trabalhar com os dados como objetos JS, com análises e traduções sem complicações.
 
-> Enviando Dados:
+Nós podemos também converter qualquer JSON convertido do servidor em objetos JS. Dessa maneira podemos trabalhar com os dados como objetos JS, com análises e traduções sem complicações.
 
+### Enviando Dados:
+```js
 var myObj = {name: "John", age: 31, city: "New York"}
 var myJSON = JSON.stringify(myObj)
 window.location = "demo_json.php?x=" + myJSON
+```
+**Atenção: "?x=" ou "?q=" são exemplos de QueryStrings.**
 
-Atenção: "?x=" ou "?q=" são exemplos de QueryStrings.
-
-> Recebendo Dados:
-
+### Recebendo Dados:
+```js
 var myJSON = '{"name":"John", "age":31, "city":"New York")'
 var myObj = JSON.parse(myJSON)
 document.getElementById("demo").innerHTML = myObj.name
-/ John
-
-> Armazenado Dados:
+// John
+```
+### Armazenado Dados:
 Quando armazenamos dados, os dados devem estar em um certo formato, e, não importando onde você escolha armazena-lo, texto é sempre um dos formatos legais.
 JSON faz isso possível para armazenar objetos JS como texto.
 
 Exemplo de armazenagem em um armazenamento local:
-
-/ armazenando:
+```js
+// armazenando:
 myObj =  {name: "John", age: 31, city: "New York"};
 myJSON = JSON.stringify(myObj)
 localStorage.setItem("testJSON"), myJSON)
 
-/ recebendo:
+// recebendo:
 text = localStorage.getItem("testJSON")
 obj = JSON.parse(text)
 document.getElementById("demo").innerHTML = obj.name
-/ John
+// John
+```
+### O Que É JSON?
 
-> O Que É JSON?
-[] JSON significa JavaScript Object Notation.
-[] JSON é um formato leve de transferência de dados.
-[] JSON é "auto-descritivo" e de fácil entendimento.
-[] JSON é uma linguagem independente *
+* JSON significa JavaScript Object Notation.
+* JSON é um formato leve de transferência de dados.
+* JSON é "auto-descritivo" e de fácil entendimento.
+* JSON é uma linguagem independente *
 
-Atenção: * JSON use sintaxe JavaScript, mas o formato JSON é apenas textual. Texto pode ser lido e usado como formato de dado por qualquer linguagem de programação.
-
-> Por Que JSON?
-Já que o formato JSON é apenas textual, ele pode ser facilmente enviado e recebido de um servidor.
-JavaScript possui uma função embutida para converter uma string, escrito no formato JSON, para objetos nativos do JS:
-
+**Atenção: * JSON use sintaxe JavaScript, mas o formato JSON é apenas textual. Texto pode ser lido e usado como formato de dado por qualquer linguagem de programação.
+**
+### Por Que JSON?
+Já que o formato JSON é apenas textual, ele pode ser facilmente enviado e recebido de um servidor. JavaScript possui uma função embutida para converter uma string, escrito no formato JSON, para objetos nativos do JS:
+```js
 JSON.parse()
+```
 
 Então, se você receber dados de um servidor, no formato JSON, você pode usa-lo como qualquer outro formato JS.
 
+## Sintaxe de JSON
 
-SINTAXE DE JSON
+* Dados em pares de nome/valor;
+* Dados separados por vírgulas;
+* Chaves { } armazenam objetos;
+* Colchetes [ ] armazenam vetores.
 
-:+: Dados em pares de nome/valor;
-:+: Dados separados por vírgulas;
-:+: Chaves { } armazenam objetos;
-:+: Colchetes [ ] armazenam vetores.
+**Atenção: Nomes em JSON requerem aspas duplas (" "). Já em JavaScript isso não é necessário.**
 
-Atenção: Nomes em JSON requerem aspas duplas (" "). Já em JavaScript isso não é necessário.
+**Atenção: Em JSON, os nomes (chaves) devem ser strings, escritos com aspas duplas: { "name":"John" }**
 
-Atenção: Em JSON, os nomes (chaves) devem ser strings, escritos com aspas duplas: { "name":"John" }
+**Atenção: Em JSON, valores devem ser um dos seguintes tipos de dados: string, número, objeto, vetor, booleano e null. Já em JavaScript, todos esses podem, além de: funções, datas, e undefined.**
 
-Atenção: Em JSON, valores devem ser um dos seguintes tipos de dados: string, número, objeto, vetor, booleano e null.
-Já em JavaScript, todos esses podem, além de: funções, datas, e undefined.
+**Atenção: Como JSON é derivado de JavaScript, pouco software extra é necessário para trabalhar com JSON dentro de JS.**
 
-Atenção: Como JSON é derivado de JavaScript, pouco software extra é necessário para trabalhar com JSON dentro de JS. 
+**Atenção: O tipo de arquivo para arquivos JSON é ".json". O MIME-type para o texto JSON é "application/json".**
 
-Atenção: O tipo de arquivo para arquivos JSON é ".json". O MIME-type para o texto JSON é "application/json".
+**Atenção: "MIME-type" é um mecanismo para dizer ao cliente a variedade de documentos transmitidos: a extensão de um nome de arquivo não tem significado na web. A sintaxe é "tipo/subtipo", como "text/html", "image/jpeg", "audio/ogg", "video/mp4", etc.**
 
-Atenção: "MIME-type" é um mecanismo para dizer ao cliente a variedade de documentos transmitidos: a extensão de um nome de arquivo não tem significado na web. A sintaxe é "tipo/subtipo", como "text/html", "image/jpeg", "audio/ogg", "video/mp4", etc.
-
-
-JSON vs XML
+## JSON vs XML
 
 Ambos JSON e XML pode ser usados para recebimento de dados de um servidor web.
 O seguinte exemplo coma ambos JSON e XML definem um objeto "employees" com um vetor de 3 empregados:
 
 Exemplo JSON:
-
+```js
 {"employees": [
   {"firstName":"John", "lastName":"Doe"},
   {"firstName":"Anna","lastName":"Smith"},
   {"firstName":"Peter", "lastName":"Jones"}
 ]}
-
+```
 Exemplos XML:
-
+```xml
 <employees>
     <employee>
         <firstName>John</firstName> <lastName>Doe</lastName>
@@ -5819,15 +5830,16 @@ Exemplos XML:
         <firstName>Peter</firstName> <lastName>Jones</lastName>
     </employee>
 </employees>
+```
 
-> JSON é igual ao XML porque:
+### JSON é igual ao XML porque:
 
 - Ambos são "auto-descritivos" (legíveis para humanos)
 - Ambos são hierárquicos (valores dentro de valores)
 - Ambos pode ser analisados e usados por várias linguagens de programação;
 - Ambos pode ser buscados com um XMLHttpRequest.
 
-> JSON não é igual ao XML porque:
+### JSON não é igual ao XML porque:
 
 - JSON não usa tags de finalização.
 - JSON é mais curto
@@ -5835,72 +5847,75 @@ Exemplos XML:
 - JSON pode usar vetores.
 
 A grande diferença é:
+
 XML tem que ser analisada com um XML parser. JSON pode ser analisado por uma função padrão JavaScript.
 
-> Por que JSON é Melhor do que XML:
+### Por que JSON é Melhor do que XML:
 
 1. XML é muito mais difícil de analisar do que JSON.
 2. JSON é analisado em objetos JavaScript prontos para uso.
 3. Para aplicações AJAX, JSON é mais rápido e mais fácil do que XML:
 
-Usando XML:
+**Usando XML:**
 1. Busca um documento XML;
 2. Use o XML DOM para iterar através do documento;
 3. Extraia valores e armazene em variáveis.
 
-Usando JSON:
+**Usando JSON:**
 1. Busque uma string JSON;
 2. JSON.Parse a string JSON.
 
 
-TIPOS DE DADOS EM JSON
+## Tipos de Dados em JSON:
 
 1. Strings devem ser escritas em aspas duplas: { "name":"John" }
 2. Números devem ser um inteiro ou de ponto flutuante: {"age":30}
 
 3. Objetos como valores em JSON devem seguir as mesmas regras como objetos JSON.
+```js
 {
 "employee": { "name":"John", "age":30, "city":"New York" }
 }
-
+```
 4. Vetores:
+```js
 {
 "employees": [ "John", "Anna", "Peter" ]
 }
-
+```
 5. Booleanos podem ser true/false: { "sale":true }
 6. Valores em JSON pode ser null: { "middlename":null }
 
-
-JSON.parse()
+### JSON.parse()
 
 Ao analisar os dados com "JSON.parse()" e os dados tornam-se um objeto JavaScript.
 
-> Exemplo:
+#### Exemplo:
 Imagine que recebemos esse texto de um servidor web:
-
+```js
 '{ "name":"John", "age":30, "city":"New York" }'
-
+```
 Use a função "JSON.parse()" converte texto em objeto JS:
-
+```js
 var obj = JSON.parse( '{ "name":"John", "age":30, "city":"New York" }' )
-
-Atenção: Tenha certeza que o texto está escrito em formato JSON, ou então vai retornar uma erro de sintaxe.
+```
+**Atenção: Tenha certeza que o texto está escrito em formato JSON, ou então vai retornar uma erro de sintaxe.**
 
 Use o objeto JS em sua página:
-
+```html
 <p id="demo"></p>
 
 <script>
 document.getElementById("demo").innerHTML = obj.name + ', ' + obj.age
 </script>
-/ Retorna: "John, 30"
-
-> JSON a partir do Servidor:
+<!-- Retorna: "John, 30" -->
+```
+### JSON a partir do Servidor:
 Você pode solicitar JSON de um servidor usando um requerimento AJAX. 
+
 Enquanto a resposta do servidor é escrita em formato JSON, você pode analisar a string em objeto JavaScript.
 
-
+```js
 var xmlhttp = new XMLHttpRequest()
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -5910,28 +5925,29 @@ xmlhttp.onreadystatechange = function() {
 }
 xmlhttp.open("GET", "json_demo.txt", true)
 xmlhttp.send()
-
-Atenção: O mesmo pode ser realizado se o arquivo em texto for um vetor:
-
+```
+**Atenção: O mesmo pode ser realizado se o arquivo em texto for um vetor:**
+```js
 var myArr = JSON.parse(this.responseText)
 document.getElementById("demo").innerHTML = myArr[0]
+```
 
-> Exceções:
+### Exceções:
 
-### Analisando Dados ###
+#### Analisando Dados
 
 Objetos de data não são permitidos em JSON. Se você precisa incluir uma data, escreva como string. Você pode converter de volta em um objeto de data depois:
-
+```js
 var text = '{ "name":"John", "birth":"1986-12-14", "city":"New York" }'
 var obj = JSON.parse(text)
 obj.birth = new Date(obj.birth)
 
 document.getElementById("demo").innerHTML = obj.name + ", " + obj.birth
-/ Retorna: John, Sat Dec 13 1986 22:00:00 GMT-0200 (Horário de Verão de Brasília)
-
+// Retorna: John, Sat Dec 13 1986 22:00:00 GMT-0200 (Horário de Verão de Brasília)
+```
 Ou você usar o segundo parâmetro da função JSON.parse() chamado "reviver".
 O parâmetro "reviver" é uma função que verifica cada propriedade antes de retornar um valor:
-
+```js
 var text = '{ "name":"John", "birth":"1986-12-14", "city":"New York"}'
 var obj = JSON.parse(text, function(key, value) {
   if (key == "birth") {
@@ -5941,95 +5957,100 @@ var obj = JSON.parse(text, function(key, value) {
   }
 })
 document.getElementById("demo").innerHTML = obj.name + ", " = obj.birth
-/ Retorna "John, Sat Dec 13 1986 22:00:00 GMT-0200 (Horário de Verão de Brasília)"
+// Retorna "John, Sat Dec 13 1986 22:00:00 GMT-0200 (Horário de Verão de Brasília)"
+```
+#### Analisando Funções
 
-### Analisando Funções ###
-
-Funções não são permitidas em JSON. Se você precisa incluir uma função, a escreva como uma string.
-Você pode converte-la novamente em uma função posteriormente:
-
+Funções não são permitidas em JSON. Se você precisa incluir uma função, a escreva como uma string. Você pode converte-la novamente em uma função posteriormente:
+```js
 var text = '{ "name":"John", "age":"function () {return 30;}", "city":"New York"}'
 var obj = JSON.parse(text)
 obj.age = eval("(" + obj.age + ")")
 
 document.getElementById("demo").innerHTML = obj.name + ", " + obj.age()
+```
+**Atenção: Você deveria evitar usar funções em JSON, pois as funções perderão seus escopos, e você teria que usar "eval()" para converter-las de volta em funções.**
 
-Atenção: Você deveria evitar usar funções em JSON, pois as funções perderão seus escopos, e você teria que usar "eval()" para converter-las de volta em funções.
-
-
-JSON.stringify()
+## JSON.stringify()
 
 Quando enviamos dados para um servidor, os dados devem ser uma string.
+
 Converta um objeto JS em uma string com "JSON.stringify()"
 
-> Stringify um Objeto JS:
+### Stringify um Objeto JS:
+
 Imagine que tens esse objeto em JavaScript:
-
+```js
 var obj = { name: "John", age: 30, city: "New York" }
-
+```
 Use a função JSON.stringify() para converte-la em uma string.
-
+```js
 var myJSON = JSON.stringify(obj)
-
+```
 O resultado será uma string que segue a notação JSON. "myJSON" é agora uma string pronta para ser enviada ao servidor.
+
 O mesmo pode ser feito com vetores.
 
-> Exceções:
+### Exceções:
 Em JSON, objetos de data e funções não são permitidos. A função "JSON.stringify()" converterá qualquer dados em strings.
 
-Atenção: Você pode converter uma string novamente em um objeto de data ao recebedor.
+**Atenção: Você pode converter uma string novamente em um objeto de data ao recebedor.**
 
-### Stringify Funções ###
+#### Stringify Funções
 
-Em JSON, funções não são permitidas como valores de objetos.
+Em JSON, funções não são permitidas como valores de objetos. 
+
 A função "JSON.stringify()" removerá qualquer função de um objeto JavaScript, ambos as chaves e o valor:
-
+```js
 var obj = { name: "John", age: function () {return 30;}, city: "New York"}
 var myJSON = JSON.stringify(obj)
 document.getElementById("demo").innerHTML = myJSON
-/ Retorna "{"name":"John","city":"New York"}"
-
+// Retorna "{"name":"John","city":"New York"}"
+```
 Isso pode ser omitido se você converter funções em strings antes de executar a função "JSON.stringify()":
-
+```js
 var obj = { name: "John", age: function () {return 30;}, city: "New York" };
 obj.age = obj.age.toString()
 var myJSON = JSON.stringify(obj)
 document.getElementById("demo").innerHTML = myJSON
-/ {"name":"John","age":"function () {return 30;}","city":"New York"}
+// {"name":"John","age":"function () {return 30;}","city":"New York"}
+```
+**Atenção: Se você enviar funções usando JSON, as funções perderão seus escopos, e o recebedor terá que usar "eval()" para converter novamente em funções.**
 
-Atenção: Se você enviar funções usando JSON, as funções perderão seus escopos, e o recebedor terá que usar "eval()" para converter novamente em funções.
-
-
-OBJETOS JSON
+## Objetos JSON
 
 Você pode acessar valores de objetos em objetos JSON através de pontos (.) ou colchetes ([ ]). 
-
+```js
 x = myObj.name
 y = myObj["name"]
+```
 
-> Iterando um Objeto:
+### Iterando um Objeto:
+
 Você pode iterar através de propriedades de objetos usando o loop "for-in":
-
+```js
 myObj = { "name":"John", "age":30, "car":null }
 for (x in myObj) {
   document.getElementById("demo").innerHTML += x + "<br>"
 }
-/ name 
-/ age
-/ car
-
+// name 
+// age
+// car
+```
 Em um loop "for-in"
-
+```js
 myObj = { "name":"John", "age":30, "car":null };
 for (x in myObj) {
   document.getElementById("demo").innerHTML += myObj[x] + "<br>"
-/ John
-/ 30
-/ null
+// John
+// 30
+// null
+```
 
-> Objetos Aninhados em JSON:
+### Objetos Aninhados em JSON:
+
 Valores em um objeto JSON pode estar em um outro objeto JSON:
-
+```js
 myObj = {
   "name":"John",
   "age":30,
@@ -6039,25 +6060,27 @@ myObj = {
     "car3":"Fiat"
   }
 }
-
+```
 Você pode acessar objetos aninhados JSON através do uso de notação de ponto ou notação de colchetes:
-
+```js
 x = myObj.cars.car2
 
 x = myObj.cars["car2"]
+```
 
 Da mesma forma você usar para modificar valores:
-
+```js
 myObj.cars.car2 = "Mercedes"
 
 myObj.cars["car2"] = "Mercedes"
+```
 
 Assim como você pode usar para deletar propriedades com a keyword "delete":
-
+```js
 delete mybj.cars.cars2
+```
 
-
-VETORES EM JSON
+## Vetores em JSON:
 
 Você acessar valores de vetores dentro de objetos usando números de indexação:
 
